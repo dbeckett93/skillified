@@ -7,9 +7,14 @@ Skillified is a community skill-sharing platform designed to connect individuals
 
 ### Wireframes
 
-![Homepage Wireframe](assets/images/readme/homepage_wireframe.png)
-![Profile Page Wireframe](assets/images/readme/profile_page_wireframe.png)
-![Skill Sharing Page Wireframe](assets/images/readme/skill_sharing_page_wireframe.png)
+### Main Site Pages
+<img src="assets/images/readme/Mobile - Site Pages.png" alt="Main Site Pages Wireframe">
+
+### User Pages
+<img src="assets/images/readme/Mobile - User Pages.png" alt="User Pages Wireframe">
+
+### Skills & Events
+<img src="assets/images/readme/Mobile - Skills & Events.png" alt="Skills & Events Wireframe">
 
 ### ERD
 
