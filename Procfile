@@ -1,1 +1,1 @@
-web: gunicorn skillified.wsgi --log-file -
+web: gunicorn skillified.wsgi
