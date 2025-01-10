@@ -15,3 +15,18 @@ def terms_privacy(request):
 
 def dashboard(request):
     return render(request, 'main/dashboard.html')
+
+def skills(request):
+    return render(request, 'main/skills.html')
+
+def events(request):
+    return render(request, 'main/events.html')
+
+def messages(request):
+    return render(request, 'main/messages.html')
+
+def settings(request):
+    return render(request, 'main/settings.html')
+
+def profile(request):
+    return render(request, 'main/profile.html')
