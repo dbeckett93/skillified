@@ -11,3 +11,4 @@ PyJWT==2.10.1
 sqlparse==0.5.3
 whitenoise==6.8.2
 python-dotenv==1.0.0
+requests==2.31.0
