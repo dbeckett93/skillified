@@ -1,1 +1,1 @@
-web: gunicorn skillified.skillified.wsgi
+web: gunicorn skillified.wsgi
