@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.linkedin_oauth2',
     # Django allauth providers /\
     'main',
+    # Crispy forms \/
+    'crispy_forms',
+    # Crispy forms /\
 ]
 
 MIDDLEWARE = [
@@ -214,3 +217,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Crispy forms configuration
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

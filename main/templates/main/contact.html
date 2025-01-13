@@ -1,7 +1,20 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Home - Skillified{% endblock %}
+{% block title %}Contact - Skillified{% endblock %}
 
 {% block content %}
-    <h1>Contact</h1>
+    <h1>Contact Us</h1>
+{% endblock %}
+
+{% block additional_content %}
+    <p>We’d love to hear from you! Whether you have a question, feedback, or need support, feel free to reach out to us. Our team is here to help and will respond to your inquiries as quickly as possible.</p>
+{% endblock %}
+
+{% block content %}
+    <h1>Contact Us</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
 {% endblock %}
