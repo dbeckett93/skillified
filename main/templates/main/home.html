@@ -8,12 +8,14 @@
         <h1>Learn, Share, Thrive</h1>
         <p>Use Skillified for free as a learner or mentor. Discover and share skills with the community!</p>
 
+        {% if not user.is_authenticated %}
         <div class="mt-4">
-            <a href="{% url 'socialaccount_login' 'google' %}" class="btn btn-danger btn-lg mx-2">Login with Google</a>
-            <a href="{% url 'socialaccount_login' 'facebook' %}" class="btn btn-primary btn-lg mx-2">Login with Facebook</a>
-            <a href="{% url 'socialaccount_login' 'linkedin_oauth2' %}" class="btn btn-info btn-lg mx-2">Login with LinkedIn</a>
+            <a href="{% url 'google_login' %}" class="btn btn-danger btn-lg mx-2">Login with Google</a>
+            <a href="{% url 'facebook_login' %}" class="btn btn-primary btn-lg mx-2">Login with Facebook</a>
+            <a href="{% url 'linkedin_oauth2_login' %}" class="btn btn-info btn-lg mx-2">Login with LinkedIn</a>
             <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg mx-2">Login with Email</a>
         </div>
+        {% endif %}
 
         <div id="skillsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
             <div class="carousel-inner">
