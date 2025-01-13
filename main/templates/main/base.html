@@ -38,7 +38,11 @@
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
-                                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle" width="30" height="30">
+                                {% if user.profile.profile_picture %}
+                                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle" width="30" height="30">
+                                {% else %}
+                                    <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle" width="30" height="30">
+                                {% endif %}
                             </a>
                         </li>
                     {% else %}
@@ -82,7 +86,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3" width="100" height="100">
+                    {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3" width="100" height="100">
+                    {% else %}
+                        <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3" width="100" height="100">
+                    {% endif %}
                     <h5>{{ user.username }}</h5>
                     <a class="btn btn-primary mt-3" href="{% url 'profile' %}">View Profile</a>
                     <hr>

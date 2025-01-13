@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True, default='profile_pictures/nobody.jpg')
     about_me = models.TextField(blank=True, null=True)
     facebook_link = models.URLField(blank=True, null=True)
     linkedin_link = models.URLField(blank=True, null=True)

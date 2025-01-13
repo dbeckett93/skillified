@@ -3,5 +3,72 @@
 {% block title %}Profile - Skillified{% endblock %}
 
 {% block content %}
-    <h1>Profile</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            {% if user.profile.profile_picture %}
+                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+            {% else %}
+                <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+            {% endif %}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="profile_picture" class="form-control mb-2">
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+            <h3>{{ user.username }}</h3>
+        </div>
+        <div class="col-md-9">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Contact Information</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="facebook_link" class="form-label">Facebook</label>
+                            <input type="url" class="form-control" id="facebook_link" name="facebook_link" value="{{ user.profile.facebook_link }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="linkedin_link" class="form-label">LinkedIn</label>
+                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link" value="{{ user.profile.linkedin_link }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">About Me</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <textarea class="form-control" id="about_me" name="about_me" rows="4">{{ user.profile.about_me }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">My Skills</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <select class="form-control" id="skills" name="skills" multiple>
+                                {% for skill in all_skills %}
+                                    <option value="{{ skill.id }}" {% if skill in user.profile.skills.all %}selected{% endif %}>{{ skill.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
