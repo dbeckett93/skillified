@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # Whitenoise middleware \/
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    # Whitenoise middleware /\
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Django allauth middleware \/
     'allauth.account.middleware.AccountMiddleware',
+    # Django allauth middleware /\
 ]
 
 ROOT_URLCONF = 'skillified.urls'
