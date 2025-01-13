@@ -1,7 +1,40 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}Home - Skillified{% endblock %}
 
 {% block content %}
-    <h1>Home</h1>
+    <div class="container text-center mt-5">
+        <h1>Learn, Share, Thrive</h1>
+        <p>Use Skillified for free as a learner or mentor. Discover and share skills with the community!</p>
+
+        <div class="mt-4">
+            <a href="{% url 'socialaccount_login' 'google' %}" class="btn btn-danger btn-lg mx-2">Login with Google</a>
+            <a href="{% url 'socialaccount_login' 'facebook' %}" class="btn btn-primary btn-lg mx-2">Login with Facebook</a>
+            <a href="{% url 'socialaccount_login' 'linkedin_oauth2' %}" class="btn btn-info btn-lg mx-2">Login with LinkedIn</a>
+            <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg mx-2">Login with Email</a>
+        </div>
+
+        <div id="skillsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'images/skill1.webp' %}" class="d-block w-100" alt="Skill 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/skill2.webp' %}" class="d-block w-100" alt="Skill 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/skill3.webp' %}" class="d-block w-100" alt="Skill 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#skillsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#skillsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
 {% endblock %}
