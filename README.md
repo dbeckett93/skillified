@@ -30,55 +30,79 @@ For more details, visit the [project page](https://github.com/users/dbeckett93/p
 
 ### User
 
-| Field      | Type                | Relationship            |
-|------------|---------------------|-------------------------|
-| id         | Integer (Primary Key) |                         |
-| username   | CharField           |                         |
-| email      | EmailField          |                         |
-| password   | CharField           |                         |
-| first_name | CharField           |                         |
-| last_name  | CharField           |                         |
-| profile    | OneToOneField       | Profile (One-to-One)    |
-| events     | ManyToManyField     | Event (Many-to-Many)    |
+| Field      | Type                   | Relationship                |
+|------------|------------------------|-----------------------------|
+| id         | Integer (Primary Key)  |                             |
+| username   | CharField              |                             |
+| email      | EmailField             |                             |
+| password   | CharField              |                             |
+| first_name | CharField              |                             |
+| last_name  | CharField              |                             |
+| is_mentor  | Boolean                |                             |
+| is_learner | Boolean                |                             |
+| profile    | OneToOneField          | Profile (One-to-One)        |
+| events     | ManyToManyField        | Event (Many-to-Many)        |
 
 ### Profile
 
-| Field           | Type                | Relationship            |
-|-----------------|---------------------|-------------------------|
-| id              | Integer (Primary Key) |                         |
-| user            | OneToOneField       | User (One-to-One)       |
-| profile_picture | ImageField          |                         |
-| about_me        | TextField           |                         |
-| facebook_link   | URLField            |                         |
-| linkedin_link   | URLField            |                         |
-| skills          | ManyToManyField     | Skill (Many-to-Many)    |
+| Field           | Type                  | Relationship                |
+|-----------------|-----------------------|-----------------------------|
+| id              | Integer (Primary Key) |                             |
+| user            | OneToOneField         | User (One-to-One)           |
+| profile_picture | ImageField            |                             |
+| about_me        | TextField             |                             |
+| facebook_link   | URLField              |                             |
+| linkedin_link   | URLField              |                             |
+| skills          | ManyToManyField       | Skill (Many-to-Many)        |
 
 ### Skill
 
-| Field       | Type                | Relationship            |
-|-------------|---------------------|-------------------------|
-| id          | Integer (Primary Key) |                         |
-| name        | CharField           |                         |
-| description | TextField           |                         |
-| created_at  | DateTimeField       |                         |
-| updated_at  | DateTimeField       |                         |
-| users       | ManyToManyField     | Profile (Many-to-Many)  |
-| events      | ForeignKey          | Event (One-to-Many)     |
+| Field       | Type                   | Relationship                |
+|-------------|------------------------|-----------------------------|
+| id          | Integer (Primary Key)  |                             |
+| name        | CharField              |                             |
+| description | TextField              |                             |
+| created_at  | DateTimeField          |                             |
+| updated_at  | DateTimeField          |                             |
+| profiles    | ManyToManyField        | Profile (Many-to-Many)      |
+| events      | ForeignKey             | Event (One-to-Many)         |
 
 ### Event
 
-| Field        | Type                | Relationship            |
-|--------------|---------------------|-------------------------|
-| id           | Integer (Primary Key) |                         |
-| title        | CharField           |                         |
-| overview     | TextField           |                         |
-| date_time    | DateTimeField       |                         |
-| skill        | ForeignKey          | Skill (Many-to-One)     |
-| participants | ManyToManyField     | User (Many-to-Many)     |
+| Field        | Type                   | Relationship                |
+|--------------|------------------------|-----------------------------|
+| id           | Integer (Primary Key)  |                             |
+| title        | CharField              |                             |
+| overview     | TextField              |                             |
+| date_time    | DateTimeField          |                             |
+| skill        | ForeignKey             | Skill (Many-to-One)         |
+| participants | ManyToManyField        | User (Many-to-Many)         |
+
+### Message
+
+| Field     | Type                   | Relationship                |
+|-----------|------------------------|-----------------------------|
+| id        | Integer (Primary Key)  |                             |
+| sender    | ForeignKey             | User (Many-to-One)          |
+| receiver  | ForeignKey             | User (Many-to-One)          |
+| content   | TextField              |                             |
+| timestamp | DateTimeField          |                             |
+
+### NotificationSetting
+
+| Field       | Type                   | Relationship                |
+|-------------|------------------------|-----------------------------|
+| id          | Integer (Primary Key)  |                             |
+| user        | ForeignKey             | User (Many-to-One)          |
+| new_message | Boolean                |                             |
+| new_event   | Boolean                |                             |
+| new_skill   | Boolean                |                             |
 
 ### Relationships Summary
-User has a one-to-one relationship with Profile.
-User has a many-to-many relationship with Event (as participants).
-Profile has a many-to-many relationship with Skill.
-Skill has a one-to-many relationship with Event.
-Event has a many-to-many relationship with User (as participants).
+- User has a one-to-one relationship with Profile.
+- User has a many-to-many relationship with Event (as participants).
+- Profile has a many-to-many relationship with Skill.
+- Skill has a one-to-many relationship with Event.
+- Event has a many-to-many relationship with User (as participants).
+- Message has a many-to-one relationship with User (as sender and receiver).
+- NotificationSetting has a many-to-one relationship with User.
