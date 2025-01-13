@@ -214,3 +214,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Crispy forms configuration
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Ensure secure connection on Heroku
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
