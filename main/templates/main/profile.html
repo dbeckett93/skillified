@@ -1,28 +1,39 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}Profile - Skillified{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <div class="row">
+        <!-- Profile Picture Section -->
         <div class="col-md-3 text-center">
             {% if user.profile.profile_picture %}
                 <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
             {% else %}
-                <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+                <img src="{{ MEDIA_URL }}profile_pictures/nobody.jpg" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
             {% endif %}
-            <form method="post" enctype="multipart/form-data">
+            <h3>{{ user.username }}</h3>
+            <button class="btn btn-primary mt-2" onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
+            <form id="profile-picture-form" method="post" enctype="multipart/form-data" style="display:none;">
                 {% csrf_token %}
                 <input type="file" name="profile_picture" class="form-control mb-2">
                 <button type="submit" class="btn btn-primary">Upload</button>
             </form>
-            <h3>{{ user.username }}</h3>
         </div>
+        <!-- Contact Information Section -->
         <div class="col-md-9">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Contact Information</h5>
-                    <form method="post">
+                    <h5 class="card-title">Contact Information 
+                        <i class="fas fa-edit" onclick="toggleEdit('contact-info')"></i>
+                    </h5>
+                    <div id="contact-info-view">
+                        <p><strong>Facebook:</strong> {{ user.profile.facebook_link }}</p>
+                        <p><strong>LinkedIn:</strong> {{ user.profile.linkedin_link }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                    </div>
+                    <form id="contact-info-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="facebook_link" class="form-label">Facebook</label>
@@ -37,25 +48,50 @@
                             <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
+                        <i class="fas fa-trash-alt" onclick="clearForm('contact-info-form')"></i>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- About Me Section -->
+        <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">About Me</h5>
-                    <form method="post">
+                    <h5 class="card-title">About Me 
+                        <i class="fas fa-edit" onclick="toggleEdit('about-me')"></i>
+                    </h5>
+                    <div id="about-me-view">
+                        <p>{{ user.profile.about_me }}</p>
+                    </div>
+                    <form id="about-me-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <textarea class="form-control" id="about_me" name="about_me" rows="4">{{ user.profile.about_me }}</textarea>
+                            <textarea class="form-control" id="about_me" name="about_me" rows="8">{{ user.profile.about_me }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
+                        <i class="fas fa-trash-alt" onclick="clearForm('about-me-form')"></i>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Skills Section -->
+         
+        <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">My Skills</h5>
-                    <form method="post">
+                    <div id="skills-view">
+                        <ul id="skills-list">
+                            {% for skill in user.profile.skills.all %}
+                                <li data-skill-id="{{ skill.id }}">{{ skill.name }} <i class="fas fa-trash-alt" onclick="deleteSkill('{{ skill.id }}')"></i></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <form id="skills-form" method="post">
                         {% csrf_token %}
                         <div class="mb-3">
                             <select class="form-control" id="skills" name="skills" multiple>
@@ -64,11 +100,20 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="new_skill" name="new_skill" placeholder="Add new skill">
+                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New Skill</button>
+                        </div>
                         <button type="submit" class="btn btn-primary">Save</button>
+                        <i class="fas fa-trash-alt" onclick="clearForm('skills-form')"></i>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

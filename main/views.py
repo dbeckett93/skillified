@@ -1,18 +1,25 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .forms import ContactForm
+import json
 import os
-from django.core.mail import send_mail
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_protect
+
+from .forms import ContactForm
 from .models import Profile, Skill
 
-# Create your views here.
+# Home page view
 def home(request):
     return render(request, 'main/home.html')
 
+# About page view
 def about(request):
     return render(request, 'main/about.html')
 
+# Contact page view with form handling
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -36,27 +43,33 @@ def contact(request):
 
     return render(request, 'main/contact.html', {'form': form})
 
+# Terms and privacy page view
 def terms_privacy(request):
     return render(request, 'main/terms_privacy.html')
 
+# Dashboard page view
 def dashboard(request):
     return render(request, 'main/dashboard.html')
 
+# Skills page view
 def skills(request):
     return render(request, 'main/skills.html')
 
+# Events page view
 def events(request):
     return render(request, 'main/events.html')
 
+# Messages page view
 def messages_view(request):
     return render(request, 'main/messages.html')
 
+# Settings page view
 def settings(request):
     return render(request, 'main/settings.html')
 
+# Profile page view with profile update handling
 @login_required
 def profile(request):
-    # Get the current user and their profile
     user = request.user
     profile = user.profile
     all_skills = Skill.objects.all()
@@ -84,15 +97,55 @@ def profile(request):
             profile.save()
         # Update skills if provided
         if 'skills' in request.POST:
-            profile.skills.set(request.POST.getlist('skills'))
+            skill_ids = request.POST.getlist('skills')
+            skills = Skill.objects.filter(id__in=skill_ids)
+            profile.skills.set(skills)
             profile.save()
+        # Add new skill if provided
+        if 'new_skill' in request.POST:
+            new_skill_name = request.POST['new_skill'].strip()
+            if new_skill_name:
+                new_skill, created = Skill.objects.get_or_create(name=new_skill_name)
+                profile.skills.add(new_skill)
+                profile.save()
         # Redirect to the profile page after saving changes
         return redirect('profile')
 
-    # Prepare context data for rendering the profile page
     context = {
         'user': user,
         'profile': profile,
         'all_skills': all_skills,
     }
     return render(request, 'main/profile.html', context)
+
+# API endpoint to add a new skill
+@login_required
+@csrf_protect
+def add_skill(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        skill_name = data.get('name')
+        if skill_name:
+            new_skill, created = Skill.objects.get_or_create(name=skill_name)
+            return JsonResponse({'success': True, 'skill_id': new_skill.id})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid skill name'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+# API endpoint to delete an existing skill
+@login_required
+@csrf_protect
+def delete_skill(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        skill_id = data.get('skill_id')
+        if skill_id:
+            try:
+                skill = Skill.objects.get(id=skill_id)
+                request.user.profile.skills.remove(skill)
+                return JsonResponse({'success': True})
+            except Skill.DoesNotExist:
+                return JsonResponse({'success': False, 'error': 'Skill does not exist'})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid skill ID'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

@@ -12,4 +12,6 @@ urlpatterns = [
     path('messages/', views.messages_view, name='messages'),
     path('settings/', views.settings, name='settings'),
     path('profile/', views.profile, name='profile'),
+    path('add_skill/', views.add_skill, name='add_skill'),
+    path('delete_skill/', views.delete_skill, name='delete_skill'),
 ]
