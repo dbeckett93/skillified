@@ -151,3 +151,23 @@ def delete_skill(request):
         else:
             return JsonResponse({'success': False, 'error': 'Invalid skill ID'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+# API endpoint to edit an existing skill
+@login_required
+@csrf_protect
+def edit_skill(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        skill_id = data.get('skill_id')
+        skill_name = data.get('name')
+        if skill_id and skill_name:
+            try:
+                skill = Skill.objects.get(id=skill_id)
+                skill.name = skill_name
+                skill.save()
+                return JsonResponse({'success': True})
+            except Skill.DoesNotExist:
+                return JsonResponse({'success': False, 'error': 'Skill does not exist'})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid skill ID or name'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

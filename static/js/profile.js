@@ -43,7 +43,7 @@ function addNewSkill() {
                 var skillsList = document.getElementById('skills-list');
                 var newListItem = document.createElement('li');
                 newListItem.dataset.skillId = data.skill_id;
-                newListItem.innerHTML = `${newSkillName} <i class="fas fa-trash-alt" onclick="deleteSkill('${data.skill_id}')"></i>`;
+                newListItem.innerHTML = `${newSkillName} <i class="fas fa-edit" onclick="editSkill('${data.skill_id}', '${newSkillName}')"></i> <i class="fas fa-trash-alt" onclick="deleteSkill('${data.skill_id}')"></i>`;
                 skillsList.appendChild(newListItem);
                 newSkillInput.value = '';
             } else {
@@ -74,6 +74,40 @@ function deleteSkill(skillId) {
             alert('Error deleting skill: ' + data.error);
         }
     });
+}
+
+function editSkill(skillId, skillName) {
+    document.getElementById('edit_skill_id').value = skillId;
+    document.getElementById('edit_skill_name').value = skillName;
+    document.getElementById('edit-skill-form').style.display = 'block';
+}
+
+function saveEditedSkill() {
+    var skillId = document.getElementById('edit_skill_id').value;
+    var skillName = document.getElementById('edit_skill_name').value.trim();
+    if (skillName) {
+        // Send an AJAX request to save the edited skill
+        fetch('/edit_skill/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ skill_id: skillId, name: skillName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                var skillListItem = document.querySelector(`li[data-skill-id="${skillId}"] .skill-name`);
+                if (skillListItem) {
+                    skillListItem.textContent = skillName;
+                }
+                document.getElementById('edit-skill-form').style.display = 'none';
+            } else {
+                alert('Error editing skill: ' + data.error);
+            }
+        });
+    }
 }
 
 function getCookie(name) {
