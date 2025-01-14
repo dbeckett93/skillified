@@ -1,9 +1,11 @@
 asgiref==3.8.1
+cloudinary==1.42.1
 crispy-bootstrap5==2024.10
 cryptography==41.0.3
 dj-database-url==2.3.0
 Django==5.1.4
 django-allauth==65.3.1
+django-cloudinary-storage==0.3.0
 django-crispy-forms==2.3
 django-extensions==3.2.3
 django-heroku==0.3.1
