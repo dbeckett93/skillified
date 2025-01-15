@@ -9,16 +9,23 @@
         <!-- Profile Picture Section -->
         <div class="col-md-3 text-center">
             <!-- Display the user's profile picture or a default image if not set -->
-            {% if user.profile.profile_picture %}
-            <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="rounded-circle mb-3" width="150" height="150">
-            {% else %}
-            <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile" class="rounded-circle mb-3" width="150" height="150">
-            {% endif %}
+            {% if user.profile.profile_picture and user.profile.profile_picture.url %}
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="rounded-circle mb-3" width="150"
+                height="150">
             <h3>{{ user.username }}</h3>
             <!-- Button to change the profile picture -->
-            <button class="btn btn-primary mt-2" onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
+            <button class="btn btn-primary mt-2"
+                onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
             <!-- Button to delete the profile picture -->
             <button class="btn btn-danger mt-2" onclick="deleteProfilePicture()">Delete Picture</button>
+            {% else %}
+            <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile" class="rounded-circle mb-3" width="150"
+                height="150">
+            <h3>{{ user.username }}</h3>
+            <!-- Button to upload the profile picture -->
+            <button class="btn btn-primary mt-2"
+                onclick="document.getElementById('profile-picture-form').style.display='block'">Upload Picture</button>
+            {% endif %}
             <!-- Form to handle profile picture deletion -->
             <form id="delete-profile-picture-form" method="post" style="display:none;">
                 {% csrf_token %}
@@ -50,11 +57,13 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="facebook_link" class="form-label">Facebook</label>
-                            <input type="url" class="form-control" id="facebook_link" name="facebook_link" value="{{ user.profile.facebook_link }}">
+                            <input type="url" class="form-control" id="facebook_link" name="facebook_link"
+                                value="{{ user.profile.facebook_link }}">
                         </div>
                         <div class="mb-3">
                             <label for="linkedin_link" class="form-label">LinkedIn</label>
-                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link" value="{{ user.profile.linkedin_link }}">
+                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link"
+                                value="{{ user.profile.linkedin_link }}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -84,7 +93,8 @@
                     <form id="about-me-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <textarea class="form-control" id="about_me" name="about_me" rows="8" required>{{ user.profile.about_me }}</textarea>
+                            <textarea class="form-control" id="about_me" name="about_me" rows="8"
+                                required>{{ user.profile.about_me }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <i class="fas fa-trash-alt" onclick="clearForm('about-me-form')"></i>
@@ -125,8 +135,10 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="new_skill" name="new_skill" placeholder="Add new skill">
-                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New Skill</button>
+                            <input type="text" class="form-control" id="new_skill" name="new_skill"
+                                placeholder="Add new skill">
+                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New
+                                Skill</button>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
@@ -135,8 +147,10 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <input type="hidden" id="edit_skill_id" name="edit_skill_id">
-                            <input type="text" class="form-control" id="edit_skill_name" name="edit_skill_name" placeholder="Edit skill name">
-                            <button type="button" class="btn btn-primary mt-2" onclick="saveEditedSkill()">Save Skill</button>
+                            <input type="text" class="form-control" id="edit_skill_name" name="edit_skill_name"
+                                placeholder="Edit skill name">
+                            <button type="button" class="btn btn-primary mt-2" onclick="saveEditedSkill()">Save
+                                Skill</button>
                         </div>
                     </form>
                 </div>
