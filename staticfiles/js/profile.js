@@ -1,3 +1,7 @@
+/**
+ * Toggles the visibility of a section's view and form.
+ * @param {string} section - The section to toggle (e.g., 'contact-info', 'about-me').
+ */
 function toggleEdit(section) {
     var view = document.getElementById(section + '-view');
     var form = document.getElementById(section + '-form');
@@ -10,6 +14,10 @@ function toggleEdit(section) {
     }
 }
 
+/**
+ * Clears all input fields in a form.
+ * @param {string} formId - The ID of the form to clear.
+ */
 function clearForm(formId) {
     var form = document.getElementById(formId);
     var inputs = form.querySelectorAll('input, textarea, select');
@@ -24,6 +32,9 @@ function clearForm(formId) {
     });
 }
 
+/**
+ * Adds a new skill to the user's profile.
+ */
 function addNewSkill() {
     var newSkillInput = document.getElementById('new_skill');
     var newSkillName = newSkillInput.value.trim();
@@ -53,6 +64,10 @@ function addNewSkill() {
     }
 }
 
+/**
+ * Deletes a skill from the user's profile.
+ * @param {string} skillId - The ID of the skill to delete.
+ */
 function deleteSkill(skillId) {
     // Send an AJAX request to delete the skill
     fetch('/delete_skill/', {
@@ -76,12 +91,20 @@ function deleteSkill(skillId) {
         });
 }
 
+/**
+ * Populates the edit form with the skill's current data and displays the form.
+ * @param {string} skillId - The ID of the skill to edit.
+ * @param {string} skillName - The current name of the skill.
+ */
 function editSkill(skillId, skillName) {
     document.getElementById('edit_skill_id').value = skillId;
     document.getElementById('edit_skill_name').value = skillName;
     document.getElementById('edit-skill-form').style.display = 'block';
 }
 
+/**
+ * Saves the edited skill to the user's profile.
+ */
 function saveEditedSkill() {
     var skillId = document.getElementById('edit_skill_id').value;
     var skillName = document.getElementById('edit_skill_name').value.trim();
@@ -110,6 +133,9 @@ function saveEditedSkill() {
     }
 }
 
+/**
+ * Deletes the user's profile picture and reverts to the default image.
+ */
 function deleteProfilePicture() {
     // Send an AJAX request to delete the profile picture
     fetch('/delete_profile_picture/', {
@@ -133,6 +159,11 @@ function deleteProfilePicture() {
         });
 }
 
+/**
+ * Retrieves the value of a cookie by name.
+ * @param {string} name - The name of the cookie to retrieve.
+ * @returns {string|null} The value of the cookie, or null if not found.
+ */
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
