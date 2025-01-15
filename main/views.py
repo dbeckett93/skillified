@@ -123,16 +123,13 @@ def profile(request):
 @csrf_protect
 def add_skill(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        skill_name = data.get('name')
-        if skill_name:
-            new_skill, created = Skill.objects.get_or_create(name=skill_name)
-            # Add the skill to the user's profile
-            request.user.profile.skills.add(new_skill)
-            return JsonResponse({'success': True, 'skill_id': new_skill.id, 'created': created})
-        else:
-            return JsonResponse({'success': False, 'error': 'Invalid skill name'})
-    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        if name and description:
+            skill, created = Skill.objects.get_or_create(name=name, description=description)
+            request.user.profile.skills.add(skill)
+            return redirect('profile')
+    return JsonResponse({'error': 'Invalid data'}, status=400)
 
 # API endpoint to delete an existing skill
 @login_required

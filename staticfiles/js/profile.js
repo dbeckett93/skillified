@@ -146,22 +146,17 @@ function deleteProfilePicture() {
         },
         body: JSON.stringify({ delete_profile_picture: true })
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                var profilePicture = document.querySelector('img[alt="Profile Image"]');
-                if (profilePicture) {
-                    profilePicture.src = 'https://i.imgur.com/2Q3XOlp.jpeg';
-                }
-                var deleteButton = document.getElementById('delete-profile-picture-button');
-                if (deleteButton) {
-                    deleteButton.style.display = 'none';
-                }
-                location.reload(); // Refresh the page
-            } else {
-                alert('Error deleting profile picture: ' + data.error);
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            var profilePicture = document.querySelector('img[alt="Profile Image"]');
+            if (profilePicture) {
+                profilePicture.src = 'https://i.imgur.com/2Q3XOlp.jpeg';
             }
-        });
+        } else {
+            alert('Error deleting profile picture: ' + data.error);
+        }
+    });
 }
 
 /**
