@@ -8,21 +8,23 @@
     <div class="row">
         <!-- Profile Picture Section -->
         <div class="col-md-3 text-center">
+            <!-- Display the user's profile picture or a default image if not set -->
             {% if user.profile.profile_picture %}
-            <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="rounded-circle mb-3" width="150"
-                height="150">
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="rounded-circle mb-3" width="150" height="150">
             {% else %}
-            <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile" class="rounded-circle mb-3" width="150"
-                height="150">
+            <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile" class="rounded-circle mb-3" width="150" height="150">
             {% endif %}
             <h3>{{ user.username }}</h3>
-            <button class="btn btn-primary mt-2"
-                onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
+            <!-- Button to change the profile picture -->
+            <button class="btn btn-primary mt-2" onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
+            <!-- Button to delete the profile picture -->
             <button class="btn btn-danger mt-2" onclick="deleteProfilePicture()">Delete Picture</button>
+            <!-- Form to handle profile picture deletion -->
             <form id="delete-profile-picture-form" method="post" style="display:none;">
                 {% csrf_token %}
                 <input type="hidden" name="delete_profile_picture" value="true">
             </form>
+            <!-- Form to handle profile picture upload -->
             <form id="profile-picture-form" method="post" enctype="multipart/form-data" style="display:none;">
                 {% csrf_token %}
                 <input type="file" name="profile_picture" class="form-control mb-2">
@@ -34,24 +36,25 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Contact Information
+                        <!-- Button to toggle the edit form for contact information -->
                         <i class="fas fa-edit" onclick="toggleEdit('contact-info')"></i>
                     </h5>
                     <div id="contact-info-view">
+                        <!-- Display the user's contact information -->
                         <p><strong>Facebook:</strong> {{ user.profile.facebook_link }}</p>
                         <p><strong>LinkedIn:</strong> {{ user.profile.linkedin_link }}</p>
                         <p><strong>Email:</strong> {{ user.email }}</p>
                     </div>
+                    <!-- Form to edit the user's contact information -->
                     <form id="contact-info-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="facebook_link" class="form-label">Facebook</label>
-                            <input type="url" class="form-control" id="facebook_link" name="facebook_link"
-                                value="{{ user.profile.facebook_link }}">
+                            <input type="url" class="form-control" id="facebook_link" name="facebook_link" value="{{ user.profile.facebook_link }}">
                         </div>
                         <div class="mb-3">
                             <label for="linkedin_link" class="form-label">LinkedIn</label>
-                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link"
-                                value="{{ user.profile.linkedin_link }}">
+                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link" value="{{ user.profile.linkedin_link }}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -66,20 +69,22 @@
     </div>
     <div class="row">
         <!-- About Me Section -->
-        <div class="col-12 pt-3">
+        <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">About Me
+                        <!-- Button to toggle the edit form for the about me section -->
                         <i class="fas fa-edit" onclick="toggleEdit('about-me')"></i>
                     </h5>
                     <div id="about-me-view">
+                        <!-- Display the user's about me information -->
                         <p>{{ user.profile.about_me }}</p>
                     </div>
+                    <!-- Form to edit the user's about me information -->
                     <form id="about-me-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <textarea class="form-control" id="about_me" name="about_me"
-                                rows="8">{{ user.profile.about_me }}</textarea>
+                            <textarea class="form-control" id="about_me" name="about_me" rows="8" required>{{ user.profile.about_me }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <i class="fas fa-trash-alt" onclick="clearForm('about-me-form')"></i>
@@ -94,9 +99,11 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">My Skills
+                        <!-- Button to toggle the edit form for skills -->
                         <i class="fas fa-plus" onclick="toggleEdit('skills')"></i>
                     </h5>
                     <div id="skills-view">
+                        <!-- Display the user's skills -->
                         <ul id="skills-list">
                             {% for skill in user.profile.skills.all %}
                             <li data-skill-id="{{ skill.id }}">
@@ -107,6 +114,7 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    <!-- Form to edit the user's skills -->
                     <form id="skills-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -117,21 +125,18 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="new_skill" name="new_skill"
-                                placeholder="Add new skill">
-                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New
-                                Skill</button>
+                            <input type="text" class="form-control" id="new_skill" name="new_skill" placeholder="Add new skill">
+                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New Skill</button>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
+                    <!-- Form to edit an existing skill -->
                     <form id="edit-skill-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
                             <input type="hidden" id="edit_skill_id" name="edit_skill_id">
-                            <input type="text" class="form-control" id="edit_skill_name" name="edit_skill_name"
-                                placeholder="Edit skill name">
-                            <button type="button" class="btn btn-primary mt-2" onclick="saveEditedSkill()">Save
-                                Skill</button>
+                            <input type="text" class="form-control" id="edit_skill_name" name="edit_skill_name" placeholder="Edit skill name">
+                            <button type="button" class="btn btn-primary mt-2" onclick="saveEditedSkill()">Save Skill</button>
                         </div>
                     </form>
                 </div>
