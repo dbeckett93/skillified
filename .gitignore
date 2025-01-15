@@ -11,3 +11,4 @@ cloudinary_python.txt
 .env
 # Ignore media files
 /media/
+test_log.txt
