@@ -9,12 +9,20 @@
         <!-- Profile Picture Section -->
         <div class="col-md-3 text-center">
             {% if user.profile.profile_picture %}
-                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3"
+                width="150" height="150">
             {% else %}
-                <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+            <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3" width="150"
+                height="150">
             {% endif %}
             <h3>{{ user.username }}</h3>
-            <button class="btn btn-primary mt-2" onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
+            <button class="btn btn-primary mt-2"
+                onclick="document.getElementById('profile-picture-form').style.display='block'">Change Picture</button>
+            <button class="btn btn-danger mt-2" onclick="deleteProfilePicture()">Delete Picture</button>
+            <form id="delete-profile-picture-form" method="post" style="display:none;">
+                {% csrf_token %}
+                <input type="hidden" name="delete_profile_picture" value="true">
+            </form>
             <form id="profile-picture-form" method="post" enctype="multipart/form-data" style="display:none;">
                 {% csrf_token %}
                 <input type="file" name="profile_picture" class="form-control mb-2">
@@ -25,7 +33,7 @@
         <div class="col-md-9">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Contact Information 
+                    <h5 class="card-title">Contact Information
                         <i class="fas fa-edit" onclick="toggleEdit('contact-info')"></i>
                     </h5>
                     <div id="contact-info-view">
@@ -37,11 +45,13 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="facebook_link" class="form-label">Facebook</label>
-                            <input type="url" class="form-control" id="facebook_link" name="facebook_link" value="{{ user.profile.facebook_link }}">
+                            <input type="url" class="form-control" id="facebook_link" name="facebook_link"
+                                value="{{ user.profile.facebook_link }}">
                         </div>
                         <div class="mb-3">
                             <label for="linkedin_link" class="form-label">LinkedIn</label>
-                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link" value="{{ user.profile.linkedin_link }}">
+                            <input type="url" class="form-control" id="linkedin_link" name="linkedin_link"
+                                value="{{ user.profile.linkedin_link }}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -59,7 +69,7 @@
         <div class="col-12 pt-3">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">About Me 
+                    <h5 class="card-title">About Me
                         <i class="fas fa-edit" onclick="toggleEdit('about-me')"></i>
                     </h5>
                     <div id="about-me-view">
@@ -68,7 +78,8 @@
                     <form id="about-me-form" method="post" style="display:none;">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <textarea class="form-control" id="about_me" name="about_me" rows="8">{{ user.profile.about_me }}</textarea>
+                            <textarea class="form-control" id="about_me" name="about_me"
+                                rows="8">{{ user.profile.about_me }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <i class="fas fa-trash-alt" onclick="clearForm('about-me-form')"></i>
@@ -82,17 +93,17 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">My Skills 
+                    <h5 class="card-title">My Skills
                         <i class="fas fa-plus" onclick="toggleEdit('skills')"></i>
                     </h5>
                     <div id="skills-view">
                         <ul id="skills-list">
                             {% for skill in user.profile.skills.all %}
-                                <li data-skill-id="{{ skill.id }}">
-                                    <span class="skill-name">{{ skill.name }}</span>
-                                    <i class="fas fa-edit" onclick="editSkill('{{ skill.id }}', '{{ skill.name }}')"></i>
-                                    <i class="fas fa-trash-alt" onclick="deleteSkill('{{ skill.id }}')"></i>
-                                </li>
+                            <li data-skill-id="{{ skill.id }}">
+                                <span class="skill-name">{{ skill.name }}</span>
+                                <i class="fas fa-edit" onclick="editSkill('{{ skill.id }}', '{{ skill.name }}')"></i>
+                                <i class="fas fa-trash-alt" onclick="deleteSkill('{{ skill.id }}')"></i>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -101,13 +112,15 @@
                         <div class="mb-3">
                             <select class="form-control" id="skills" name="skills" multiple>
                                 {% for skill in user.profile.skills.all %}
-                                    <option value="{{ skill.id }}" selected>{{ skill.name }}</option>
+                                <option value="{{ skill.id }}" selected>{{ skill.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="new_skill" name="new_skill" placeholder="Add new skill">
-                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New Skill</button>
+                            <input type="text" class="form-control" id="new_skill" name="new_skill"
+                                placeholder="Add new skill">
+                            <button type="button" class="btn btn-primary mt-2" onclick="addNewSkill()">Add New
+                                Skill</button>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
@@ -115,8 +128,10 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <input type="hidden" id="edit_skill_id" name="edit_skill_id">
-                            <input type="text" class="form-control" id="edit_skill_name" name="edit_skill_name" placeholder="Edit skill name">
-                            <button type="button" class="btn btn-primary mt-2" onclick="saveEditedSkill()">Save Skill</button>
+                            <input type="text" class="form-control" id="edit_skill_name" name="edit_skill_name"
+                                placeholder="Edit skill name">
+                            <button type="button" class="btn btn-primary mt-2" onclick="saveEditedSkill()">Save
+                                Skill</button>
                         </div>
                     </form>
                 </div>

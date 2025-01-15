@@ -171,3 +171,18 @@ def edit_skill(request):
         else:
             return JsonResponse({'success': False, 'error': 'Invalid skill ID or name'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+# API endpoint to delete the user's profile picture
+@login_required
+@csrf_protect
+def delete_profile_picture(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if data.get('delete_profile_picture'):
+            profile = request.user.profile
+            profile.profile_picture = 'https://i.imgur.com/2Q3XOlp.jpeg'
+            profile.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid request'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

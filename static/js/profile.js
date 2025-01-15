@@ -13,7 +13,7 @@ function toggleEdit(section) {
 function clearForm(formId) {
     var form = document.getElementById(formId);
     var inputs = form.querySelectorAll('input, textarea, select');
-    inputs.forEach(function(input) {
+    inputs.forEach(function (input) {
         if (input.type === 'checkbox' || input.type === 'radio') {
             input.checked = false;
         } else if (input.tagName === 'SELECT') {
@@ -37,19 +37,19 @@ function addNewSkill() {
             },
             body: JSON.stringify({ name: newSkillName })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                var skillsList = document.getElementById('skills-list');
-                var newListItem = document.createElement('li');
-                newListItem.dataset.skillId = data.skill_id;
-                newListItem.innerHTML = `${newSkillName} <i class="fas fa-edit" onclick="editSkill('${data.skill_id}', '${newSkillName}')"></i> <i class="fas fa-trash-alt" onclick="deleteSkill('${data.skill_id}')"></i>`;
-                skillsList.appendChild(newListItem);
-                newSkillInput.value = '';
-            } else {
-                alert('Error adding skill: ' + data.error);
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    var skillsList = document.getElementById('skills-list');
+                    var newListItem = document.createElement('li');
+                    newListItem.dataset.skillId = data.skill_id;
+                    newListItem.innerHTML = `${newSkillName} <i class="fas fa-edit" onclick="editSkill('${data.skill_id}', '${newSkillName}')"></i> <i class="fas fa-trash-alt" onclick="deleteSkill('${data.skill_id}')"></i>`;
+                    skillsList.appendChild(newListItem);
+                    newSkillInput.value = '';
+                } else {
+                    alert('Error adding skill: ' + data.error);
+                }
+            });
     }
 }
 
@@ -63,17 +63,17 @@ function deleteSkill(skillId) {
         },
         body: JSON.stringify({ skill_id: skillId })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            var skillListItem = document.querySelector(`li[data-skill-id="${skillId}"]`);
-            if (skillListItem) {
-                skillListItem.remove();
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                var skillListItem = document.querySelector(`li[data-skill-id="${skillId}"]`);
+                if (skillListItem) {
+                    skillListItem.remove();
+                }
+            } else {
+                alert('Error deleting skill: ' + data.error);
             }
-        } else {
-            alert('Error deleting skill: ' + data.error);
-        }
-    });
+        });
 }
 
 function editSkill(skillId, skillName) {
@@ -95,19 +95,42 @@ function saveEditedSkill() {
             },
             body: JSON.stringify({ skill_id: skillId, name: skillName })
         })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    var skillListItem = document.querySelector(`li[data-skill-id="${skillId}"] .skill-name`);
+                    if (skillListItem) {
+                        skillListItem.textContent = skillName;
+                    }
+                    document.getElementById('edit-skill-form').style.display = 'none';
+                } else {
+                    alert('Error editing skill: ' + data.error);
+                }
+            });
+    }
+}
+
+function deleteProfilePicture() {
+    // Send an AJAX request to delete the profile picture
+    fetch('/delete_profile_picture/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ delete_profile_picture: true })
+    })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                var skillListItem = document.querySelector(`li[data-skill-id="${skillId}"] .skill-name`);
-                if (skillListItem) {
-                    skillListItem.textContent = skillName;
+                var profilePicture = document.querySelector('img[alt="Profile Image"]');
+                if (profilePicture) {
+                    profilePicture.src = 'https://i.imgur.com/2Q3XOlp.jpeg';
                 }
-                document.getElementById('edit-skill-form').style.display = 'none';
             } else {
-                alert('Error editing skill: ' + data.error);
+                alert('Error deleting profile picture: ' + data.error);
             }
         });
-    }
 }
 
 function getCookie(name) {
