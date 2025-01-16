@@ -84,8 +84,26 @@ def settings(request):
             user.username = username
         if email:
             user.email = email
-        if current_password and new_password and confirm_password:
+        if current_password and new_password and not confirm_password:
+            messages.error(request, 'Please confirm your new password.')
+            return redirect('settings')
+        elif current_password and new_password and confirm_password:
             if user.check_password(current_password):
+                if len(new_password) < 8:
+                    messages.error(request, 'New password must be at least 8 characters long.')
+                    return redirect('settings')
+                if not any(char.isdigit() for char in new_password):
+                    messages.error(request, 'New password must contain at least one digit.')
+                    return redirect('settings')
+                if not any(char.isalpha() for char in new_password):
+                    messages.error(request, 'New password must contain at least one letter.')
+                    return redirect('settings')
+                if not any(char.isupper() for char in new_password):
+                    messages.error(request, 'New password must contain at least one uppercase letter.')
+                    return redirect('settings')
+                if not any(char.islower() for char in new_password):
+                    messages.error(request, 'New password must contain at least one lowercase letter.')
+                    return redirect('settings')
                 if new_password == confirm_password:
                     user.set_password(new_password)
                     update_session_auth_hash(request, user)
