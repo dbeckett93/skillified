@@ -177,7 +177,7 @@ def delete_profile_picture(request):
         data = json.loads(request.body)
         if data.get('delete_profile_picture'):
             profile = request.user.profile
-            profile.profile_picture = 'https://i.imgur.com/2Q3XOlp.jpeg'
+            profile.profile_picture = ''
             profile.save()
             return JsonResponse({'success': True})
         else:

@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = CloudinaryField('image', blank=True, null=True, default='https://i.imgur.com/2Q3XOlp.jpeg')
+    profile_picture = CloudinaryField('image', blank=True, null=True)
     about_me = models.TextField(blank=True, null=True)
     facebook_link = models.URLField(blank=True, null=True)
     linkedin_link = models.URLField(blank=True, null=True)

@@ -151,7 +151,7 @@ function deleteProfilePicture() {
         if (data.success) {
             var profilePicture = document.querySelector('img[alt="Profile Image"]');
             if (profilePicture) {
-                profilePicture.src = 'https://i.imgur.com/2Q3XOlp.jpeg';
+                profilePicture.src = '';
             }
         } else {
             alert('Error deleting profile picture: ' + data.error);
