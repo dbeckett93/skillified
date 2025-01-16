@@ -9,18 +9,14 @@ import json
 class ProfilePageTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        # Debug information
-        from django.conf import settings
-        print("INSTALLED_APPS in test:", settings.INSTALLED_APPS)
-
         # Create a test user and profile once for the entire test case
-        cls.user = User.objects.create_user(username='testuser', password='testpassword')
+        cls.user = User.objects.create_user(username='testuser', password='TestPassword1')
         cls.profile, created = Profile.objects.get_or_create(user=cls.user)
 
     def setUp(self):
         # Create a client and log in the user for each test
         self.client = Client()
-        self.client.login(username='testuser', password='testpassword')
+        self.client.login(username='testuser', password='TestPassword1')
         # Refresh the profile instance to avoid stale data
         self.profile = Profile.objects.get(user=self.user)
 
