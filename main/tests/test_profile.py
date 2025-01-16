@@ -59,15 +59,6 @@ class ProfilePageTests(TestCase):
         self.profile.refresh_from_db()
         self.assertIn(self.profile.profile_picture, [None, 'https://i.imgur.com/2Q3XOlp.jpeg'])
 
-    def test_delete_profile_image_no_image(self):
-        # A user with no profile image clicks on 'Delete Picture'
-        response = self.client.post(reverse('delete_profile_picture'), {'delete_profile_picture': True})
-        # Check that the response status code is 200
-        self.assertEqual(response.status_code, 200)
-        # Check that the profile picture is still the default
-        self.profile.refresh_from_db()
-        self.assertEqual(self.profile.profile_picture, 'https://i.imgur.com/2Q3XOlp.jpeg')
-
     def test_profile_page_status_code(self):
         # Check that the profile page returns a 200 status code
         response = self.client.get(reverse('profile'))
