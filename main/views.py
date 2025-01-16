@@ -142,6 +142,7 @@ def delete_skill(request):
             try:
                 skill = Skill.objects.get(id=skill_id)
                 request.user.profile.skills.remove(skill)
+                skill.delete()  # Delete the skill from the database
                 return JsonResponse({'success': True})
             except Skill.DoesNotExist:
                 return JsonResponse({'success': False, 'error': 'Skill does not exist'})

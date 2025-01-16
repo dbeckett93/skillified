@@ -128,29 +128,35 @@ class ProfilePageTests(TestCase):
 
     def test_edit_skill(self):
         # User edits an existing skill
-        skill = Skill.objects.create(name='Python', description='Programming language')
+        skill = Skill.objects.create(name='Python')
         self.profile.skills.add(skill)
-        response = self.client.post(reverse('edit_skill'), {
+        response = self.client.post(reverse('edit_skill'), json.dumps({
             'skill_id': skill.id,
-            'name': 'Advanced Python',
-            'description': 'Advanced programming language'
-        })
-        # Check that the response status code is 302 (redirect)
-        self.assertEqual(response.status_code, 302)
-        # Check that the skill was updated
+            'name': 'Advanced Python'
+        }), content_type='application/json')
+        # Check that the response status code is 200
+        self.assertEqual(response.status_code, 200)
+        # Refresh the skill instance
         skill.refresh_from_db()
+        # Check that the skill was updated
         self.assertEqual(skill.name, 'Advanced Python')
-        self.assertEqual(skill.description, 'Advanced programming language')
 
     def test_delete_skill(self):
         # User deletes an existing skill
-        skill = Skill.objects.create(name='Python', description='Programming language')
+        skill = Skill.objects.create(name='Python')
         self.profile.skills.add(skill)
-        response = self.client.post(reverse('delete_skill'), {
+        
+        response = self.client.post(reverse('delete_skill'), json.dumps({
             'skill_id': skill.id
-        })
-        # Check that the response status code is 302 (redirect)
-        self.assertEqual(response.status_code, 302)
-        # Check that the skill was deleted
-        self.assertFalse(Skill.objects.filter(id=skill.id).exists())
+        }), content_type='application/json')
+        
+        # Check that the response status code is 200
+        self.assertEqual(response.status_code, 200)
+        
+        # Refresh the profile instance
+        self.profile.refresh_from_db()
+        
+        # Check that the skill was deleted from the database
+        skill_exists = Skill.objects.filter(id=skill.id).exists()
+        self.assertFalse(skill_exists)
         self.assertNotIn(skill, self.profile.skills.all())
