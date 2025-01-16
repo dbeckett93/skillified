@@ -3,13 +3,14 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_protect
 
 from .forms import ContactForm
-from .models import Profile, Skill
+from .models import Profile, Skill, Event, NotificationSetting, Message
 
 # Home page view
 def home(request):
@@ -64,7 +65,50 @@ def messages_view(request):
     return render(request, 'main/messages.html')
 
 # Settings page view
+@login_required
 def settings(request):
+    if request.method == 'POST':
+        user = request.user
+        profile = user.profile
+
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        notify_messages = request.POST.get('notify_messages') == 'on'
+        notify_events = request.POST.get('notify_events') == 'on'
+        notify_skills = request.POST.get('notify_skills') == 'on'
+
+        if username:
+            user.username = username
+        if email:
+            user.email = email
+        if current_password and new_password and confirm_password:
+            if user.check_password(current_password):
+                if new_password == confirm_password:
+                    user.set_password(new_password)
+                    update_session_auth_hash(request, user)
+                else:
+                    messages.error(request, 'New passwords do not match.')
+                    return redirect('settings')
+            else:
+                messages.error(request, 'Current password is incorrect.')
+                return redirect('settings')
+
+        # Update notification settings
+        notification_settings, created = NotificationSetting.objects.get_or_create(user=user)
+        notification_settings.new_message = notify_messages
+        notification_settings.new_event = notify_events
+        notification_settings.new_skill = notify_skills
+        notification_settings.save()
+
+        user.save()
+        profile.save()
+
+        messages.success(request, 'Settings updated successfully.')
+        return redirect('settings')
+
     return render(request, 'main/settings.html')
 
 # Profile page view with profile update handling

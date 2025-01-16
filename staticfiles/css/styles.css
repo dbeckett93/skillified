@@ -15,3 +15,24 @@ header nav ul li {
 footer {
     font-size: 10px;
 }
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+}
+
+.messages .error {
+    color: red;
+    background-color: #fdd;
+    border: 1px solid red;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.messages .success {
+    color: green;
+    background-color: #dfd;
+    border: 1px solid green;
+    padding: 10px;
+    margin-bottom: 10px;
+}
