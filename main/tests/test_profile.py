@@ -94,10 +94,13 @@ class ProfilePageTests(TestCase):
             'linkedin_link': 'https://linkedin.com/in/testuser',
             'email': 'testuser@example.com'
         })
+
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
+
         # Check that the contact information was updated
         self.profile.refresh_from_db()
+        self.user.refresh_from_db()  # Refresh the User instance
         self.assertEqual(self.profile.facebook_link, 'https://facebook.com/testuser')
         self.assertEqual(self.profile.linkedin_link, 'https://linkedin.com/in/testuser')
         self.assertEqual(self.user.email, 'testuser@example.com')
