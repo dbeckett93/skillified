@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
+{% block title %}Login - Skillified{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Login</h2>
+    <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <hr>
+    <div class="mt-4">
+        <a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-lg mx-2">Login with Google</a>
+        <a href="{% provider_login_url 'facebook' %}" class="btn btn-primary btn-lg mx-2">Login with Facebook</a>
+        <a href="{% provider_login_url 'linkedin_oauth2' %}" class="btn btn-info btn-lg mx-2">Login with LinkedIn</a>
+    </div>
+    <div class="mt-4">
+        <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up here</a></p>
+    </div>
+</div>
+{% endblock %}

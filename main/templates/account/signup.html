@@ -1,5 +1,5 @@
-{% extends "main/base.html" %}
-{% load i18n %}
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Sign Up - Skillified{% endblock %}
 
@@ -8,7 +8,7 @@
     <h2>Sign Up</h2>
     <form method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
 </div>

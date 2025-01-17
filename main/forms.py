@@ -33,11 +33,14 @@ class CustomSignupForm(SignupForm):
         help_text='Mentors can list skills for other users to see and can arrange skill sharing events for the community.'
     )
 
-    # Add a help text to the mentor field with a line break
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['mentor'].help_text = 'Mentors can list skills for other users to see and can arrange skill sharing events for the community.'
-        self.fields['mentor'].help_text = '<br>' + self.fields['mentor'].help_text
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'form'
+        self.helper.label_class = 'form-label'
+        self.helper.field_class = 'form-control'
+        self.helper.add_input(Submit('submit', 'Sign Up'))
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
