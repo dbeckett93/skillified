@@ -9,6 +9,7 @@ class Profile(models.Model):
     facebook_link = models.URLField(blank=True, null=True)
     linkedin_link = models.URLField(blank=True, null=True)
     skills = models.ManyToManyField('Skill', related_name='profiles')
+    is_mentor = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

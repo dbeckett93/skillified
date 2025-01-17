@@ -1,7 +1,15 @@
-{% extends 'main/base.html' %}
+{% extends "main/base.html" %}
+{% load i18n %}
 
 {% block title %}Sign Up - Skillified{% endblock %}
 
 {% block content %}
-    <h1>Signup</h1>
+<div class="container mt-4">
+    <h2>Sign Up</h2>
+    <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
 {% endblock %}

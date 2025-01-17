@@ -78,6 +78,10 @@ TEMPLATES = [
     },
 ]
 
+ACCOUNT_FORMS = {
+    'signup': 'main.forms.CustomSignupForm',
+}
+
 WSGI_APPLICATION = 'skillified.wsgi.application'
 
 AUTHENTICATION_BACKENDS = [
