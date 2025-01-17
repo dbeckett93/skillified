@@ -3,6 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from main.models import NotificationSetting, Profile
+import os
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
 
 class SettingsViewTests(TestCase):
     @classmethod

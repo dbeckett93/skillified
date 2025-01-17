@@ -6,6 +6,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 import os
 import json
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
+
 class ProfilePageTests(TestCase):
     @classmethod
     def setUpTestData(cls):
