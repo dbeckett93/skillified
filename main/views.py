@@ -7,10 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 
-from .forms import ContactForm
+from .forms import ContactForm, SkillForm
 from .models import Profile, Skill, Event, NotificationSetting, Message
 
 # Home page view
@@ -270,9 +270,9 @@ def mentor_add_skill(request):
     else:
         form = SkillForm()
     
-    return render(request, 'main/add_skill.html', {'form': form})
+    return render(request, 'main/mentor_add_skill.html', {'form': form})
 
-@login_required
+# Skill detail page view
 def skill_detail(request, skill_id):
-    skill = Skill.objects.get(id=skill_id)
+    skill = get_object_or_404(Skill, id=skill_id)
     return render(request, 'main/skill_detail.html', {'skill': skill})
