@@ -33,6 +33,7 @@ class CustomSignupForm(SignupForm):
         help_text='Mentors can list skills for other users to see and can arrange skill sharing events for the community.'
     )
 
+    # Add a help text to the mentor field with a line break
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['mentor'].help_text = 'Mentors can list skills for other users to see and can arrange skill sharing events for the community.'
