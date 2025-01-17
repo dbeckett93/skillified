@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from main.models import Profile, Skill
 from django.core.files.uploadedfile import SimpleUploadedFile
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 import os
 import json
 
@@ -14,6 +15,31 @@ class ProfilePageTests(TestCase):
         # Create a test user and profile once for the entire test case
         cls.user = User.objects.create_user(username='testuser', password='TestPassword1')
         cls.profile, created = Profile.objects.get_or_create(user=cls.user)
+
+            # Create SocialApp instances for the social providers
+        google_app = SocialApp.objects.create(
+            provider='google',
+            name='Google',
+            client_id='google-client-id',
+            secret='google-client-secret',
+        )
+        google_app.sites.add(1)
+
+        facebook_app = SocialApp.objects.create(
+            provider='facebook',
+            name='Facebook',
+            client_id='facebook-client-id',
+            secret='facebook-client-secret',
+        )
+        facebook_app.sites.add(1)
+
+        linkedin_app = SocialApp.objects.create(
+            provider='linkedin_oauth2',
+            name='LinkedIn',
+            client_id='linkedin-client-id',
+            secret='linkedin-client-secret',
+        )
+        linkedin_app.sites.add(1)
 
     def setUp(self):
         # Create a client and log in the user for each test
