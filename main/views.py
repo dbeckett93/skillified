@@ -53,6 +53,10 @@ def terms_privacy(request):
 def dashboard(request):
     return render(request, 'main/dashboard.html')
 
+# Logout page view
+def logout(request):
+    return render(request, 'account/logout.html')
+
 # Events page view
 def events(request):
     return render(request, 'main/events.html')
