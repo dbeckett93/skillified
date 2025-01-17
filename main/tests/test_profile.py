@@ -10,6 +10,26 @@ import json
 os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
 
 class ProfilePageTests(TestCase):
+    """
+    Test suite for the Profile Page functionality.
+    This test case covers the following scenarios:
+    - Setting up test data including a test user, profile, and social app instances.
+    - Logging in the user for each test.
+    - Adding a profile image.
+    - Changing a profile image.
+    - Deleting a profile image.
+    - Checking the profile page status code.
+    - Verifying the profile page uses the correct template.
+    - Ensuring the profile page context contains the correct user profile.
+    - Redirecting to login if the user is not logged in.
+    - Updating contact information.
+    - Updating the 'about me' section.
+    - Adding a new skill.
+    - Editing an existing skill.
+    - Deleting an existing skill.
+    Each test method ensures that the corresponding functionality works as expected by checking the response status codes, 
+    updating the database, and verifying the changes.
+    """
     @classmethod
     def setUpTestData(cls):
         # Create a test user and profile once for the entire test case
