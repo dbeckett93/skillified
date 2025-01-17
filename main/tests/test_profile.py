@@ -22,10 +22,10 @@ class ProfilePageTests(TestCase):
 
     def test_add_profile_image(self):
         # Use an actual image file for the test
-        with open('media/profile_pictures/nobody.jpg', 'rb') as img:
+        with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
-        with open('media/profile_pictures/new_nobody.jpg', 'rb') as img:
+        with open('assets/images/testing/new_nobody.jpg', 'rb') as img:
             response = self.client.post(reverse('profile'), {'profile_picture': img})
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
@@ -38,10 +38,10 @@ class ProfilePageTests(TestCase):
 
     def test_change_profile_image(self):
         # User with a profile image uses 'Change Picture' to add a new image
-        with open('media/profile_pictures/nobody.jpg', 'rb') as img:
+        with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
-        with open('media/profile_pictures/new_nobody.jpg', 'rb') as img:
+        with open('assets/images/testing/new_nobody.jpg', 'rb') as img:
             response = self.client.post(reverse('profile'), {'profile_picture': img})
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
@@ -51,7 +51,7 @@ class ProfilePageTests(TestCase):
 
     def test_delete_profile_image(self):
         # User with a profile image clicks on 'Delete Picture'
-        with open('media/profile_pictures/nobody.jpg', 'rb') as img:
+        with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
         # Simulate clicking the delete picture button
