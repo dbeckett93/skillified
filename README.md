@@ -38,8 +38,6 @@ For more details, visit the [project page](https://github.com/users/dbeckett93/p
 | password   | CharField              |                             |
 | first_name | CharField              |                             |
 | last_name  | CharField              |                             |
-| is_mentor  | Boolean                |                             |
-| is_learner | Boolean                |                             |
 | profile    | OneToOneField          | Profile (One-to-One)        |
 | events     | ManyToManyField        | Event (Many-to-Many)        |
 
@@ -54,6 +52,8 @@ For more details, visit the [project page](https://github.com/users/dbeckett93/p
 | facebook_link   | URLField              |                             |
 | linkedin_link   | URLField              |                             |
 | skills          | ManyToManyField       | Skill (Many-to-Many)        |
+| is_mentor  | Boolean                |                             |
+
 
 ### Skill
 
