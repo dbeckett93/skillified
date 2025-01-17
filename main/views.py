@@ -253,7 +253,7 @@ def mentor_skills(request):
     return render(request, 'main/mentor_skills.html', {'skills': skills, 'is_mentor': is_mentor})
 
 @login_required
-def add_skill(request):
+def mentor_add_skill(request):
     if not request.user.profile.is_mentor:
         return redirect('mentor_skills')
     
