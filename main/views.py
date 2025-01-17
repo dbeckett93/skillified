@@ -1,6 +1,7 @@
 import json
 import os
 
+from django import forms
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
@@ -51,10 +52,6 @@ def terms_privacy(request):
 # Dashboard page view
 def dashboard(request):
     return render(request, 'main/dashboard.html')
-
-# Skills page view
-def skills(request):
-    return render(request, 'main/skills.html')
 
 # Events page view
 def events(request):
@@ -246,3 +243,32 @@ def delete_profile_picture(request):
         else:
             return JsonResponse({'success': False, 'error': 'Invalid request'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+# Mentor Skills page view
+@login_required
+def mentor_skills(request):
+    skills = Skill.objects.filter(profiles__user=request.user)
+    is_mentor = request.user.profile.is_mentor
+    return render(request, 'main/mentor_skills.html', {'skills': skills, 'is_mentor': is_mentor})
+
+@login_required
+def add_skill(request):
+    if not request.user.profile.is_mentor:
+        return redirect('mentor_skills')
+    
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            skill = form.save()
+            request.user.profile.skills.add(skill)
+            return redirect('mentor_skills')
+    else:
+        form = SkillForm()
+    
+    return render(request, 'main/add_skill.html', {'form': form})
+
+@login_required
+def skill_detail(request, skill_id):
+    skill = Skill.objects.get(id=skill_id)
+    return render(request, 'main/skill_detail.html', {'skill': skill})

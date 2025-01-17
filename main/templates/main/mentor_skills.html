@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Mentor Skills - Skillified{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Skills</h2>
+    {% if is_mentor %}
+    <a href="{% url 'add_skill' %}" class="btn btn-primary mb-3">Add New Skill</a>
+    {% endif %}
+    <div class="row">
+        {% for skill in skills %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ skill.name }}</h5>
+                    <p class="card-text">{{ skill.description }}</p>
+                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary">View Skill</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
