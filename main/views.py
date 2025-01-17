@@ -15,14 +15,24 @@ from .models import Profile, Skill, Event, NotificationSetting, Message
 
 # Home page view
 def home(request):
+    """
+    Renders the home page.
+    """
     return render(request, 'main/home.html')
 
 # About page view
 def about(request):
+    """
+    Renders the about page.
+    """
     return render(request, 'main/about.html')
 
 # Contact page view with form handling
 def contact(request):
+    """
+    Handles the contact form submission. If the form is valid, sends an email
+    to the site admin and displays a success message.
+    """
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -47,27 +57,46 @@ def contact(request):
 
 # Terms and privacy page view
 def terms_privacy(request):
+    """
+    Renders the terms and privacy page.
+    """
     return render(request, 'main/terms_privacy.html')
 
 # Dashboard page view
 def dashboard(request):
+    """
+    Renders the user dashboard page.
+    """
     return render(request, 'main/dashboard.html')
 
 # Logout page view
 def logout(request):
+    """
+    Renders the logout confirmation page.
+    """
     return render(request, 'account/logout.html')
 
 # Events page view
 def events(request):
+    """
+    Renders the events page.
+    """
     return render(request, 'main/events.html')
 
 # Messages page view
 def messages_view(request):
+    """
+    Renders the messages page.
+    """
     return render(request, 'main/messages.html')
 
 # Settings page view
 @login_required
 def settings(request):
+    """
+    Handles the settings form submission. Allows the user to update their
+    username, email, password, and notification settings.
+    """
     if request.method == 'POST':
         user = request.user
         profile = user.profile
@@ -133,6 +162,10 @@ def settings(request):
 # Profile page view with profile update handling
 @login_required
 def profile(request):
+    """
+    Handles the profile update form submission. Allows the user to update their
+    profile picture, social links, email, about me section, and skills.
+    """
     user = request.user
     profile = user.profile
     all_skills = Skill.objects.all()
@@ -185,6 +218,10 @@ def profile(request):
 @login_required
 @csrf_protect
 def add_skill(request):
+    """
+    Adds a new skill to the user's profile if the request method is POST and
+    the required data is provided.
+    """
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')
@@ -198,6 +235,10 @@ def add_skill(request):
 @login_required
 @csrf_protect
 def delete_skill(request):
+    """
+    Deletes an existing skill from the user's profile if the request method is
+    POST and the skill ID is provided.
+    """
     if request.method == 'POST':
         data = json.loads(request.body)
         skill_id = data.get('skill_id')
@@ -217,6 +258,10 @@ def delete_skill(request):
 @login_required
 @csrf_protect
 def edit_skill(request):
+    """
+    Edits an existing skill in the user's profile if the request method is POST
+    and the required data is provided.
+    """
     if request.method == 'POST':
         data = json.loads(request.body)
         skill_id = data.get('skill_id')
@@ -237,6 +282,10 @@ def edit_skill(request):
 @login_required
 @csrf_protect
 def delete_profile_picture(request):
+    """
+    Deletes the user's profile picture if the request method is POST and the
+    'delete_profile_picture' key is present in the request body.
+    """
     if request.method == 'POST':
         data = json.loads(request.body)
         if data.get('delete_profile_picture'):
@@ -248,16 +297,24 @@ def delete_profile_picture(request):
             return JsonResponse({'success': False, 'error': 'Invalid request'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
-
 # Mentor Skills page view
 @login_required
 def mentor_skills(request):
-    skills = Skill.objects.filter(profiles__user=request.user)
+    """
+    Renders the mentor skills page, displaying all skills added by any mentor.
+    If the user is a mentor, they can add new skills.
+    """
+    skills = Skill.objects.filter(profiles__user__profile__is_mentor=True).distinct()
     is_mentor = request.user.profile.is_mentor
     return render(request, 'main/mentor_skills.html', {'skills': skills, 'is_mentor': is_mentor})
 
+# View to add a new skill for mentors
 @login_required
 def mentor_add_skill(request):
+    """
+    Allows mentors to add new skills. If the user is not a mentor, they are
+    redirected to the mentor skills page. Handles both GET and POST requests.
+    """
     if not request.user.profile.is_mentor:
         return redirect('mentor_skills')
     
@@ -274,5 +331,9 @@ def mentor_add_skill(request):
 
 # Skill detail page view
 def skill_detail(request, skill_id):
+    """
+    Renders the skill detail page, displaying the details of a specific skill
+    identified by the skill_id parameter.
+    """
     skill = get_object_or_404(Skill, id=skill_id)
     return render(request, 'main/skill_detail.html', {'skill': skill})
