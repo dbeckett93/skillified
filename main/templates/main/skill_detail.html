@@ -11,9 +11,20 @@
     {% endif %}
     <h3 class="mt-4">Upcoming Events</h3>
     <ul>
-        {% for event in upcoming_events %}
-        <li>{{ event.title }} - {{ event.date_time }}</li>
-        {% endfor %}
+        <div class="row">
+            {% for event in upcoming_events %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text">{{ event.overview }}</p>
+                        <p><strong>Date and Time:</strong> {{ event.date_time }}</p>
+                        <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">View Event</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </ul>
 </div>
 {% endblock %}
