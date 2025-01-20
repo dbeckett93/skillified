@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Event Detail - Skillified{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ event.title }}</h2>
+    <p>{{ event.overview }}</p>
+    <p><strong>Date and Time:</strong> {{ event.date_time }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {% if is_participant %}
+        <button type="button" class="btn btn-secondary" disabled>Registered</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary">Register for Event</button>
+        {% endif %}
+    </form>
+    <h3 class="mt-4">Participants</h3>
+    <ul>
+        {% for participant in event.participants.all %}
+        <li>{{ participant.username }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

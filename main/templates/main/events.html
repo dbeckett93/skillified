@@ -3,5 +3,27 @@
 {% block title %}Events - Skillified{% endblock %}
 
 {% block content %}
-    <h1>Dashboard</h1>
+<div class="container mt-4">
+    <h2>Events</h2>
+    <form method="get" action="{% url 'events' %}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search events...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+    <div class="row">
+        {% for event in events %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <p class="card-text">{{ event.overview }}</p>
+                    <p><strong>Date and Time:</strong> {{ event.date_time }}</p>
+                    <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">View Event</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

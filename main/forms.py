@@ -2,7 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from allauth.account.forms import SignupForm
-from .models import Profile, Skill
+from .models import Profile, Skill, Event
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -65,3 +65,17 @@ class SkillForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Add Skill'))
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['title', 'overview', 'date_time']
+        widgets = {
+            'date_time': forms.DateTimeInput(attrs={'class': 'datetimepicker'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Create Event'))

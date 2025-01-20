@@ -11,7 +11,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
 
-from .forms import ContactForm, SkillForm
+from .forms import ContactForm, SkillForm, EventForm
 from .models import Profile, Skill, Event, NotificationSetting, Message
 
 # Home page view
@@ -76,13 +76,6 @@ def logout(request):
     Renders the logout confirmation page.
     """
     return render(request, 'account/logout.html')
-
-# Events page view
-def events(request):
-    """
-    Renders the events page.
-    """
-    return render(request, 'main/events.html')
 
 # Messages page view
 def messages_view(request):
@@ -345,4 +338,65 @@ def skill_detail(request, skill_id):
     identified by the skill_id parameter.
     """
     skill = get_object_or_404(Skill, id=skill_id)
-    return render(request, 'main/skill_detail.html', {'skill': skill})
+    upcoming_events = Event.objects.filter(skill=skill).order_by('date_time')
+    is_mentor = request.user.profile.is_mentor if request.user.is_authenticated else False
+    context = {
+        'skill': skill,
+        'upcoming_events': upcoming_events,
+        'is_mentor': is_mentor,
+    }
+    return render(request, 'main/skill_detail.html', context)
+
+# Events page view
+def events(request):
+    """
+    Renders the events page, displaying all events. Supports keyword search.
+    """
+    query = request.GET.get('q')
+    if query:
+        events = Event.objects.filter(
+            Q(title__icontains=query) | Q(overview__icontains=query)
+        ).distinct()
+    else:
+        events = Event.objects.all()
+    
+    return render(request, 'main/events.html', {'events': events, 'query': query})
+
+# Add Event page view
+@login_required
+def add_event(request, skill_id):
+    """
+    Allows mentors to create a new event for a specific skill.
+    """
+    skill = get_object_or_404(Skill, id=skill_id)
+    
+    if not request.user.profile.is_mentor:
+        return redirect('skill_detail', skill_id=skill_id)
+    
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.skill = skill
+            event.save()
+            return redirect('skill_detail', skill_id=skill_id)
+    else:
+        form = EventForm()
+    
+    return render(request, 'main/add_event.html', {'form': form, 'skill': skill})
+
+# Event detail page view
+@login_required
+def event_detail(request, event_id):
+    """
+    Displays the details of a specific event and allows users to register as participants.
+    """
+    event = get_object_or_404(Event, id=event_id)
+    is_participant = event.participants.filter(id=request.user.id).exists()
+
+    if request.method == 'POST':
+        if not is_participant:
+            event.participants.add(request.user)
+            return redirect('event_detail', event_id=event_id)
+
+    return render(request, 'main/event_detail.html', {'event': event, 'is_participant': is_participant})
