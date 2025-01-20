@@ -5,6 +5,12 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Mentor Skills</h2>
+    <form method="get" action="{% url 'mentor_skills' %}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search skills...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     {% if is_mentor %}
     <a href="{% url 'mentor_add_skill' %}" class="btn btn-primary mb-3">Add New Skill</a>
     {% endif %}

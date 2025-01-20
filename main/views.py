@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
+from django.db.models import Q
 
 from .forms import ContactForm, SkillForm
 from .models import Profile, Skill, Event, NotificationSetting, Message
@@ -302,11 +303,19 @@ def delete_profile_picture(request):
 def mentor_skills(request):
     """
     Renders the mentor skills page, displaying all skills added by any mentor.
-    If the user is a mentor, they can add new skills.
+    If the user is a mentor, they can add new skills. Supports keyword search.
     """
-    skills = Skill.objects.filter(profiles__user__profile__is_mentor=True).distinct()
+    query = request.GET.get('q')
+    if query:
+        skills = Skill.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query),
+            profiles__user__profile__is_mentor=True
+        ).distinct()
+    else:
+        skills = Skill.objects.filter(profiles__user__profile__is_mentor=True).distinct()
+    
     is_mentor = request.user.profile.is_mentor
-    return render(request, 'main/mentor_skills.html', {'skills': skills, 'is_mentor': is_mentor})
+    return render(request, 'main/mentor_skills.html', {'skills': skills, 'is_mentor': is_mentor, 'query': query})
 
 # View to add a new skill for mentors
 @login_required
