@@ -9,6 +9,28 @@
     {% if is_mentor %}
     <a href="{% url 'add_event' skill.id %}" class="btn btn-primary mt-3">Add Event</a>
     {% endif %}
+    {% if is_owner %}
+    <button class="btn btn-secondary mt-3" onclick="toggleEditSkill()">Edit Skill</button>
+    <form method="post" action="{% url 'delete_skill' skill.id %}" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete Skill</button>
+    </form>
+    {% endif %}
+    <div id="edit-skill-form" style="display:none;">
+        <form method="post" action="{% url 'edit_skill_detail' %}">
+            {% csrf_token %}
+            <input type="hidden" name="skill_id" value="{{ skill.id }}">
+            <div class="mb-3">
+                <label for="edit_skill_name" class="form-label">Skill Name</label>
+                <input type="text" class="form-control" id="edit_skill_name" name="name" value="{{ skill.name }}">
+            </div>
+            <div class="mb-3">
+                <label for="edit_skill_description" class="form-label">Skill Description</label>
+                <textarea class="form-control" id="edit_skill_description" name="description" rows="4">{{ skill.description }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
     <h3 class="mt-4">Upcoming Events</h3>
     <ul>
         <div class="row">
@@ -27,4 +49,15 @@
         </div>
     </ul>
 </div>
+
+<script>
+    function toggleEditSkill() {
+        var editForm = document.getElementById('edit-skill-form');
+        if (editForm.style.display === 'none') {
+            editForm.style.display = 'block';
+        } else {
+            editForm.style.display = 'none';
+        }
+    }
+</script>
 {% endblock %}

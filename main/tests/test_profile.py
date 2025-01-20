@@ -193,7 +193,7 @@ class ProfilePageTests(TestCase):
         skill = Skill.objects.create(name='Python')
         self.profile.skills.add(skill)
         
-        response = self.client.post(reverse('delete_skill'), json.dumps({
+        response = self.client.post(reverse('delete_skill_api'), json.dumps({
             'skill_id': skill.id
         }), content_type='application/json')
         

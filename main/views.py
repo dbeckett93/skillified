@@ -246,10 +246,10 @@ def add_skill(request):
             return redirect('profile')
     return JsonResponse({'error': 'Invalid data'}, status=400)
 
-# API endpoint to delete an existing skill
+# API endpoint to delete an existing skill from the profile page
 @login_required
 @csrf_protect
-def delete_skill(request):
+def delete_skill_api(request):
     """
     Deletes an existing skill from the user's profile if the request method is
     POST and the skill ID is provided.
@@ -269,7 +269,24 @@ def delete_skill(request):
             return JsonResponse({'success': False, 'error': 'Invalid skill ID'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
-# API endpoint to edit an existing skill
+# View to delete a skill from the skill detail page
+@login_required
+@csrf_protect
+def delete_skill(request, skill_id):
+    """
+    Deletes an existing skill if the request method is POST and the skill ID is provided.
+    Only the owner of the skill can delete it.
+    """
+    skill = get_object_or_404(Skill, id=skill_id)
+    if request.method == 'POST':
+        if skill.profiles.filter(user=request.user).exists():
+            skill.delete()
+            return redirect('mentor_skills')
+        else:
+            return JsonResponse({'success': False, 'error': 'You do not have permission to delete this skill'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+# API endpoint to edit an existing skill from the profile page
 @login_required
 @csrf_protect
 def edit_skill(request):
@@ -291,6 +308,30 @@ def edit_skill(request):
                 return JsonResponse({'success': False, 'error': 'Skill does not exist'})
         else:
             return JsonResponse({'success': False, 'error': 'Invalid skill ID or name'})
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+# View to edit a skill from the skill detail page
+@login_required
+@csrf_protect
+def edit_skill_detail(request):
+    """
+    Edits an existing skill if the request method is POST and the required data is provided.
+    """
+    if request.method == 'POST':
+        skill_id = request.POST.get('skill_id')
+        skill_name = request.POST.get('name')
+        skill_description = request.POST.get('description')
+        if skill_id and skill_name and skill_description:
+            try:
+                skill = Skill.objects.get(id=skill_id)
+                skill.name = skill_name
+                skill.description = skill_description
+                skill.save()
+                return redirect('skill_detail', skill_id=skill_id)
+            except Skill.DoesNotExist:
+                return JsonResponse({'success': False, 'error': 'Skill does not exist'})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid skill ID, name, or description'})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # API endpoint to delete the user's profile picture
@@ -361,10 +402,12 @@ def skill_detail(request, skill_id):
     skill = get_object_or_404(Skill, id=skill_id)
     upcoming_events = Event.objects.filter(skill=skill).order_by('date_time')
     is_mentor = request.user.profile.is_mentor if request.user.is_authenticated else False
+    is_owner = skill.profiles.filter(user=request.user).exists() if request.user.is_authenticated else False
     context = {
         'skill': skill,
         'upcoming_events': upcoming_events,
         'is_mentor': is_mentor,
+        'is_owner': is_owner,
     }
     return render(request, 'main/skill_detail.html', context)
 
