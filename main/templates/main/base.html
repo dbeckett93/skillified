@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +12,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand ms-2 me-auto" href="{% url 'home' %}">Skillified</a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"></li>
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'mentor_skills' %}">Mentor Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'events' %}">Events</a>
+                        </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
@@ -37,19 +51,21 @@
                 </div>
                 <ul class="navbar-nav ms-auto flex-row">
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
-                                {% if user.profile.profile_picture %}
-                                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="rounded-circle" width="30" height="30">
-                                {% else %}
-                                    <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile" class="rounded-circle" width="30" height="30">
-                                {% endif %}
-                            </a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
+                            {% if user.profile.profile_picture %}
+                            <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="rounded-circle"
+                                width="30" height="30">
+                            {% else %}
+                            <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile" class="rounded-circle" width="30"
+                                height="30">
+                            {% endif %}
+                        </a>
+                    </li>
                     {% else %}
-                        <li class="nav-item">
-                            <a class="btn btn-primary" href="{% url 'account_login' %}">Login</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{% url 'account_login' %}">Login</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
@@ -60,17 +76,17 @@
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-                <li class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+            <li class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
             {% endfor %}
         </ul>
-    {% endif %}
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
 
     <footer class="text-center mt-4 footer">
         <p>&copy; 2025 Skillified &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="{% url 'about' %}">About</a> | 
-            <a href="{% url 'contact' %}">Contact</a> | 
+            <a href="{% url 'about' %}">About</a> |
+            <a href="{% url 'contact' %}">Contact</a> |
             <a href="{% url 'terms_privacy' %}">Terms and Privacy</a>
         </p>
     </footer>
@@ -86,9 +102,11 @@
                 </div>
                 <div class="modal-body text-center">
                     {% if user.profile.profile_picture %}
-                        <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3" width="100" height="100">
+                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Image" class="rounded-circle mb-3"
+                        width="100" height="100">
                     {% else %}
-                        <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3" width="100" height="100">
+                    <img src="https://i.imgur.com/2Q3XOlp.jpeg" alt="Profile Image" class="rounded-circle mb-3"
+                        width="100" height="100">
                     {% endif %}
                     <h5>{{ user.username }}</h5>
                     <a class="btn btn-primary mt-3" href="{% url 'profile' %}">View Profile</a>
@@ -102,7 +120,8 @@
                         <li>
                             <form method="post" action="{% url 'account_logout' %}">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none;">Logout</button>
+                                <button type="submit" class="btn btn-link"
+                                    style="padding: 0; border: none; background: none;">Logout</button>
                             </form>
                         </li>
                     </ul>
@@ -116,4 +135,5 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
+
 </html>
