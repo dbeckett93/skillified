@@ -3,11 +3,58 @@
 {% block title %}Dashboard - Skillified{% endblock %}
 
 {% block content %}
+<div class="container mt-4 mb-4">
     <h1>Dashboard</h1>
+    <div class="mb-4"></div>
+        <a href="{% url 'mentor_skills' %}" class="btn btn-primary">Mentor Skills</a>
+        <a href="{% url 'events' %}" class="btn btn-primary">Events</a>
+        <a href="{% url 'messages' %}" class="btn btn-primary">Messages</a>
+    </div>
 
-    <ul></ul>
-        <li><a href="{% url 'mentor_skills' %}">Mentor Skills</a></li>
-        <li><a href="{% url 'events' %}">Events</a></li>
-        <li><a href="{% url 'messages' %}">Messages</a></li>
-    </ul>
+    <h2>Upcoming Events</h2>
+    <div class="row">
+        {% for event in upcoming_events %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <p class="card-text">{{ event.overview }}</p>
+                    <p><strong>Date and Time:</strong> {{ event.date_time }}</p>
+                    <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">View Event</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Recent Skills</h2>
+    <div class="row">
+        {% for skill in recent_skills %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ skill.name }}</h5>
+                    <p class="card-text">{{ skill.description }}</p>
+                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary">View Skill</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Popular Skills to Explore</h2>
+    <div class="row">
+        {% for skill in popular_skills %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ skill.name }}</h5>
+                    <p class="card-text">{{ skill.description }}</p>
+                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary">View Skill</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -8,8 +8,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from .forms import ContactForm, SkillForm, EventForm
 from .models import Profile, Skill, Event, NotificationSetting, Message
@@ -64,11 +65,31 @@ def terms_privacy(request):
     return render(request, 'main/terms_privacy.html')
 
 # Dashboard page view
+@login_required
 def dashboard(request):
     """
-    Renders the user dashboard page.
+    Renders the user dashboard, displaying upcoming events, recent skills, and popular skills.
     """
-    return render(request, 'main/dashboard.html')
+    user = request.user
+    today = timezone.now()
+
+    # Fetch upcoming events where the user is a participant
+    upcoming_events = Event.objects.filter(participants=user, date_time__gte=today).order_by('date_time')
+
+    # Fetch recent skills where the user has signed up as an event participant
+    recent_skills = Skill.objects.filter(events__participants=user).distinct()
+
+    # Fetch popular skills to explore
+    popular_skills = Skill.objects.filter(events__date_time__gte=today).annotate(
+        total_participants=Count('events__participants')
+    ).order_by('-total_participants')
+
+    context = {
+        'upcoming_events': upcoming_events,
+        'recent_skills': recent_skills,
+        'popular_skills': popular_skills,
+    }
+    return render(request, 'main/dashboard.html', context)
 
 # Logout page view
 def logout(request):
