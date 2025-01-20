@@ -6,9 +6,13 @@
 <div class="container mt-4">
     <h2>Events</h2>
     <form method="get" action="{% url 'events' %}" class="mb-3">
-        <div class="input-group">
+        <div class="input-group mb-3">
             <input type="text" name="q" class="form-control" placeholder="Search events...">
             <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+        <div class="input-group mb-3">
+            <input type="date" name="event_date" class="form-control datetimepicker" placeholder="Event date">
+            <button type="submit" class="btn btn-primary">Filter by Date</button>
         </div>
     </form>
     <div class="row">
@@ -26,4 +30,13 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr(".datetimepicker", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+        });
+    });
+</script>
 {% endblock %}

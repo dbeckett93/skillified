@@ -350,17 +350,22 @@ def skill_detail(request, skill_id):
 # Events page view
 def events(request):
     """
-    Renders the events page, displaying all events. Supports keyword search.
+    Renders the events page, displaying all events. Supports keyword search and date filtering.
     """
     query = request.GET.get('q')
+    event_date = request.GET.get('event_date')
+
+    events = Event.objects.all()
+
     if query:
-        events = Event.objects.filter(
+        events = events.filter(
             Q(title__icontains=query) | Q(overview__icontains=query)
         ).distinct()
-    else:
-        events = Event.objects.all()
-    
-    return render(request, 'main/events.html', {'events': events, 'query': query})
+
+    if event_date:
+        events = events.filter(date_time__date=event_date)
+
+    return render(request, 'main/events.html', {'events': events, 'query': query, 'event_date': event_date})
 
 # Add Event page view
 @login_required
