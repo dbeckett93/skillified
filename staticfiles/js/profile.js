@@ -70,7 +70,7 @@ function addNewSkill() {
  */
 function deleteSkill(skillId) {
     // Send an AJAX request to delete the skill
-    fetch('/delete_skill/', {
+    fetch('/delete_skill_api/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
