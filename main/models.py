@@ -29,6 +29,7 @@ class Event(models.Model):
     date_time = models.DateTimeField()
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE, related_name='events')
     participants = models.ManyToManyField(User, related_name='events')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.title

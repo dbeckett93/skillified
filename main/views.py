@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q, Count
 
-from .forms import ContactForm, SkillForm, EventForm
+from .forms import ContactForm, SkillForm, EventForm, EditEventForm
 from .models import Profile, Skill, Event, NotificationSetting, Message
 
 # Home page view
@@ -469,3 +469,31 @@ def event_detail(request, event_id):
             return redirect('event_detail', event_id=event_id)
 
     return render(request, 'main/event_detail.html', {'event': event, 'is_participant': is_participant})
+
+# Edit Event page view
+@login_required
+def edit_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    
+    if event.owner != request.user:
+        return redirect('event_detail', event_id=event_id)
+    
+    if request.method == 'POST':
+        form = EditEventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('event_detail', event_id=event_id)
+    else:
+        form = EditEventForm(instance=event)
+    
+    return render(request, 'main/edit_event.html', {'form': form, 'event': event})
+
+# Delete Event page view
+@login_required
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    
+    if event.owner == request.user:
+        event.delete()
+    
+    return redirect('events')

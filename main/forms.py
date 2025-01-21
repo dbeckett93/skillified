@@ -79,3 +79,11 @@ class EventForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Create Event'))
+
+class EditEventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['title', 'overview', 'date_time']
+        widgets = {
+        'date_time': forms.DateTimeInput(attrs={'class': 'datetimepicker'}),
+        }
