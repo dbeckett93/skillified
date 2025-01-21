@@ -12,6 +12,7 @@ class EventDetailTests(TestCase):
     - `test_event_detail_accessible_to_authenticated_users`: Ensures that the event details page is accessible to authenticated users.
     - `test_event_detail_displays_correct_information`: Ensures that the event details page displays the correct event information.
     - `test_register_for_event`: Ensures that users can register for an event.
+    - `test_unregister_from_event`: Ensures that users can unregister from an event.
     - `test_edit_delete_buttons_visible_to_owner`: Ensures that the "Edit Event" and "Delete Event" buttons are only visible to the event owner.
     - `test_edit_event`: Ensures that the event owner can edit the event.
     - `test_delete_event`: Ensures that the event owner can delete the event.
@@ -46,9 +47,16 @@ class EventDetailTests(TestCase):
 
     def test_register_for_event(self):
         self.client.login(username='otheruser', password='TestPassword1word1')
-        response = self.client.post(reverse('event_detail', args=[self.event.id]))
+        response = self.client.post(reverse('event_detail', args=[self.event.id]), {'action': 'register'})
         self.assertEqual(response.status_code, 302)  # Redirect after successful registration
         self.assertTrue(self.event.participants.filter(id=self.other_user.id).exists())
+
+    def test_unregister_from_event(self):
+        self.client.login(username='otheruser', password='TestPassword1word1')
+        self.event.participants.add(self.other_user)
+        response = self.client.post(reverse('event_detail', args=[self.event.id]), {'action': 'unregister'})
+        self.assertEqual(response.status_code, 302)  # Redirect after successful unregistration
+        self.assertFalse(self.event.participants.filter(id=self.other_user.id).exists())
 
     def test_edit_delete_buttons_visible_to_owner(self):
         response = self.client.get(reverse('event_detail', args=[self.event.id]))
