@@ -10,6 +10,7 @@
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="btn btn-primary">Create Event</button>
+        <a href="{% url 'mentor_skills' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 
