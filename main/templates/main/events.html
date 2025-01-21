@@ -15,6 +15,30 @@
             <button type="submit" class="btn btn-primary">Filter by Date</button>
         </div>
     </form>
+    <!-- Help Icon -->
+    <div class="mb-3">
+        <button type="button" class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#helpModal">
+            Help <i class="fa-solid fa-question"></i>
+        </button>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Events added by mentors will display here. Click on "View Event" to see event details and to register for the event.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         {% for event in events %}
         <div class="col-md-4 mb-4">
