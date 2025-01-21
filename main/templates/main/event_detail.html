@@ -10,9 +10,9 @@
     <form method="post">
         {% csrf_token %}
         {% if is_participant %}
-        <button type="button" class="btn btn-secondary" disabled>Registered</button>
+        <button type="submit" name="action" value="unregister" class="btn btn-secondary">Unregister</button>
         {% else %}
-        <button type="submit" class="btn btn-primary">Register for Event</button>
+        <button type="submit" name="action" value="register" class="btn btn-primary">Register for Event</button>
         {% endif %}
     </form>
     {% if event.owner == request.user %}

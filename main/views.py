@@ -458,15 +458,17 @@ def add_event(request, skill_id):
 @login_required
 def event_detail(request, event_id):
     """
-    Displays the details of a specific event and allows users to register as participants.
+    Displays the details of a specific event and allows users to register or unregister as participants.
     """
     event = get_object_or_404(Event, id=event_id)
     is_participant = event.participants.filter(id=request.user.id).exists()
 
     if request.method == 'POST':
-        if not is_participant:
+        if request.POST.get('action') == 'register' and not is_participant:
             event.participants.add(request.user)
-            return redirect('event_detail', event_id=event_id)
+        elif request.POST.get('action') == 'unregister' and is_participant:
+            event.participants.remove(request.user)
+        return redirect('event_detail', event_id=event_id)
 
     return render(request, 'main/event_detail.html', {'event': event, 'is_participant': is_participant})
 
