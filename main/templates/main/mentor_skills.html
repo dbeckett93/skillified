@@ -4,7 +4,28 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Mentor Skills</h2>
+    <div class="d-flex justify-content-between align-items-center"></div>
+        <h2>Mentor Skills</h2>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Mentor Skills Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Users who have registered as mentors will have their skills displayed here. Clicking on "View Skill" will allow any mentor to add an event that users can register for.</p>
+                    <p>Only users registered as mentors can add skills from this page.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <form method="get" action="{% url 'mentor_skills' %}" class="mb-3">
         <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Search skills...">
@@ -14,6 +35,9 @@
     {% if is_mentor %}
     <a href="{% url 'mentor_add_skill' %}" class="btn btn-primary mb-3">Add New Skill</a>
     {% endif %}
+    <button type="button" class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#helpModal">
+        Help <i class="fa-solid fa-question"></i>
+    </button>
     <div class="row">
         {% for skill in skills %}
         <div class="col-md-4 mb-4">
