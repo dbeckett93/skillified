@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -86,7 +86,7 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="text-center mt-4 footer">
+    <footer class="footer">
         <p>&copy; 2025 Skillified &nbsp;&nbsp;&nbsp;&nbsp;
             <a href="{% url 'about' %}">About</a> |
             <a href="{% url 'contact' %}">Contact</a> |
