@@ -20,16 +20,20 @@ function toggleEdit(section) {
  */
 function clearForm(formId) {
     var form = document.getElementById(formId);
-    var inputs = form.querySelectorAll('input, textarea, select');
-    inputs.forEach(function (input) {
-        if (input.type === 'checkbox' || input.type === 'radio') {
-            input.checked = false;
-        } else if (input.tagName === 'SELECT') {
-            input.selectedIndex = -1;
-        } else {
-            input.value = '';
+    var elements = form.elements;
+
+    for (var i = 0; i < elements.length; i++) {
+        var fieldType = elements[i].type.toLowerCase();
+        var fieldName = elements[i].name;
+
+        if (fieldType === 'text' || fieldType === 'password' || fieldType === 'textarea' || fieldType === 'email' || fieldType === 'url') {
+            elements[i].value = '';
+        } else if (fieldType === 'checkbox' || fieldType === 'radio') {
+            elements[i].checked = false;
+        } else if (fieldType === 'select-one' || fieldType === 'select-multiple') {
+            elements[i].selectedIndex = -1;
         }
-    });
+    }
 }
 
 /**
