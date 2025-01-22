@@ -141,26 +141,8 @@ function saveEditedSkill() {
  * Deletes the user's profile picture and reverts to the default image.
  */
 function deleteProfilePicture() {
-    // Send an AJAX request to delete the profile picture
-    fetch('/delete_profile_picture/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify({ delete_profile_picture: true })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            var profilePicture = document.querySelector('img[alt="Profile Image"]');
-            if (profilePicture) {
-                profilePicture.src = '';
-            }
-        } else {
-            alert('Error deleting profile picture: ' + data.error);
-        }
-    });
+    // Submit the form to delete the profile picture
+    document.getElementById('delete-profile-picture-form').submit();
 }
 
 /**

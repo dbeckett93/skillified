@@ -342,15 +342,11 @@ def delete_profile_picture(request):
     Deletes the user's profile picture if the request method is POST and the
     'delete_profile_picture' key is present in the request body.
     """
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        if data.get('delete_profile_picture'):
-            profile = request.user.profile
-            profile.profile_picture = ''
-            profile.save()
-            return JsonResponse({'success': True})
-        else:
-            return JsonResponse({'success': False, 'error': 'Invalid request'})
+    if request.method == 'POST' and 'delete_profile_picture' in request.POST:
+        profile = request.user.profile
+        profile.profile_picture = ''
+        profile.save()
+        return redirect('profile')  # Redirect to the profile page after deletion
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # Mentor Skills page view
