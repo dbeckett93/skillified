@@ -64,11 +64,33 @@ button:hover, .btn:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 20px;
+    width: 400px; /* Set a consistent width */
+    height: 400px; /* Set a consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* Ensure content does not overflow the card */
+    position: relative; /* Ensure the button is positioned relative to the card */
 }
 
 .card-title {
     font-size: 1.25rem;
     margin-bottom: 10px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
+}
+
+.card-text {
+    overflow: hidden; /* Ensure content does not overflow the card */
+    text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
+    max-height: 240px; /* Set a specific pixel cutoff for the content */
+}
+
+.card .btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
 /* Carousel styles */
