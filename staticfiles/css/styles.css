@@ -194,3 +194,12 @@ header nav ul li {
 .form button:hover {
     background-color: var(--button-hover-bg-color);
 }
+
+.input-group .form-control {
+    border-radius: 0.25rem;
+}
+
+.input-group .btn {
+    border-radius: 0.25rem;
+    height: 47px;
+}
