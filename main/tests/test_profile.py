@@ -102,10 +102,10 @@ class ProfilePageTests(TestCase):
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
-        # Simulate clicking the delete picture button
-        response = self.client.post(reverse('delete_profile_picture'), json.dumps({'delete_profile_picture': 'true'}), content_type='application/json')
-        # Check that the response status code is 200
-        self.assertEqual(response.status_code, 200)
+        # Simulate clicking the delete picture button using a form post
+        response = self.client.post(reverse('delete_profile_picture'), {'delete_profile_picture': 'true'})
+        # Check that the response status code is 302 (redirect)
+        self.assertEqual(response.status_code, 302)
         # Check that the profile picture was deleted
         self.profile.refresh_from_db()
         self.assertEqual(self.profile.profile_picture, None)
