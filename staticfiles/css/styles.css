@@ -64,8 +64,8 @@ button:hover, .btn:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 20px;
-    width: 400px; /* Set a consistent width */
-    height: 400px; /* Set a consistent height */
+    width: 100%; /* Ensure cards take full width of the column */
+    height: 100%; /* Ensure cards take full height of the column */
     display: flex;
     flex-direction: column;
     justify-content: space-between;

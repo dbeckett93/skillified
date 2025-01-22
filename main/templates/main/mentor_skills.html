@@ -40,12 +40,12 @@
     </button>
     <div class="row">
         {% for skill in skills %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
+        <div class="col-md-4 mb-4"> <!-- Add mb-4 for consistent bottom margin -->
+            <div class="card h-100"> <!-- Add h-100 to ensure cards have equal height -->
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ skill.name }}</h5>
-                    <p class="card-text">{{ skill.description }}</p>
-                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary">View Skill</a>
+                    <p class="card-text flex-grow-1">{{ skill.description }}</p>
+                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary mt-auto">View Skill</a>
                 </div>
             </div>
         </div>
