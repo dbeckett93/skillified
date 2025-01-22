@@ -99,10 +99,14 @@ button:hover, .btn:hover {
 }
 
 .carousel-caption {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     padding: 10px;
     border-radius: 4px;
-    color: var(--text-light-color);
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: bold;
 }
 
 /* Footer styles */
