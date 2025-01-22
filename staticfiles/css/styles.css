@@ -50,6 +50,7 @@ button, .btn {
     padding: 10px 15px;
     cursor: pointer;
     transition: background-color 0.3s;
+    min-width: 170px;
 }
 
 button:hover, .btn:hover {
