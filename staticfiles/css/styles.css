@@ -88,7 +88,6 @@ button:hover, .btn:hover {
     overflow: hidden; /* Ensure content does not overflow the card */
     text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
     max-height: 240px; /* Set a specific pixel cutoff for the content */
-    margin-bottom: 10px; /* Add some space between the text and the button */
 }
 
 .card .btn {
