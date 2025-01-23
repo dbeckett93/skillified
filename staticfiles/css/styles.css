@@ -208,3 +208,10 @@ header nav ul li {
     border-radius: 0.25rem;
     height: 47px;
 }
+
+/* Media query to hide the login button on small screens */
+@media (max-width: 576px) {
+    .navbar-nav .nav-item .nav-link.login-btn {
+        display: none;
+    }
+}
