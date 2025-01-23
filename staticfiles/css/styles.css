@@ -47,7 +47,7 @@ button, .btn {
     color: var(--button-text-color);
     border: none;
     border-radius: 12px;
-    padding: 10px 15px;
+    padding: 10px 15px 10px 10px;
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
