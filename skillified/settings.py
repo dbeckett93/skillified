@@ -24,6 +24,7 @@ ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
+# Site Settings
 SITE_ID = 1
 
 INSTALLED_APPS = [
