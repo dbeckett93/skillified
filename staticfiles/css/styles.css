@@ -92,8 +92,8 @@ button:hover, .btn:hover {
 
 .card .btn {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 22px;
 }
 
 /* Carousel styles */
