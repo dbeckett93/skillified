@@ -160,7 +160,7 @@ def settings(request):
         user.save()
         messages.success(request, 'Settings updated successfully.')
         return redirect('settings')
-
+    
     return render(request, 'main/settings.html')
 
 # Profile page view with profile update handling
@@ -432,6 +432,7 @@ def add_event(request, skill_id):
         if form.is_valid():
             event = form.save(commit=False)
             event.skill = skill
+            event.owner = request.user
             event.save()
             return redirect('skill_detail', skill_id=skill_id)
     else:
