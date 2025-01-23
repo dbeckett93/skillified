@@ -48,6 +48,8 @@ button, .btn {
     border: none;
     border-radius: 12px;
     padding: 10px 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
     min-width: 170px;
@@ -207,6 +209,8 @@ header nav ul li {
 .input-group .btn {
     border-radius: 0.25rem;
     height: 47px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 /* Media query to hide the login button on small screens */
