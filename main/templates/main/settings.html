@@ -43,7 +43,13 @@
             <label class="form-check-label" for="notify_skills">Notify for new skills</label>
         </div>
         {% endwith %}
-        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+        <h3 class="mt-3">Mentor Status</h3>
+        <p>When enabled as a Mentor your skills are shared with the community and you can create community events.</p>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="is_mentor" name="is_mentor" {% if user.profile.is_mentor %}checked{% endif %}>
+            <label class="form-check-label" for="is_mentor">Mentor Status</label>
+        </div>
+        <button type="submit" class="btn btn-primary my-3">Save Changes</button>
     </form>
 </div>
 {% endblock %}
