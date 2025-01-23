@@ -45,17 +45,17 @@
     <div class="row">
         {% for event in events %}
         <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ event.title }}</h5>
-                    <p class="card-text">{{ event.overview }}</p>
+                    <p class="card-text flex-grow-1">{{ event.overview }}</p>
                     <p><strong>Date and Time:</strong> {{ event.date_time }}</p>
-                    <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">View Event</a>
+                    <a href="{% url 'event_detail' event.id %}" class="btn btn-primary mt-auto">View Event</a>
                 </div>
             </div>
         </div>
         {% empty %}
-        There are no events to display.
+        There are no events to display. Events can be added by Mentors from the skill details page in the Mentor Skills section.
         {% endfor %}
     </div>
 </div>
