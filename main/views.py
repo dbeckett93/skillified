@@ -138,11 +138,24 @@ def settings(request):
                 if len(new_password) < 8:
                     messages.error(request, 'New password must be at least 8 characters long.')
                     return redirect('settings')
-                if new_password != confirm_password:
-                    messages.error(request, 'New password and confirmation do not match.')
+                if not any(char.isdigit() for char in new_password):
+                    messages.error(request, 'New password must contain at least one digit.')
                     return redirect('settings')
-                user.set_password(new_password)
-                update_session_auth_hash(request, user)
+                if not any(char.isalpha() for char in new_password):
+                    messages.error(request, 'New password must contain at least one letter.')
+                    return redirect('settings')
+                if not any(char.isupper() for char in new_password):
+                    messages.error(request, 'New password must contain at least one uppercase letter.')
+                    return redirect('settings')
+                if not any(char.islower() for char in new_password):
+                    messages.error(request, 'New password must contain at least one lowercase letter.')
+                    return redirect('settings')
+                if new_password == confirm_password:
+                    user.set_password(new_password)
+                    update_session_auth_hash(request, user)
+                else:
+                    messages.error(request, 'New passwords do not match.')
+                    return redirect('settings')
             else:
                 messages.error(request, 'Current password is incorrect.')
                 return redirect('settings')

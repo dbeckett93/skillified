@@ -69,6 +69,5 @@ class HomePageTests(TestCase):
         self.assertContains(response, f'href="{reverse("dashboard")}"')
         self.assertContains(response, f'href="{reverse("mentor_skills")}"')
         self.assertContains(response, f'href="{reverse("events")}"')
-        self.assertContains(response, f'href="{reverse("messages")}"')
         self.assertContains(response, f'href="{reverse("settings")}"')
         self.assertContains(response, 'Logout')

@@ -48,6 +48,7 @@ class SettingsViewTests(TestCase):
         self.assertTemplateUsed(response, 'main/settings.html')
         self.assertContains(response, 'User Settings')
         self.assertContains(response, 'Notification Settings')
+        self.assertContains(response, 'Mentor Status')
 
     # Test updating the username and email
     def test_update_username_and_email(self):
@@ -60,6 +61,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         self.user.refresh_from_db()
         self.assertEqual(self.user.username, 'newusername')
@@ -76,6 +78,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': '',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         notification_settings = NotificationSetting.objects.get(user=self.user)
         self.assertTrue(notification_settings.new_message)
@@ -93,6 +96,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         self.user.refresh_from_db()
         self.assertTrue(self.user.check_password('NewPassword123'))
@@ -108,6 +112,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -124,6 +129,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -140,6 +146,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -156,6 +163,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -172,6 +180,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -188,6 +197,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -204,6 +214,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -220,6 +231,7 @@ class SettingsViewTests(TestCase):
             'notify_messages': 'on',
             'notify_events': 'on',
             'notify_skills': 'on',
+            'mentor_status': 'on',
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
