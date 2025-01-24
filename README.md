@@ -567,6 +567,32 @@ To ensure the application is functioning correctly, you can run the tests using 
 
 By following these steps, you can effectively run and manage tests for your Skillified project using Pytest.
 
+## Code Validation
+
+### HTML Validation
+- **Tool Used**: [W3C Markup Validation Service](https://validator.w3.org/)
+- **Process**: All HTML files were validated using the W3C Markup Validation Service to ensure there are no syntax errors and that the code adheres to web standards.
+- **Results**: Any errors or warnings identified were corrected to ensure compliance with HTML5 standards.
+
+### CSS Validation
+- **Tool Used**: [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
+- **Process**: All CSS files were validated using the W3C CSS Validation Service to ensure there are no syntax errors and that the code adheres to CSS standards.
+- **Results**: Any errors or warnings identified were corrected to ensure compliance with CSS3 standards.
+
+### JavaScript Validation
+- **Tool Used**: [JSHint](https://jshint.com/)
+- **Process**: All JavaScript files were validated using JSHint to ensure there are no syntax errors and that the code adheres to best practices.
+- **Results**: Any errors or warnings identified were corrected to ensure clean and efficient JavaScript code.
+
+### Python Validation
+- **Tool Used**: [Pylint](https://www.pylint.org/)
+- **Process**: All Python files were validated using Pylint to ensure there are no syntax errors and that the code adheres to PEP 8 standards.
+- **Results**: Any errors or warnings identified were corrected to ensure clean and efficient Python code.
+
+By following these validation steps, we ensure that the codebase is clean, efficient, and adheres to industry standards.
+
+
+
 ## Future Enhancements
 
 ### Review and Comment System
