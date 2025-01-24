@@ -44,12 +44,8 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text flex-grow-1">{{ event.overview }}
-                        <br>
-                        <br>
-                        <strong>Date and Time:</strong>
-                        <br>
-                        {{ event.date_time }}</p>
+                        <p>{{ event.date_time }}</p>
+                        <p class="card-text flex-grow-1">{{ event.overview }}</p>
                         <a href="{% url 'event_detail' event.id %}?from_skill={{ skill.id }}" class="btn btn-primary mt-auto">View Event</a>
                     </div>
                 </div>
