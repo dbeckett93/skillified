@@ -660,7 +660,18 @@ The only errors are from external scripts.
 ### JavaScript Validation
 - **Tool Used**: [JSHint](https://jshint.com/)
 - **Process**: All JavaScript files were validated using JSHint to ensure there are no syntax errors and that the code adheres to best practices.
-- **Results**: Any errors or warnings identified were corrected to ensure clean and efficient JavaScript code.
+
+#### Results
+
+<details>
+<summary>Profile JS Validation Results (click to view)</summary>
+<img src="assets/images/readme/profile_js.webp" alt="Profile JS Validation Results">
+</details>
+
+<details>
+<summary>Script JS Validation Results (click to view)</summary>
+<img src="assets/images/readme/script_js.webp" alt="Script JS Validation Results">
+</details>
 
 ### Python Validation
 - **Tool Used**: [Pylint](https://www.pylint.org/)
