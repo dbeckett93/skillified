@@ -548,3 +548,38 @@ To ensure the application is functioning correctly, you can run the tests using 
     ```
 
 By following these steps, you can effectively run and manage tests for your Skillified project using Pytest.
+
+## Future Enhancements
+
+### Review and Comment System
+- **Description**: Implement a review and comment system for skills and events to allow users to provide feedback and engage in discussions.
+- **Features**:
+    - Users can leave reviews and ratings for skills and events.
+    - Users can comment on reviews and engage in discussions.
+    - Moderation tools to manage inappropriate content.
+
+### Messaging System
+- **Description**: Revisit the inclusion of a messaging system to facilitate direct communication between users.
+- **Features**:
+    - Users can send and receive messages within the platform.
+    - Notification settings for new messages.
+    - Integration with existing notification settings to manage message alerts.
+
+### Additional Fields for Skills
+- **Description**: Enhance the skill model to include additional fields such as images, external resource links, and the ability for users to subscribe for updates and events specific to that skill.
+- **Features**:
+    - Users can upload images related to the skill.
+    - Users can add external resource links for further reading or tutorials.
+    - Users can subscribe to receive updates and notifications about new events related to the skill.
+    - Integration with existing notification settings to manage skill-specific alerts.
+
+    ### Additional Fields for Events
+    - **Description**: Enhance the event model to include additional fields such as meeting join information for links to sites like Zoom, Microsoft Teams, and Google Meet. Full integration with these platforms can be considered as another potential improvement. Additionally, implement a timetable for events.
+    - **Features**:
+        - Users can add meeting join links for virtual events.
+        - Integration with Zoom, Microsoft Teams, and Google Meet for seamless event management.
+        - Users can view a timetable of upcoming events.
+        - Notifications for upcoming events and changes to the event schedule.
+        - Integration with existing notification settings to manage event-specific alerts.
+
+These enhancements aim to improve user engagement and provide additional value to the Skillified platform.
