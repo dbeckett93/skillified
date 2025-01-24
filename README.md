@@ -601,3 +601,28 @@ By following these steps, you can effectively run and manage tests for your Skil
         - Integration with existing notification settings to manage event-specific alerts.
 
 These enhancements aim to improve user engagement and provide additional value to the Skillified platform.
+
+## Credits
+
+### External Resources Used
+
+- [iLoveIMG](https://www.iloveimg.com/resize-image#resize-options,percentage) - A tool for resizing images.
+- [FreeConvert](https://www.freeconvert.com/webp-converter) - A tool for converting images to WebP format.
+- [TinyPNG](https://tinypng.com/) - A tool for compressing images.
+- [Unsplash](https://unsplash.com/) - A source for free high-resolution images.
+- [Bootsnipp Buttons by user silentcoding](https://bootsnipp.com/snippets/bxK9b) - Used for styling social media buttons.
+
+### Resource Documentation
+- [Bootstrap Documentation](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+- [Django Documentation](https://docs.djangoproject.com/en/3.2/)
+- [Cloudinary Documentation](https://cloudinary.com/documentation)
+- [Django-Allauth Documentation](https://django-allauth.readthedocs.io/en/latest/)
+- [Crispy Forms Documentation](https://django-crispy-forms.readthedocs.io/en/latest/)
+- [Heroku Documentation](https://devcenter.heroku.com/categories/reference)
+
+### Special Thanks
+- To the helpful code Institute team that I've worked with during the Bootcamp.
+    - Dillon McCaffrey - Facilitator, for advice and Heroku torubleshooting help during the intial deployment.
+    - Mark Briscoe - SME, for sharing his vast wealth of knowledge to prepare students for a career in development.
+    - Ruairidh MacArthur (Roo) - Software Coach, for great troubleshooting advice, particularly helping me untangle the mess of allauth templates to fit into my non-standard project directory structure.
+    - Ashley Beckett -  My Wife, for supporting my decision to dedicate time to the coding Bootcamp and for being a regular tester for all of my projects.
