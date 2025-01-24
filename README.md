@@ -105,10 +105,28 @@ Given that the project design was intended to utilise Bootstrap from the outset,
 - Event has a many-to-many relationship with User (as participants).
 - NotificationSetting has a many-to-one relationship with User.
 
+## Agile Development Process
+
+### GitHub Projects
+
+GitHub Projects was utilised to record user stories and design tasks throughout the project development. This tool provided a structured and organised way to manage the workflow, ensuring that all tasks were tracked and completed efficiently.
+
+### Iterative Design
+
+An iterative design approach was adopted to build out the application. Initial wireframe designs served as a guide, allowing for continuous refinement and improvement of the user interface and user experience. This approach ensured that the application evolved based on feedback and testing results.
+
+### Simultaneous Development and Testing
+
+Pages and unit tests were developed simultaneously to ensure that each section of the application was thoroughly tested before moving on to the next. This practice helped in identifying and resolving issues early in the development process, leading to a more robust and reliable application.
+
+### Thorough Testing
+
+Each feature and section of the application underwent rigorous testing to ensure functionality, usability, and accessibility. Automated tests were created using Pytest to cover various aspects of the application, including user authentication, profile management, skill and event management, and notification settings. Manual testing was also performed on different devices and browsers to ensure a seamless user experience across platforms.
+
 #### Design Rationale
-- **Layout**: The layout is designed to be intuitive and easy to navigate, with a clear hierarchy of information. The use of cards and modals helps to organize content and provide a seamless user experience.
+- **Layout**: The layout is designed to be intuitive and easy to navigate, with a clear hierarchy of information. The use of cards and modals helps to organise content and provide a seamless user experience.
 - **Colour Scheme**: The colour scheme uses high contrast colours to ensure readability and accessibility. Primary colours are used for important actions and navigation elements.
-- **Typography**: The platform uses a combination of 'Poppins' and 'Oswald' fonts for a modern and clean look. Font sizes are chosen to ensure readability across devices.
+- **Typography**: The platform uses a combination of 'Poppins' and 'Oswald' fonts for a modern and clean look. Font sises are chosen to ensure readability across devices.
 - **Accessibility**: The design follows WCAG guidelines to ensure accessibility for all users, including those using screen readers. Interactive elements are keyboard accessible, and alt text is provided for images.
 
 #### Inclusivity Notes
@@ -169,7 +187,7 @@ Given that the project design was intended to utilise Bootstrap from the outset,
      ```
 
 5. **Responsive Design**: 
-- The layout adapts to different screen sizes using CSS media queries, Flexbox, and Grid. While Bootstrap handles most of the responsiveness, custom media queries have been used where needed to ensure that the platform is usable on a variety of devices, including desktops, tablets, and mobile phones.
+- The layout adapts to different screen sises using CSS media queries, Flexbox, and Grid. While Bootstrap handles most of the responsiveness, custom media queries have been used where needed to ensure that the platform is usable on a variety of devices, including desktops, tablets, and mobile phones.
     - Example:
       ```css
         /* Media query to hide the login button on small screens */
@@ -574,10 +592,10 @@ By following these steps, you can effectively run and manage tests for your Skil
     - Integration with existing notification settings to manage skill-specific alerts.
 
     ### Additional Fields for Events
-    - **Description**: Enhance the event model to include additional fields such as meeting join information for links to sites like Zoom, Microsoft Teams, and Google Meet. Full integration with these platforms can be considered as another potential improvement. Additionally, implement a timetable for events.
+    - **Description**: Enhance the event model to include additional fields such as meeting join information for links to sites like soom, Microsoft Teams, and Google Meet. Full integration with these platforms can be considered as another potential improvement. Additionally, implement a timetable for events.
     - **Features**:
         - Users can add meeting join links for virtual events.
-        - Integration with Zoom, Microsoft Teams, and Google Meet for seamless event management.
+        - Integration with soom, Microsoft Teams, and Google Meet for seamless event management.
         - Users can view a timetable of upcoming events.
         - Notifications for upcoming events and changes to the event schedule.
         - Integration with existing notification settings to manage event-specific alerts.
