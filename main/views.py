@@ -416,8 +416,9 @@ def events(request):
     """
     query = request.GET.get('q')
     event_date = request.GET.get('event_date')
+    today = timezone.now().date()
 
-    events = Event.objects.all()
+    events = Event.objects.filter(date_time__date__gte=today).order_by('date_time')
 
     if query:
         events = events.filter(
