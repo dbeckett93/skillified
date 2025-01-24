@@ -11,9 +11,11 @@
     --text-light-color: #666;
     --text-dark-color: #000;
     --border-color: #ccc;
-    --button-bg-color: #417690;
+    --button-bg-color: #494ca2;
+    --button-border-color: #494ca2;
     --button-text-color: #fff;
-    --button-hover-bg-color: #205067;
+    --button-hover-bg-color: #333;
+    --button-hover-border-color: #333;
     --font-family: 'Poppins', sans-serif;
     --title-font-family: 'Oswald', sans-serif;
 }
@@ -44,84 +46,95 @@ a:hover {
 /* Button styles */
 button, .btn {
     border: none;
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 10px 15px 10px 10px;
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
     min-width: 170px;
+    background: var(--button-bg-color);
+    border-color: var(--button-border-color);
 }
 
+/* Gradient button styles */
 .btn-gradient {    
-    width:40%;
+    width: 40%;
     position: relative;
     display: inline-block;
-    left:-20px;
+    left: -20px;
     background: rgba(0, 0, 0, 0.15);
     border-top-right-radius: 60px;
     padding: 8px 24px 8px 16px;
     box-shadow: 2px 0px 0px 0px rgba(78, 72, 72, 0.4);
 }
 
+/* Button hover styles */
 button:hover, .btn:hover {
     background-color: var(--button-hover-bg-color);
+    border-color: var(--button-hover-border-color);
 }
 
-.btn-text{
-    width:60%;
-    font-size:23px;
+/* Button text styles */
+.btn-text {
+    width: 60%;
+    font-size: 23px;
 }
 
-.btn-facebook{
-    padding:0px 20px;
+/* Facebook button styles */
+.btn-facebook {
+    padding: 0px 20px;
     color: #fff;
     background-color: #5863db;
-    border:none;
+    border: none;
     justify-content: center;
     align-items: center;
     display: flex;
-    width:230px;
+    width: 230px;
     margin-right: 10px;
 }
 
-.btn-google{
-    padding:0px 20px;
+/* Google button styles */
+.btn-google {
+    padding: 0px 20px;
     color: #fff;
     background-color: #f06262;
-    border:none;
+    border: none;
     justify-content: center;
     align-items: center;
     display: flex;
-    width:230px;
+    width: 230px;
     margin-right: 10px;
 }
 
-.btn-linkedin{
-    padding:0px 20px;
+/* LinkedIn button styles */
+.btn-linkedin {
+    padding: 0px 20px;
     color: #fff;
     background-color: #0074af;
-    border:none;
+    border: none;
     justify-content: center;
     align-items: center;
     display: flex;
-    width:230px;
+    width: 230px;
     margin-right: 10px;
 }
 
-.btn-email{
-    padding:0px 20px;
+/* Email button styles */
+.btn-email {
+    padding: 0px 20px;
     color: #fff;
     background-color: #0069ff;
-    border:none;
+    border: none;
     justify-content: center;
     align-items: center;
     display: flex;
-    width:230px;
+    width: 230px;
     margin-right: 10px;
 }
 
-.btn-social:hover{
+/* Social button hover styles */
+.btn-social:hover {
     background-color: #cccccc;
     color: black;
 }
@@ -133,9 +146,6 @@ button:hover, .btn:hover {
     justify-content: center;
     gap: 10px;
 }
-
-
-
 
 /* Card component styles */
 .card {
@@ -154,6 +164,7 @@ button:hover, .btn:hover {
     position: relative; /* Ensure the button is positioned relative to the card */
 }
 
+/* Card title styles */
 .card-title {
     font-size: 1.25rem;
     margin-bottom: 10px;
@@ -162,12 +173,14 @@ button:hover, .btn:hover {
     text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
 }
 
+/* Card text styles */
 .card-text {
     overflow: hidden; /* Ensure content does not overflow the card */
     text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
     max-height: 240px; /* Set a specific pixel cutoff for the content */
 }
 
+/* Card button styles */
 .card .btn {
     position: absolute;
     bottom: 10px;
@@ -179,6 +192,7 @@ button:hover, .btn:hover {
     object-fit: cover;
 }
 
+/* Carousel caption styles */
 .carousel-caption {
     background: rgba(255, 255, 255, 0.7);
     padding: 10px;
@@ -200,6 +214,7 @@ button:hover, .btn:hover {
     margin-top: auto !important;
 }
 
+/* Footer link styles */
 .footer a {
     color: var(--button-text-color);
 }
@@ -251,12 +266,14 @@ header nav ul li {
     background-color: var(--background-color);
 }
 
+/* Form label styles */
 .form-label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
+/* Form control styles */
 .form-control {
     width: 100%;
     padding: 10px;
@@ -265,6 +282,7 @@ header nav ul li {
     border-radius: 3px;
 }
 
+/* Form button styles */
 .form button {
     display: inline-block;
     padding: 10px 20px;
@@ -276,14 +294,17 @@ header nav ul li {
     cursor: pointer;
 }
 
+/* Form button hover styles */
 .form button:hover {
     background-color: var(--button-hover-bg-color);
 }
 
+/* Input group form control styles */
 .input-group .form-control {
     border-radius: 0.25rem;
 }
 
+/* Input group button styles */
 .input-group .btn {
     border-radius: 0.25rem;
     height: 47px;
