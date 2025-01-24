@@ -24,17 +24,18 @@ class EventsTests(TestCase):
         self.client.login(username='testuser', password='TestPassword1word1')
 
         self.skill = Skill.objects.create(name='Test Skill', description='Test Skill Description')
+        today = timezone.now()
         self.event1 = Event.objects.create(
             title='Test Event 1',
             overview='Overview of Test Event 1',
-            date_time=timezone.make_aware(datetime(2025, 1, 21, 10, 0, 0)),
+            date_time=today + timezone.timedelta(days=365),
             skill=self.skill,
             owner=self.user
         )
         self.event2 = Event.objects.create(
             title='Test Event 2',
             overview='Overview of Test Event 2',
-            date_time=timezone.make_aware(datetime(2025, 1, 22, 11, 0, 0)),
+            date_time=today + timezone.timedelta(days=366),
             skill=self.skill,
             owner=self.user
         )
@@ -45,7 +46,7 @@ class EventsTests(TestCase):
         self.assertNotContains(response, 'Test Event 2')
 
     def test_search_events_by_date(self):
-        response = self.client.get(reverse('events') + '?event_date=2025-01-21')
+        response = self.client.get(reverse('events') + '?event_date=' + (timezone.now() + timezone.timedelta(days=365)).strftime('%Y-%m-%d'))
         self.assertContains(response, 'Test Event 1')
         self.assertNotContains(response, 'Test Event 2')
 
