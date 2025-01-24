@@ -5,6 +5,14 @@ from main.forms import ContactForm
 
 
 class ContactPageTests(TestCase):
+    """
+    Test suite for the Contact Page.
+
+    This test suite includes tests for rendering the contact page, 
+    form submission success, form submission with missing fields, 
+    and form submission with an invalid email address.
+    """
+
     def setUp(self):
         self.client = Client()
         self.url = reverse('contact')

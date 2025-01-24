@@ -12,16 +12,22 @@ class AddEventTests(TestCase):
     This test suite includes the following tests:
     - `test_page_visible_to_mentor`: Ensures that the add event page is only
       visible to mentor users.
+
     - `test_page_not_visible_to_non_mentor`: Ensures that the add event page
       is not visible to non-mentor users.
+
     - `test_add_event`: Ensures that a mentor user can add a new event with a
       title, overview, and date/time.
+
     - `test_add_event_title_required`: Ensures that the event title is a
       required field.
+
     - `test_add_event_overview_required`: Ensures that the event overview is a
       required field.
+
     - `test_add_event_date_time_required`: Ensures that the event date/time is
       a required field.
+      
     - `test_add_event_invalid_date_time_format`: Ensures that the event
       date/time format is validated.
     """
