@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.messages import get_messages
 from main.forms import ContactForm
 
+
 class ContactPageTests(TestCase):
     def setUp(self):
         self.client = Client()
@@ -31,7 +32,8 @@ class ContactPageTests(TestCase):
             'message': ''
         }
         response = self.client.post(self.url, data=form_data)
-        self.assertEqual(response.status_code, 200)  # Form re-rendered with errors
+        # Form re-rendered with errors
+        self.assertEqual(response.status_code, 200)
         form = response.context['form']
         self.assertTrue(form.errors)
         self.assertIn('name', form.errors)
@@ -46,8 +48,10 @@ class ContactPageTests(TestCase):
             'message': 'This is a test message.'
         }
         response = self.client.post(self.url, data=form_data)
-        self.assertEqual(response.status_code, 200)  # Form re-rendered with errors
+        # Form re-rendered with errors
+        self.assertEqual(response.status_code, 200)
         form = response.context['form']
         self.assertTrue(form.errors)
         self.assertIn('email', form.errors)
-        self.assertEqual(form.errors['email'], ['Enter a valid email address.'])
+        self.assertEqual(form.errors['email'], [
+                         'Enter a valid email address.'])

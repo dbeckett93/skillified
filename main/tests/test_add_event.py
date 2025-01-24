@@ -61,8 +61,7 @@ class AddEventTests(TestCase):
 
     def test_add_event(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post
-        (reverse('add_event', args=[self.skill.id]), {
+        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
             'title': 'Test Event',
             'overview': 'Test Event Overview',
             'date_time': '2025-01-21 10:00'
@@ -75,8 +74,7 @@ class AddEventTests(TestCase):
 
     def test_add_event_title_required(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post
-        (reverse('add_event', args=[self.skill.id]), {
+        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
             'title': '',
             'overview': 'Test Event Overview',
             'date_time': '2025-01-21 10:00'
@@ -89,8 +87,7 @@ class AddEventTests(TestCase):
 
     def test_add_event_overview_required(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post
-        (reverse('add_event', args=[self.skill.id]), {
+        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
             'title': 'Test Event',
             'overview': '',
             'date_time': '2025-01-21 10:00'
@@ -103,8 +100,7 @@ class AddEventTests(TestCase):
 
     def test_add_event_date_time_required(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post
-        (reverse('add_event', args=[self.skill.id]), {
+        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
             'title': 'Test Event',
             'overview': 'Test Event Overview',
             'date_time': ''
@@ -117,8 +113,7 @@ class AddEventTests(TestCase):
 
     def test_add_event_invalid_date_time_format(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post
-        (reverse('add_event', args=[self.skill.id]), {
+        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
             'title': 'Test Event',
             'overview': 'Test Event Overview',
             'date_time': 'invalid-date-time'
