@@ -6,60 +6,60 @@
 <div class="container mt-4 mb-4">
     <h1>Dashboard</h1>
     <div class="mb-4"></div>
-        <a href="{% url 'mentor_skills' %}" class="btn btn-primary">Mentor Skills</a>
-        <a href="{% url 'events' %}" class="btn btn-primary">Events</a>
-    </div>
+    <a href="{% url 'mentor_skills' %}" class="btn btn-primary">Mentor Skills</a>
+    <a href="{% url 'events' %}" class="btn btn-primary">Events</a>
+</div>
 
-    <h2>Upcoming Events</h2>
-    <div class="row">
-        {% for event in upcoming_events %}
-        <div class="col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ event.title }}</h5>
-                    <p>{{ event.date_time }}</p>
-                    <p class="card-text flex-grow-1">{{ event.overview }}</p>
-                    <a href="{% url 'event_detail' event.id %}" class="btn btn-primary mt-auto">View Event</a>
-                </div>
+<h2>Upcoming Events</h2>
+<div class="row">
+    {% for event in upcoming_events %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <p>{{ event.date_time }}</p>
+                <p class="card-text flex-grow-1">{{ event.overview }}</p>
+                <a href="{% url 'event_detail' event.id %}" class="btn btn-primary mt-auto">View Event</a>
             </div>
         </div>
-        {% empty %}
-        <p>No upcoming events.</p>
-        {% endfor %}
     </div>
+    {% empty %}
+    <p>No upcoming events.</p>
+    {% endfor %}
+</div>
 
-    <h2>Recent Skills</h2>
-    <div class="row">
-        {% for skill in recent_skills %}
-        <div class="col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ skill.name }}</h5>
-                    <p class="card-text flex-grow-1">{{ skill.description }}</p>
-                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary mt-auto">View Skill</a>
-                </div>
+<h2>Recent Skills</h2>
+<div class="row">
+    {% for skill in recent_skills %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ skill.name }}</h5>
+                <p class="card-text flex-grow-1">{{ skill.description }}</p>
+                <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary mt-auto">View Skill</a>
             </div>
         </div>
-        {% empty %}
-        <p>No recent skills.</p>
-        {% endfor %}
     </div>
+    {% empty %}
+    <p>No recent skills.</p>
+    {% endfor %}
+</div>
 
-    <h2>Popular Skills to Explore</h2>
-    <div class="row">
-        {% for skill in popular_skills %}
-        <div class="col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ skill.name }}</h5>
-                    <p class="card-text flex-grow-1">{{ skill.description }}</p>
-                    <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary mt-auto">View Skill</a>
-                </div>
+<h2>Popular Skills to Explore</h2>
+<div class="row">
+    {% for skill in popular_skills %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ skill.name }}</h5>
+                <p class="card-text flex-grow-1">{{ skill.description }}</p>
+                <a href="{% url 'skill_detail' skill.id %}" class="btn btn-primary mt-auto">View Skill</a>
             </div>
         </div>
-        {% empty %}
-        <p>No popular skills to explore.</p>
-        {% endfor %}
     </div>
+    {% empty %}
+    <p>No popular skills to explore.</p>
+    {% endfor %}
+</div>
 </div>
 {% endblock %}

@@ -5,6 +5,7 @@ import os
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
 
+
 class HomePageTests(TestCase):
     """
     Test suite for the Home Page of the application.
@@ -29,6 +30,7 @@ class HomePageTests(TestCase):
         test_navigation_links: Tests that the navigation links are present on the home page.
         test_authenticated_user_navigation_links: Tests that authenticated users see the correct navigation links.
     """
+
     def setUp(self):
         self.client = Client()
         self.home_url = reverse('home')
@@ -51,7 +53,8 @@ class HomePageTests(TestCase):
 
     def test_home_page_does_not_contain_incorrect_html(self):
         response = self.client.get(self.home_url)
-        self.assertNotContains(response, 'Hi there! I should not be on the page.')
+        self.assertNotContains(
+            response, 'Hi there! I should not be on the page.')
 
     def test_navigation_links(self):
         response = self.client.get(self.home_url)
@@ -62,7 +65,8 @@ class HomePageTests(TestCase):
         self.assertContains(response, f'href="{self.login_url}"')
 
     def test_authenticated_user_navigation_links(self):
-        user = User.objects.create_user(username='testuser', password='testpassword')
+        user = User.objects.create_user(
+            username='testuser', password='testpassword')
         self.client.login(username='testuser', password='testpassword')
         response = self.client.get(self.home_url)
         self.assertContains(response, f'href="{reverse("profile")}"')

@@ -30,7 +30,8 @@
             </div>
             <div class="mb-3">
                 <label for="edit_skill_description" class="form-label">Skill Description</label>
-                <textarea class="form-control" id="edit_skill_description" name="description" rows="4">{{ skill.description }}</textarea>
+                <textarea class="form-control" id="edit_skill_description" name="description"
+                    rows="4">{{ skill.description }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
             <button type="button" class="btn btn-secondary" onclick="toggleEditSkill()">Cancel</button>
@@ -38,22 +39,23 @@
     </div>
     <h3 class="mt-4">Upcoming Events</h3>
     <br>
-        <div class="row">
-            {% for event in upcoming_events %}
-            <div class="mb-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ event.title }}</h5>
-                        <p>{{ event.date_time }}</p>
-                        <p class="card-text flex-grow-1">{{ event.overview }}</p>
-                        <a href="{% url 'event_detail' event.id %}?from_skill={{ skill.id }}" class="btn btn-primary mt-auto">View Event</a>
-                    </div>
+    <div class="row">
+        {% for event in upcoming_events %}
+        <div class="mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <p>{{ event.date_time }}</p>
+                    <p class="card-text flex-grow-1">{{ event.overview }}</p>
+                    <a href="{% url 'event_detail' event.id %}?from_skill={{ skill.id }}"
+                        class="btn btn-primary mt-auto">View Event</a>
                 </div>
             </div>
-            {% empty %}
-            There are no upcoming events.
-            {% endfor %}
         </div>
+        {% empty %}
+        There are no upcoming events.
+        {% endfor %}
+    </div>
 </div>
 
 <script>

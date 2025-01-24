@@ -5,6 +5,7 @@ from main.models import Event, Skill
 from django.utils import timezone
 from datetime import datetime
 
+
 class EventsTests(TestCase):
     """
     Test suite for the Events functionality.
@@ -20,10 +21,12 @@ class EventsTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user(username='testuser', password='TestPassword1word1')
+        self.user = User.objects.create_user(
+            username='testuser', password='TestPassword1word1')
         self.client.login(username='testuser', password='TestPassword1word1')
 
-        self.skill = Skill.objects.create(name='Test Skill', description='Test Skill Description')
+        self.skill = Skill.objects.create(
+            name='Test Skill', description='Test Skill Description')
         today = timezone.now()
         self.event1 = Event.objects.create(
             title='Test Event 1',
@@ -46,7 +49,8 @@ class EventsTests(TestCase):
         self.assertNotContains(response, 'Test Event 2')
 
     def test_search_events_by_date(self):
-        response = self.client.get(reverse('events') + '?event_date=' + (timezone.now() + timezone.timedelta(days=365)).strftime('%Y-%m-%d'))
+        response = self.client.get(reverse('events') + '?event_date=' + (
+            timezone.now() + timezone.timedelta(days=365)).strftime('%Y-%m-%d'))
         self.assertContains(response, 'Test Event 1')
         self.assertNotContains(response, 'Test Event 2')
 

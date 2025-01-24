@@ -9,6 +9,7 @@ import json
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
 
+
 class ProfilePageTests(TestCase):
     """
     Test suite for the Profile Page functionality.
@@ -33,10 +34,11 @@ class ProfilePageTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Create a test user and profile once for the entire test case
-        cls.user = User.objects.create_user(username='testuser', password='TestPassword1')
+        cls.user = User.objects.create_user(
+            username='testuser', password='TestPassword1')
         cls.profile, created = Profile.objects.get_or_create(user=cls.user)
 
-            # Create SocialApp instances for the social providers
+        # Create SocialApp instances for the social providers
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
@@ -71,10 +73,12 @@ class ProfilePageTests(TestCase):
     def test_add_profile_image(self):
         # Use an actual image file for the test
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
-            self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
+            self.profile.profile_picture = SimpleUploadedFile(
+                name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
         with open('assets/images/testing/new_nobody.jpg', 'rb') as img:
-            response = self.client.post(reverse('profile'), {'profile_picture': img})
+            response = self.client.post(
+                reverse('profile'), {'profile_picture': img})
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
         # Print variables for debugging
@@ -87,10 +91,12 @@ class ProfilePageTests(TestCase):
     def test_change_profile_image(self):
         # User with a profile image uses 'Change Picture' to add a new image
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
-            self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
+            self.profile.profile_picture = SimpleUploadedFile(
+                name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
         with open('assets/images/testing/new_nobody.jpg', 'rb') as img:
-            response = self.client.post(reverse('profile'), {'profile_picture': img})
+            response = self.client.post(
+                reverse('profile'), {'profile_picture': img})
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
         # Check that the profile picture was updated
@@ -100,10 +106,12 @@ class ProfilePageTests(TestCase):
     def test_delete_profile_image(self):
         # User with a profile image clicks on 'Delete Picture'
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
-            self.profile.profile_picture = SimpleUploadedFile(name='nobody.jpg', content=img.read(), content_type='image/jpeg')
+            self.profile.profile_picture = SimpleUploadedFile(
+                name='nobody.jpg', content=img.read(), content_type='image/jpeg')
         self.profile.save()
         # Simulate clicking the delete picture button using a form post
-        response = self.client.post(reverse('delete_profile_picture'), {'delete_profile_picture': 'true'})
+        response = self.client.post(reverse('delete_profile_picture'), {
+                                    'delete_profile_picture': 'true'})
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
         # Check that the profile picture was deleted
@@ -129,7 +137,8 @@ class ProfilePageTests(TestCase):
         # Check that the profile page redirects to login if the user is not logged in
         self.client.logout()
         response = self.client.get(reverse('profile'))
-        self.assertRedirects(response, f"{reverse('account_login')}?next={reverse('profile')}")
+        self.assertRedirects(response, f"{reverse('account_login')}?next={
+                             reverse('profile')}")
 
     def test_update_contact_information(self):
         # User updates contact information
@@ -145,8 +154,10 @@ class ProfilePageTests(TestCase):
         # Check that the contact information was updated
         self.profile.refresh_from_db()
         self.user.refresh_from_db()  # Refresh the User instance
-        self.assertEqual(self.profile.facebook_link, 'https://facebook.com/testuser')
-        self.assertEqual(self.profile.linkedin_link, 'https://linkedin.com/in/testuser')
+        self.assertEqual(self.profile.facebook_link,
+                         'https://facebook.com/testuser')
+        self.assertEqual(self.profile.linkedin_link,
+                         'https://linkedin.com/in/testuser')
         self.assertEqual(self.user.email, 'testuser@example.com')
 
     def test_update_about_me(self):
@@ -158,7 +169,8 @@ class ProfilePageTests(TestCase):
         self.assertEqual(response.status_code, 302)
         # Check that the about me section was updated
         self.profile.refresh_from_db()
-        self.assertEqual(self.profile.about_me, 'This is a test about me section.')
+        self.assertEqual(self.profile.about_me,
+                         'This is a test about me section.')
 
     def test_add_skill(self):
         # User adds a new skill
@@ -192,17 +204,17 @@ class ProfilePageTests(TestCase):
         # User deletes an existing skill
         skill = Skill.objects.create(name='Python')
         self.profile.skills.add(skill)
-        
+
         response = self.client.post(reverse('delete_skill_api'), json.dumps({
             'skill_id': skill.id
         }), content_type='application/json')
-        
+
         # Check that the response status code is 200
         self.assertEqual(response.status_code, 200)
-        
+
         # Refresh the profile instance
         self.profile.refresh_from_db()
-        
+
         # Check that the skill was deleted from the database
         skill_exists = Skill.objects.filter(id=skill.id).exists()
         self.assertFalse(skill_exists)

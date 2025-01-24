@@ -5,6 +5,7 @@ from main.models import Event, Skill, Profile
 from django.utils import timezone
 from datetime import datetime
 
+
 class EventDetailTests(TestCase):
     """
     Test suite for the Event Detail functionality.
@@ -20,11 +21,14 @@ class EventDetailTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user(username='testuser', password='TestPassword1word1')
-        self.other_user = User.objects.create_user(username='otheruser', password='TestPassword1word1')
+        self.user = User.objects.create_user(
+            username='testuser', password='TestPassword1word1')
+        self.other_user = User.objects.create_user(
+            username='otheruser', password='TestPassword1word1')
         self.client.login(username='testuser', password='TestPassword1word1')
 
-        self.skill = Skill.objects.create(name='Test Skill', description='Test Skill Description')
+        self.skill = Skill.objects.create(
+            name='Test Skill', description='Test Skill Description')
         self.event = Event.objects.create(
             title='Test Event',
             overview='Test Event Overview',
@@ -34,12 +38,14 @@ class EventDetailTests(TestCase):
         )
 
     def test_event_detail_accessible_to_authenticated_users(self):
-        response = self.client.get(reverse('event_detail', args=[self.event.id]))
+        response = self.client.get(
+            reverse('event_detail', args=[self.event.id]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Test Event')
 
     def test_event_detail_displays_correct_information(self):
-        response = self.client.get(reverse('event_detail', args=[self.event.id]))
+        response = self.client.get(
+            reverse('event_detail', args=[self.event.id]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Test Event')
         self.assertContains(response, 'Test Event Overview')
@@ -47,24 +53,32 @@ class EventDetailTests(TestCase):
 
     def test_register_for_event(self):
         self.client.login(username='otheruser', password='TestPassword1word1')
-        response = self.client.post(reverse('event_detail', args=[self.event.id]), {'action': 'register'})
-        self.assertEqual(response.status_code, 302)  # Redirect after successful registration
-        self.assertTrue(self.event.participants.filter(id=self.other_user.id).exists())
+        response = self.client.post(
+            reverse('event_detail', args=[self.event.id]), {'action': 'register'})
+        # Redirect after successful registration
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(self.event.participants.filter(
+            id=self.other_user.id).exists())
 
     def test_unregister_from_event(self):
         self.client.login(username='otheruser', password='TestPassword1word1')
         self.event.participants.add(self.other_user)
-        response = self.client.post(reverse('event_detail', args=[self.event.id]), {'action': 'unregister'})
-        self.assertEqual(response.status_code, 302)  # Redirect after successful unregistration
-        self.assertFalse(self.event.participants.filter(id=self.other_user.id).exists())
+        response = self.client.post(reverse('event_detail', args=[self.event.id]), {
+                                    'action': 'unregister'})
+        # Redirect after successful unregistration
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(self.event.participants.filter(
+            id=self.other_user.id).exists())
 
     def test_edit_delete_buttons_visible_to_owner(self):
-        response = self.client.get(reverse('event_detail', args=[self.event.id]))
+        response = self.client.get(
+            reverse('event_detail', args=[self.event.id]))
         self.assertContains(response, 'Edit Event')
         self.assertContains(response, 'Delete Event')
 
         self.client.login(username='otheruser', password='TestPassword1word1')
-        response = self.client.get(reverse('event_detail', args=[self.event.id]))
+        response = self.client.get(
+            reverse('event_detail', args=[self.event.id]))
         self.assertNotContains(response, 'Edit Event')
         self.assertNotContains(response, 'Delete Event')
 
@@ -74,14 +88,17 @@ class EventDetailTests(TestCase):
             'overview': 'Updated Event Overview',
             'date_time': '2025-01-22 11:00:00'
         })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful form submission
+        # Redirect after successful form submission
+        self.assertEqual(response.status_code, 302)
         self.event.refresh_from_db()
         self.assertEqual(self.event.title, 'Updated Event Title')
         self.assertEqual(self.event.overview, 'Updated Event Overview')
-        self.assertEqual(self.event.date_time, timezone.make_aware(datetime(2025, 1, 22, 11, 0, 0)))
+        self.assertEqual(self.event.date_time, timezone.make_aware(
+            datetime(2025, 1, 22, 11, 0, 0)))
 
     def test_delete_event(self):
-        response = self.client.post(reverse('delete_event', args=[self.event.id]), follow=True)
+        response = self.client.post(
+            reverse('delete_event', args=[self.event.id]), follow=True)
         self.assertEqual(response.status_code, 200)
         event_exists = Event.objects.filter(id=self.event.id).exists()
         self.assertFalse(event_exists)

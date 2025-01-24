@@ -6,6 +6,7 @@ import os
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
 
+
 class MentorSkillsTests(TestCase):
     """
     Test suite for the Mentor Skills functionality.
@@ -24,19 +25,24 @@ class MentorSkillsTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.mentor_user = User.objects.create_user(username='mentoruser', password='TestPassword1word1')
-        self.non_mentor_user = User.objects.create_user(username='nonmentoruser', password='TestPassword1word1')
-        
-        self.mentor_profile, created = Profile.objects.get_or_create(user=self.mentor_user)
+        self.mentor_user = User.objects.create_user(
+            username='mentoruser', password='TestPassword1word1')
+        self.non_mentor_user = User.objects.create_user(
+            username='nonmentoruser', password='TestPassword1word1')
+
+        self.mentor_profile, created = Profile.objects.get_or_create(
+            user=self.mentor_user)
         self.mentor_profile.is_mentor = True
         self.mentor_profile.save()
-        
-        self.non_mentor_profile, created = Profile.objects.get_or_create(user=self.non_mentor_user)
+
+        self.non_mentor_profile, created = Profile.objects.get_or_create(
+            user=self.non_mentor_user)
         self.non_mentor_profile.is_mentor = False
         self.non_mentor_profile.save()
 
     def test_add_new_skill_button_not_visible_for_non_mentors(self):
-        self.client.login(username='nonmentoruser', password='TestPassword1word1')
+        self.client.login(username='nonmentoruser',
+                          password='TestPassword1word1')
         response = self.client.get(reverse('mentor_skills'))
         self.assertNotContains(response, 'Add New Skill')
 

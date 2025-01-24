@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit
 from allauth.account.forms import SignupForm
 from .models import Profile, Skill, Event
 
+
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()
@@ -19,6 +20,7 @@ class ContactForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Send'))
+
 
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
@@ -47,14 +49,15 @@ class CustomSignupForm(SignupForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.save()
-        
+
         # Update the profile with the mentor status
         profile = Profile.objects.get(user=user)
         profile.is_mentor = self.cleaned_data['mentor'] == 'yes'
         profile.save()
-        
+
         return user
-    
+
+
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
@@ -65,6 +68,7 @@ class SkillForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Add Skill'))
+
 
 class EventForm(forms.ModelForm):
     class Meta:
@@ -80,10 +84,11 @@ class EventForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Create Event'))
 
+
 class EditEventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['title', 'overview', 'date_time']
         widgets = {
-        'date_time': forms.DateTimeInput(attrs={'class': 'datetimepicker'}),
+            'date_time': forms.DateTimeInput(attrs={'class': 'datetimepicker'}),
         }

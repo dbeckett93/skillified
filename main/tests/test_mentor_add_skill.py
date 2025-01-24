@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from main.models import Skill, Profile
 
+
 class MentorAddSkillTests(TestCase):
     """
     Test suite for the Mentor Add Skill functionality.
@@ -17,14 +18,18 @@ class MentorAddSkillTests(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.mentor_user = User.objects.create_user(username='mentoruser', password='TestPassword1word1')
-        self.non_mentor_user = User.objects.create_user(username='nonmentoruser', password='TestPassword1word1')
-        
-        self.mentor_profile, created = Profile.objects.get_or_create(user=self.mentor_user)
+        self.mentor_user = User.objects.create_user(
+            username='mentoruser', password='TestPassword1word1')
+        self.non_mentor_user = User.objects.create_user(
+            username='nonmentoruser', password='TestPassword1word1')
+
+        self.mentor_profile, created = Profile.objects.get_or_create(
+            user=self.mentor_user)
         self.mentor_profile.is_mentor = True
         self.mentor_profile.save()
-        
-        self.non_mentor_profile, created = Profile.objects.get_or_create(user=self.non_mentor_user)
+
+        self.non_mentor_profile, created = Profile.objects.get_or_create(
+            user=self.non_mentor_user)
         self.non_mentor_profile.is_mentor = False
         self.non_mentor_profile.save()
 
@@ -35,9 +40,11 @@ class MentorAddSkillTests(TestCase):
         self.assertContains(response, 'Add New Skill')
 
     def test_page_not_visible_to_non_mentor(self):
-        self.client.login(username='nonmentoruser', password='TestPassword1word1')
+        self.client.login(username='nonmentoruser',
+                          password='TestPassword1word1')
         response = self.client.get(reverse('mentor_add_skill'))
-        self.assertEqual(response.status_code, 302)  # Redirect to mentor skills page
+        # Redirect to mentor skills page
+        self.assertEqual(response.status_code, 302)
 
     def test_add_skill(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
@@ -45,8 +52,10 @@ class MentorAddSkillTests(TestCase):
             'name': 'Test Skill',
             'description': 'Test Skill Description'
         })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful form submission
-        skill_exists = Skill.objects.filter(name='Test Skill', description='Test Skill Description').exists()
+        # Redirect after successful form submission
+        self.assertEqual(response.status_code, 302)
+        skill_exists = Skill.objects.filter(
+            name='Test Skill', description='Test Skill Description').exists()
         self.assertTrue(skill_exists)
 
     def test_add_skill_name_required(self):
@@ -71,7 +80,8 @@ class MentorAddSkillTests(TestCase):
         form = response.context['form']
         self.assertTrue(form.errors)
         self.assertIn('description', form.errors)
-        self.assertEqual(form.errors['description'], ['This field is required.'])
+        self.assertEqual(form.errors['description'], [
+                         'This field is required.'])
 
     def test_add_skill_name_max_length(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
@@ -84,4 +94,5 @@ class MentorAddSkillTests(TestCase):
         form = response.context['form']
         self.assertTrue(form.errors)
         self.assertIn('name', form.errors)
-        self.assertEqual(form.errors['name'], ['Ensure this value has at most 255 characters (it has 256).'])
+        self.assertEqual(form.errors['name'], [
+                         'Ensure this value has at most 255 characters (it has 256).'])

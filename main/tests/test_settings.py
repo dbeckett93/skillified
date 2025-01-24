@@ -8,6 +8,7 @@ import os
 # Set the Django settings module environment variable
 os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
 
+
 class SettingsViewTests(TestCase):
     """
     Unit tests for the SettingsView.
@@ -31,7 +32,8 @@ class SettingsViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Create a test user and profile once for the entire test case
-        cls.user = User.objects.create_user(username='testuser', password='TestPassword1')
+        cls.user = User.objects.create_user(
+            username='testuser', password='TestPassword1')
         cls.profile, created = Profile.objects.get_or_create(user=cls.user)
 
     def setUp(self):
@@ -150,7 +152,8 @@ class SettingsViewTests(TestCase):
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'New password must be at least 8 characters long.')
+        self.assertEqual(
+            str(messages[0]), 'New password must be at least 8 characters long.')
 
     # Test new password without a digit
     def test_new_password_no_digit(self):
@@ -167,7 +170,8 @@ class SettingsViewTests(TestCase):
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'New password must contain at least one digit.')
+        self.assertEqual(
+            str(messages[0]), 'New password must contain at least one digit.')
 
     # Test new password without a letter
     def test_new_password_no_letter(self):
@@ -184,7 +188,8 @@ class SettingsViewTests(TestCase):
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'New password must contain at least one letter.')
+        self.assertEqual(
+            str(messages[0]), 'New password must contain at least one letter.')
 
     # Test new password without an uppercase letter
     def test_new_password_no_uppercase(self):
@@ -201,7 +206,8 @@ class SettingsViewTests(TestCase):
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'New password must contain at least one uppercase letter.')
+        self.assertEqual(
+            str(messages[0]), 'New password must contain at least one uppercase letter.')
 
     # Test new password without a lowercase letter
     def test_new_password_no_lowercase(self):
@@ -218,7 +224,8 @@ class SettingsViewTests(TestCase):
         })
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'New password must contain at least one lowercase letter.')
+        self.assertEqual(
+            str(messages[0]), 'New password must contain at least one lowercase letter.')
 
     # Test new passwords do not match
     def test_new_passwords_do_not_match(self):

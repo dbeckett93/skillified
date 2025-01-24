@@ -16,6 +16,8 @@ from .forms import ContactForm, SkillForm, EventForm, EditEventForm
 from .models import Profile, Skill, Event, NotificationSetting
 
 # Home page view
+
+
 def home(request):
     """
     Renders the home page.
@@ -23,6 +25,8 @@ def home(request):
     return render(request, 'main/home.html')
 
 # About page view
+
+
 def about(request):
     """
     Renders the about page.
@@ -30,6 +34,8 @@ def about(request):
     return render(request, 'main/about.html')
 
 # Contact page view with form handling
+
+
 def contact(request):
     """
     Handles the contact form submission. If the form is valid, sends an email
@@ -43,14 +49,16 @@ def contact(request):
 
             # email content
             subject = 'Contact Form Submission'
-            message = f"Name: {form.cleaned_data['name']}\nEmail: {form.cleaned_data['email']}\nMessage: {form.cleaned_data['message']}"
+            message = f"Name: {form.cleaned_data['name']}\nEmail: {
+                form.cleaned_data['email']}\nMessage: {form.cleaned_data['message']}"
             from_email = EMAIL_HOST_USER
             recipient_list = [EMAIL_HOST_USER]
 
             send_mail(subject, message, from_email, recipient_list)
 
             # Display a success message and redirect the user back to the contact page
-            messages.success(request, 'Thank you for your message. We will get back to you shortly.')
+            messages.success(
+                request, 'Thank you for your message. We will get back to you shortly.')
             return redirect('contact')
     else:
         form = ContactForm()
@@ -58,6 +66,8 @@ def contact(request):
     return render(request, 'main/contact.html', {'form': form})
 
 # Terms and privacy page view
+
+
 def terms_privacy(request):
     """
     Renders the terms and privacy page.
@@ -65,6 +75,8 @@ def terms_privacy(request):
     return render(request, 'main/terms_privacy.html')
 
 # Dashboard page view
+
+
 @login_required
 def dashboard(request):
     """
@@ -74,7 +86,8 @@ def dashboard(request):
     today = timezone.now()
 
     # Fetch upcoming events where the user is a participant
-    upcoming_events = Event.objects.filter(participants=user, date_time__gte=today).order_by('date_time')
+    upcoming_events = Event.objects.filter(
+        participants=user, date_time__gte=today).order_by('date_time')
 
     # Fetch recent skills where the user has signed up as an event participant
     recent_skills = Skill.objects.filter(events__participants=user).distinct()
@@ -92,6 +105,8 @@ def dashboard(request):
     return render(request, 'main/dashboard.html', context)
 
 # Logout page view
+
+
 def logout(request):
     """
     Renders the logout confirmation page.
@@ -99,6 +114,8 @@ def logout(request):
     return render(request, 'account/logout.html')
 
 # Settings page view
+
+
 @login_required
 def settings(request):
     """
@@ -129,19 +146,24 @@ def settings(request):
         elif current_password and new_password and confirm_password:
             if user.check_password(current_password):
                 if len(new_password) < 8:
-                    messages.error(request, 'New password must be at least 8 characters long.')
+                    messages.error(
+                        request, 'New password must be at least 8 characters long.')
                     return redirect('settings')
                 if not any(char.isdigit() for char in new_password):
-                    messages.error(request, 'New password must contain at least one digit.')
+                    messages.error(
+                        request, 'New password must contain at least one digit.')
                     return redirect('settings')
                 if not any(char.isalpha() for char in new_password):
-                    messages.error(request, 'New password must contain at least one letter.')
+                    messages.error(
+                        request, 'New password must contain at least one letter.')
                     return redirect('settings')
                 if not any(char.isupper() for char in new_password):
-                    messages.error(request, 'New password must contain at least one uppercase letter.')
+                    messages.error(
+                        request, 'New password must contain at least one uppercase letter.')
                     return redirect('settings')
                 if not any(char.islower() for char in new_password):
-                    messages.error(request, 'New password must contain at least one lowercase letter.')
+                    messages.error(
+                        request, 'New password must contain at least one lowercase letter.')
                     return redirect('settings')
                 if new_password == confirm_password:
                     user.set_password(new_password)
@@ -157,7 +179,8 @@ def settings(request):
         profile.save()
 
         # Update notification settings
-        notification_settings, created = NotificationSetting.objects.get_or_create(user=user)
+        notification_settings, created = NotificationSetting.objects.get_or_create(
+            user=user)
         notification_settings.new_message = notify_messages
         notification_settings.new_event = notify_events
         notification_settings.new_skill = notify_skills
@@ -166,10 +189,12 @@ def settings(request):
         user.save()
         messages.success(request, 'Settings updated successfully.')
         return redirect('settings')
-    
+
     return render(request, 'main/settings.html')
 
 # Profile page view with profile update handling
+
+
 @login_required
 def profile(request):
     """
@@ -211,7 +236,8 @@ def profile(request):
         if 'new_skill' in request.POST:
             new_skill_name = request.POST['new_skill'].strip()
             if new_skill_name:
-                new_skill, created = Skill.objects.get_or_create(name=new_skill_name)
+                new_skill, created = Skill.objects.get_or_create(
+                    name=new_skill_name)
                 profile.skills.add(new_skill)
                 profile.save()
         # Redirect to the profile page after saving changes
@@ -225,6 +251,8 @@ def profile(request):
     return render(request, 'main/profile.html', context)
 
 # API endpoint to add a new skill
+
+
 @login_required
 @csrf_protect
 def add_skill(request):
@@ -236,12 +264,15 @@ def add_skill(request):
         name = request.POST.get('name')
         description = request.POST.get('description')
         if name and description:
-            skill, created = Skill.objects.get_or_create(name=name, description=description)
+            skill, created = Skill.objects.get_or_create(
+                name=name, description=description)
             request.user.profile.skills.add(skill)
             return redirect('profile')
     return JsonResponse({'error': 'Invalid data'}, status=400)
 
 # API endpoint to delete an existing skill from the profile page
+
+
 @login_required
 @csrf_protect
 def delete_skill_api(request):
@@ -265,6 +296,8 @@ def delete_skill_api(request):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # View to delete a skill from the skill detail page
+
+
 @login_required
 @csrf_protect
 def delete_skill(request, skill_id):
@@ -282,6 +315,8 @@ def delete_skill(request, skill_id):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # API endpoint to edit an existing skill from the profile page
+
+
 @login_required
 @csrf_protect
 def edit_skill(request):
@@ -306,6 +341,8 @@ def edit_skill(request):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # View to edit a skill from the skill detail page
+
+
 @login_required
 @csrf_protect
 def edit_skill_detail(request):
@@ -330,6 +367,8 @@ def edit_skill_detail(request):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # API endpoint to delete the user's profile picture
+
+
 @login_required
 @csrf_protect
 def delete_profile_picture(request):
@@ -341,10 +380,13 @@ def delete_profile_picture(request):
         profile = request.user.profile
         profile.profile_picture = ''
         profile.save()
-        return redirect('profile')  # Redirect to the profile page after deletion
+        # Redirect to the profile page after deletion
+        return redirect('profile')
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 # Mentor Skills page view
+
+
 @login_required
 def mentor_skills(request):
     """
@@ -358,12 +400,15 @@ def mentor_skills(request):
             profiles__user__profile__is_mentor=True
         ).distinct()
     else:
-        skills = Skill.objects.filter(profiles__user__profile__is_mentor=True).distinct()
-    
+        skills = Skill.objects.filter(
+            profiles__user__profile__is_mentor=True).distinct()
+
     is_mentor = request.user.profile.is_mentor
     return render(request, 'main/mentor_skills.html', {'skills': skills, 'is_mentor': is_mentor, 'query': query})
 
 # View to add a new skill for mentors
+
+
 @login_required
 def mentor_add_skill(request):
     """
@@ -372,7 +417,7 @@ def mentor_add_skill(request):
     """
     if not request.user.profile.is_mentor:
         return redirect('mentor_skills')
-    
+
     if request.method == 'POST':
         form = SkillForm(request.POST)
         if form.is_valid():
@@ -381,10 +426,12 @@ def mentor_add_skill(request):
             return redirect('mentor_skills')
     else:
         form = SkillForm()
-    
+
     return render(request, 'main/mentor_add_skill.html', {'form': form})
 
 # Skill detail page view
+
+
 @login_required
 def skill_detail(request, skill_id):
     """
@@ -394,7 +441,8 @@ def skill_detail(request, skill_id):
     skill = get_object_or_404(Skill, id=skill_id)
     upcoming_events = Event.objects.filter(skill=skill).order_by('date_time')
     is_mentor = request.user.profile.is_mentor if request.user.is_authenticated else False
-    is_owner = skill.profiles.filter(user=request.user).exists() if request.user.is_authenticated else False
+    is_owner = skill.profiles.filter(user=request.user).exists(
+    ) if request.user.is_authenticated else False
     context = {
         'skill': skill,
         'upcoming_events': upcoming_events,
@@ -404,6 +452,8 @@ def skill_detail(request, skill_id):
     return render(request, 'main/skill_detail.html', context)
 
 # Events page view
+
+
 @login_required
 def events(request):
     """
@@ -413,7 +463,8 @@ def events(request):
     event_date = request.GET.get('event_date')
     today = timezone.now().date()
 
-    events = Event.objects.filter(date_time__date__gte=today).order_by('date_time')
+    events = Event.objects.filter(
+        date_time__date__gte=today).order_by('date_time')
 
     if query:
         events = events.filter(
@@ -426,16 +477,18 @@ def events(request):
     return render(request, 'main/events.html', {'events': events, 'query': query, 'event_date': event_date})
 
 # Add Event page view
+
+
 @login_required
 def add_event(request, skill_id):
     """
     Allows mentors to create a new event for a specific skill.
     """
     skill = get_object_or_404(Skill, id=skill_id)
-    
+
     if not request.user.profile.is_mentor:
         return redirect('skill_detail', skill_id=skill_id)
-    
+
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
@@ -446,10 +499,12 @@ def add_event(request, skill_id):
             return redirect('skill_detail', skill_id=skill_id)
     else:
         form = EventForm()
-    
+
     return render(request, 'main/add_event.html', {'form': form, 'skill': skill})
 
 # Event detail page view
+
+
 @login_required
 def event_detail(request, event_id):
     """
@@ -468,13 +523,15 @@ def event_detail(request, event_id):
     return render(request, 'main/event_detail.html', {'event': event, 'is_participant': is_participant})
 
 # Edit Event page view
+
+
 @login_required
 def edit_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    
+
     if event.owner != request.user:
         return redirect('event_detail', event_id=event_id)
-    
+
     if request.method == 'POST':
         form = EditEventForm(request.POST, instance=event)
         if form.is_valid():
@@ -482,15 +539,17 @@ def edit_event(request, event_id):
             return redirect('event_detail', event_id=event_id)
     else:
         form = EditEventForm(instance=event)
-    
+
     return render(request, 'main/edit_event.html', {'form': form, 'event': event})
 
 # Delete Event page view
+
+
 @login_required
 def delete_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    
+
     if event.owner == request.user:
         event.delete()
-    
+
     return redirect('events')
