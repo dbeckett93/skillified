@@ -3,21 +3,21 @@
 
 /* Define CSS variables for colors and fonts */
 :root {
-    --primary-color: #264b5d;
-    --secondary-color: #417690;
-    --accent-color: #f5dd5d;
-    --background-color: #f9f9f9;
-    --text-color: #333;
-    --text-light-color: #666;
-    --text-dark-color: #000;
-    --border-color: #ccc;
-    --button-bg-color: #494ca2;
-    --button-border-color: #494ca2;
-    --button-text-color: #fff;
-    --button-hover-bg-color: #333;
-    --button-hover-border-color: #333;
-    --font-family: 'Poppins', sans-serif;
-    --title-font-family: 'Oswald', sans-serif;
+    --primary-color: #264b5d; /* Dark Blue */
+    --secondary-color: #417690; /* Medium Blue */
+    --accent-color: #f5dd5d; /* Yellow */
+    --background-color: #f9f9f9; /* Light Grey */
+    --text-color: #333; /* Dark Grey */
+    --text-light-color: #666; /* Medium Grey */
+    --text-dark-color: #000; /* Black */
+    --border-color: #ccc; /* Light Grey */
+    --button-bg-color: #494ca2; /* Purple */
+    --button-border-color: #494ca2; /* Purple */
+    --button-text-color: #fff; /* White */
+    --button-hover-bg-color: #333; /* Dark Grey */
+    --button-hover-border-color: #333; /* Dark Grey */
+    --font-family: 'Poppins', sans-serif; /* Font Family */
+    --title-font-family: 'Oswald', sans-serif; /* Title Font Family */
 }
 
 /* Base styles for the body */
