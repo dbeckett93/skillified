@@ -126,7 +126,7 @@ Each feature and section of the application underwent rigorous testing to ensure
 #### Design Rationale
 - **Layout**: The layout is designed to be intuitive and easy to navigate, with a clear hierarchy of information. The use of cards and modals helps to organise content and provide a seamless user experience.
 - **Colour Scheme**: The colour scheme uses high contrast colours to ensure readability and accessibility. Primary colours are used for important actions and navigation elements.
-- **Typography**: The platform uses a combination of 'Poppins' and 'Oswald' fonts for a modern and clean look. Font sises are chosen to ensure readability across devices.
+- **Typography**: The platform uses a combination of 'Poppins' and 'Oswald' fonts for a modern and clean look. Font sizes are chosen to ensure readability across devices.
 - **Accessibility**: The design follows WCAG guidelines to ensure accessibility for all users, including those using screen readers. Interactive elements are keyboard accessible, and alt text is provided for images.
 
 #### Inclusivity Notes
@@ -187,7 +187,7 @@ Each feature and section of the application underwent rigorous testing to ensure
      ```
 
 5. **Responsive Design**: 
-- The layout adapts to different screen sises using CSS media queries, Flexbox, and Grid. While Bootstrap handles most of the responsiveness, custom media queries have been used where needed to ensure that the platform is usable on a variety of devices, including desktops, tablets, and mobile phones.
+- The layout adapts to different screen sizes using CSS media queries, Flexbox, and Grid. While Bootstrap handles most of the responsiveness, custom media queries have been used where needed to ensure that the platform is usable on a variety of devices, including desktops, tablets, and mobile phones.
     - Example:
       ```css
         /* Media query to hide the login button on small screens */
