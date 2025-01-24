@@ -13,7 +13,7 @@
     <h2>Upcoming Events</h2>
     <div class="row">
         {% for event in upcoming_events %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ event.title }}</h5>
@@ -35,7 +35,7 @@
     <h2>Recent Skills</h2>
     <div class="row">
         {% for skill in recent_skills %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ skill.name }}</h5>
@@ -52,7 +52,7 @@
     <h2>Popular Skills to Explore</h2>
     <div class="row">
         {% for skill in popular_skills %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ skill.name }}</h5>

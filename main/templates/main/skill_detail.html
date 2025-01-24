@@ -5,6 +5,7 @@
 {% block content %}
 <div class="container mt-4">
     <h2>{{ skill.name }}</h2>
+    <br>
     <p>{{ skill.description }}</p>
     <div class="d-flex flex-column flex-md-row mt-3">
         {% if is_mentor %}
@@ -35,10 +36,11 @@
         </form>
     </div>
     <h3 class="mt-4">Upcoming Events</h3>
+    <br>
     <ul>
         <div class="row">
             {% for event in upcoming_events %}
-            <div class="col-md-4 mb-4">
+            <div class="mb-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ event.title }}</h5>

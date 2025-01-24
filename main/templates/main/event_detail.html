@@ -5,6 +5,7 @@
 {% block content %}
 <div class="container mt-4">
     <h2>{{ event.title }}</h2>
+    <br>
     <p>{{ event.overview }}</p>
     <p><strong>Date and Time:</strong> {{ event.date_time }}</p>
     <form method="post">
@@ -23,6 +24,7 @@
     </form>
     {% endif %}
     <h3 class="mt-4">Participants</h3>
+    <br>
     <ul>
         {% for participant in event.participants.all %}
         <li>{{ participant.username }}</li>
