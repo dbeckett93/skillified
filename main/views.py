@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q, Count
 
 from .forms import ContactForm, SkillForm, EventForm, EditEventForm
-from .models import Profile, Skill, Event, NotificationSetting, Message
+from .models import Profile, Skill, Event, NotificationSetting
 
 # Home page view
 def home(request):
@@ -97,13 +97,6 @@ def logout(request):
     Renders the logout confirmation page.
     """
     return render(request, 'account/logout.html')
-
-# Messages page view
-def messages_view(request):
-    """
-    Renders the messages page.
-    """
-    return render(request, 'main/messages.html')
 
 # Settings page view
 @login_required
