@@ -51,7 +51,7 @@
                         <strong>Date and Time:</strong>
                         <br>
                         {{ event.date_time }}</p>
-                        <a href="{% url 'event_detail' event.id %}" class="btn btn-primary mt-auto">View Event</a>
+                        <a href="{% url 'event_detail' event.id %}?from_skill={{ skill.id }}" class="btn btn-primary mt-auto">View Event</a>
                     </div>
                 </div>
             </div>
