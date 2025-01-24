@@ -650,7 +650,12 @@ The only errors are from external scripts.
 ### CSS Validation
 - **Tool Used**: [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
 - **Process**: All CSS files were validated using the W3C CSS Validation Service to ensure there are no syntax errors and that the code adheres to CSS standards.
-- **Results**: Any errors or warnings identified were corrected to ensure compliance with CSS3 standards.
+
+#### Results
+<details>
+<summary>CSS validation results (click to view)</summary>
+<img src="assets/images/readme/css.webp" alt="CSS Validation Results">
+</details>
 
 ### JavaScript Validation
 - **Tool Used**: [JSHint](https://jshint.com/)
