@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Call the function to initialize the date time picker
+    function initializeDatePicker() {
+        flatpickr(".datepicker", {
+            dateFormat: "Y-m-d",
+        });
+    }
+
+    // Call the functions to initialize the date time picker and date picker
     initializeDateTimePicker();
+    initializeDatePicker();
 });
