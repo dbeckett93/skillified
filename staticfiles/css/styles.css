@@ -43,8 +43,6 @@ a:hover {
 
 /* Button styles */
 button, .btn {
-    background-color: #417690;
-    color: var(--button-text-color);
     border: none;
     border-radius: 12px;
     padding: 10px 15px 10px 10px;
@@ -55,9 +53,84 @@ button, .btn {
     min-width: 170px;
 }
 
+.btn-gradient {    
+    width:40%;
+    position: relative;
+    display: inline-block;
+    left:-20px;
+    background: rgba(0, 0, 0, 0.15);
+    border-top-right-radius: 60px;
+    padding: 8px 24px 8px 16px;
+    box-shadow: 2px 0px 0px 0px rgba(78, 72, 72, 0.4);
+}
+
 button:hover, .btn:hover {
     background-color: var(--button-hover-bg-color);
 }
+
+.btn-text{
+    width:60%;
+    font-size:23px;
+}
+
+.btn-facebook{
+    padding:0px 20px;
+    color: #fff;
+    background-color: #5863db;
+    border:none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width:230px;
+    margin-right: 10px;
+}
+
+.btn-google{
+    padding:0px 20px;
+    color: #fff;
+    background-color: #f06262;
+    border:none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width:230px;
+    margin-right: 10px;
+}
+
+.btn-linkedin{
+    padding:0px 20px;
+    color: #fff;
+    background-color: #0074af;
+    border:none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width:230px;
+    margin-right: 10px;
+}
+
+.btn-email{
+    padding:0px 20px;
+    color: #fff;
+    background-color: #0069ff;
+    border:none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width:230px;
+    margin-right: 10px;
+}
+
+/* Flex container for buttons */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+
 
 /* Card component styles */
 .card {
