@@ -385,6 +385,7 @@ def mentor_add_skill(request):
     return render(request, 'main/mentor_add_skill.html', {'form': form})
 
 # Skill detail page view
+@login_required
 def skill_detail(request, skill_id):
     """
     Renders the skill detail page, displaying the details of a specific skill
@@ -403,6 +404,7 @@ def skill_detail(request, skill_id):
     return render(request, 'main/skill_detail.html', context)
 
 # Events page view
+@login_required
 def events(request):
     """
     Renders the events page, displaying all events. Supports keyword search and date filtering.
