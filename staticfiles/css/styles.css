@@ -33,6 +33,15 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--title-font-family);
 }
 
+/* Image styles */
+img {
+    width: auto;
+    max-height: 55vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Link styles */
 a {
     color: var(--primary-color);
