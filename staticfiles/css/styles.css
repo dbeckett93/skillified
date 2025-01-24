@@ -121,6 +121,11 @@ button:hover, .btn:hover {
     margin-right: 10px;
 }
 
+.btn-social:hover{
+    background-color: #cccccc;
+    color: black;
+}
+
 /* Flex container for buttons */
 .button-container {
     display: flex;
