@@ -10,10 +10,18 @@ class EventsTests(TestCase):
     """
     Test suite for the Events functionality.
     This test suite includes the following tests:
-    - `test_search_events_by_keyword`: Tests the search functionality by querying events based on a keyword.
-    - `test_search_events_by_date`: Tests the search functionality by querying events based on a date.
-    - `test_search_events_empty_query`: Tests the search functionality with an empty query string.
-    - `test_search_events_no_results`: Tests the search functionality with a query string that yields no results.
+    - `test_search_events_by_keyword`: Tests the search functionality by 
+      querying events based on a keyword.
+
+    - `test_search_events_by_date`: Tests the search functionality by 
+      querying events based on a date.
+
+    - `test_search_events_empty_query`: Tests the search functionality 
+      with an empty query string.
+
+    - `test_search_events_no_results`: Tests the search functionality 
+      with a query string that yields no results.
+
     Setup:
     - Creates a client for making HTTP requests.
     - Creates events for testing.

@@ -27,7 +27,8 @@ class SettingsViewTests(TestCase):
     - Test new password without a lowercase letter.
     - Test new passwords do not match.
 
-    Each test ensures that the settings view behaves as expected under various conditions.
+    Each test ensures that the settings view behaves as expected 
+    under various conditions.
     """
     @classmethod
     def setUpTestData(cls):

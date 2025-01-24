@@ -12,7 +12,8 @@ class SkillDetailTests(TestCase):
     This test suite includes the following tests:
     - `test_edit_skill`: Ensures that a skill can be edited.
     - `test_delete_skill`: Ensures that a skill can be deleted.
-    - `test_view_event_redirect`: Ensures that the "View Event" button for an added event redirects to the correct page.
+    - `test_view_event_redirect`: Ensures that the "View Event" button 
+      for an added event redirects to the correct page.
     """
 
     def setUp(self):
