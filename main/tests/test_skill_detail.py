@@ -12,7 +12,7 @@ class SkillDetailTests(TestCase):
     This test suite includes the following tests:
     - `test_edit_skill`: Ensures that a skill can be edited.
     - `test_delete_skill`: Ensures that a skill can be deleted.
-    - `test_view_event_redirect`: Ensures that the "View Event" button 
+    - `test_view_event_redirect`: Ensures that the "View Event" button
       for an added event redirects to the correct page.
     """
 
@@ -36,11 +36,13 @@ class SkillDetailTests(TestCase):
         )
 
     def test_edit_skill(self):
-        response = self.client.post(reverse('edit_skill_detail'), {
-            'skill_id': self.skill.id,
-            'name': 'Updated Skill Name',
-            'description': 'Updated Skill Description'
-        })
+        response = self.client.post(
+            reverse('edit_skill_detail'), {
+                'skill_id': self.skill.id,
+                'name': 'Updated Skill Name',
+                'description': 'Updated Skill Description'
+            }
+        )
         self.assertEqual(response.status_code, 302)
         self.skill.refresh_from_db()
         self.assertEqual(self.skill.name, 'Updated Skill Name')

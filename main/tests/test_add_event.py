@@ -27,7 +27,7 @@ class AddEventTests(TestCase):
 
     - `test_add_event_date_time_required`: Ensures that the event date/time is
       a required field.
-      
+
     - `test_add_event_invalid_date_time_format`: Ensures that the event
       date/time format is validated.
     """
@@ -59,19 +59,20 @@ class AddEventTests(TestCase):
         self.assertContains(response, 'Add Event for Test Skill')
 
     def test_page_not_visible_to_non_mentor(self):
-        self.client.login(username='nonmentoruser',
-                          password='TestPassword1word1')
+        self.client.login(
+            username='nonmentoruser', password='TestPassword1word1')
         response = self.client.get(reverse('add_event', args=[self.skill.id]))
         # Redirect to skill detail page
         self.assertEqual(response.status_code, 302)
 
     def test_add_event(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
-            'title': 'Test Event',
-            'overview': 'Test Event Overview',
-            'date_time': '2025-01-21 10:00'
-        })
+        response = self.client.post(
+            reverse('add_event', args=[self.skill.id]), {
+                'title': 'Test Event',
+                'overview': 'Test Event Overview',
+                'date_time': '2025-01-21 10:00'
+            })
         # Redirect after successful form submission
         self.assertEqual(response.status_code, 302)
         event_exists = Event.objects.filter(
@@ -80,11 +81,12 @@ class AddEventTests(TestCase):
 
     def test_add_event_title_required(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
-            'title': '',
-            'overview': 'Test Event Overview',
-            'date_time': '2025-01-21 10:00'
-        })
+        response = self.client.post(
+            reverse('add_event', args=[self.skill.id]), {
+                'title': '',
+                'overview': 'Test Event Overview',
+                'date_time': '2025-01-21 10:00'
+            })
         self.assertEqual(response.status_code, 200)
         form = response.context['form']
         self.assertTrue(form.errors)
@@ -93,11 +95,12 @@ class AddEventTests(TestCase):
 
     def test_add_event_overview_required(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
-            'title': 'Test Event',
-            'overview': '',
-            'date_time': '2025-01-21 10:00'
-        })
+        response = self.client.post(
+            reverse('add_event', args=[self.skill.id]), {
+                'title': 'Test Event',
+                'overview': '',
+                'date_time': '2025-01-21 10:00'
+            })
         self.assertEqual(response.status_code, 200)
         form = response.context['form']
         self.assertTrue(form.errors)
@@ -106,11 +109,12 @@ class AddEventTests(TestCase):
 
     def test_add_event_date_time_required(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
-            'title': 'Test Event',
-            'overview': 'Test Event Overview',
-            'date_time': ''
-        })
+        response = self.client.post(
+            reverse('add_event', args=[self.skill.id]), {
+                'title': 'Test Event',
+                'overview': 'Test Event Overview',
+                'date_time': ''
+            })
         self.assertEqual(response.status_code, 200)
         form = response.context['form']
         self.assertTrue(form.errors)
@@ -119,14 +123,15 @@ class AddEventTests(TestCase):
 
     def test_add_event_invalid_date_time_format(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
-            'title': 'Test Event',
-            'overview': 'Test Event Overview',
-            'date_time': 'invalid-date-time'
-        })
+        response = self.client.post(
+            reverse('add_event', args=[self.skill.id]), {
+                'title': 'Test Event',
+                'overview': 'Test Event Overview',
+                'date_time': 'invalid-date-time'
+            })
         self.assertEqual(response.status_code, 200)
         form = response.context['form']
         self.assertTrue(form.errors)
         self.assertIn('date_time', form.errors)
         self.assertEqual(form.errors['date_time'], [
-                         'Enter a valid date/time.'])
+            'Enter a valid date/time.'])

@@ -24,22 +24,22 @@ class HomePageTests(TestCase):
     Methods:
         setUp: Sets up the test client and URLs for the tests.
 
-        test_home_page_status_code: Tests that the home page returns a 
+        test_home_page_status_code: Tests that the home page returns a
         status code of 200.
 
-        test_home_page_template: Tests that the correct template is used 
+        test_home_page_template: Tests that the correct template is used
         for the home page.
 
-        test_home_page_contains_correct_html: Tests that the home page 
+        test_home_page_contains_correct_html: Tests that the home page
         contains the correct HTML content.
 
-        test_home_page_does_not_contain_incorrect_html: Tests that the 
+        test_home_page_does_not_contain_incorrect_html: Tests that the
         home page does not contain incorrect HTML content.
 
-        test_navigation_links: Tests that the navigation links are 
+        test_navigation_links: Tests that the navigation links are
         present on the home page.
 
-        test_authenticated_user_navigation_links: Tests that 
+        test_authenticated_user_navigation_links: Tests that
         authenticated users see the correct navigation links.
     """
 

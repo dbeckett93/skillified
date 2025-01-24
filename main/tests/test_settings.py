@@ -27,7 +27,7 @@ class SettingsViewTests(TestCase):
     - Test new password without a lowercase letter.
     - Test new passwords do not match.
 
-    Each test ensures that the settings view behaves as expected 
+    Each test ensures that the settings view behaves as expected
     under various conditions.
     """
     @classmethod
@@ -83,7 +83,8 @@ class SettingsViewTests(TestCase):
             'notify_skills': 'on',
             'mentor_status': 'on',
         })
-        notification_settings = NotificationSetting.objects.get(user=self.user)
+        notification_settings = NotificationSetting.objects.get(
+            user=self.user)
         self.assertTrue(notification_settings.new_message)
         self.assertFalse(notification_settings.new_event)
         self.assertTrue(notification_settings.new_skill)
@@ -154,7 +155,9 @@ class SettingsViewTests(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(
-            str(messages[0]), 'New password must be at least 8 characters long.')
+            str(messages[0]), (
+                'New password must be at least 8 characters long.')
+        )
 
     # Test new password without a digit
     def test_new_password_no_digit(self):
@@ -208,7 +211,9 @@ class SettingsViewTests(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(
-            str(messages[0]), 'New password must contain at least one uppercase letter.')
+            str(messages[0]), (
+                'New password must contain at least one uppercase letter.')
+        )
 
     # Test new password without a lowercase letter
     def test_new_password_no_lowercase(self):
@@ -226,7 +231,9 @@ class SettingsViewTests(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(
-            str(messages[0]), 'New password must contain at least one lowercase letter.')
+            str(messages[0]), (
+                'New password must contain at least one lowercase letter.')
+        )
 
     # Test new passwords do not match
     def test_new_passwords_do_not_match(self):

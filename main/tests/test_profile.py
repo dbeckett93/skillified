@@ -14,7 +14,7 @@ class ProfilePageTests(TestCase):
     """
     Test suite for the Profile Page functionality.
     This test case covers the following scenarios:
-    - Setting up test data including a test user, profile, 
+    - Setting up test data including a test user, profile,
       and social app instances.
     - Logging in the user for each test.
     - Adding a profile image.
@@ -22,7 +22,7 @@ class ProfilePageTests(TestCase):
     - Deleting a profile image.
     - Checking the profile page status code.
     - Verifying the profile page uses the correct template.
-    - Ensuring the profile page context contains the correct 
+    - Ensuring the profile page context contains the correct
       user profile.
     - Redirecting to login if the user is not logged in.
     - Updating contact information.
@@ -30,8 +30,8 @@ class ProfilePageTests(TestCase):
     - Adding a new skill.
     - Editing an existing skill.
     - Deleting an existing skill.
-    Each test method ensures that the corresponding functionality 
-    works as expected by checking the response status codes, 
+    Each test method ensures that the corresponding functionality
+    works as expected by checking the response status codes,
     updating the database, and verifying the changes.
     """
     @classmethod
@@ -77,7 +77,9 @@ class ProfilePageTests(TestCase):
         # Use an actual image file for the test
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(
-                name='nobody.jpg', content=img.read(), content_type='image/jpeg')
+                name='nobody.jpg', content=img.read(),
+                content_type='image/jpeg'
+            )
         self.profile.save()
         with open('assets/images/testing/new_nobody.jpg', 'rb') as img:
             response = self.client.post(
@@ -95,7 +97,9 @@ class ProfilePageTests(TestCase):
         # User with a profile image uses 'Change Picture' to add a new image
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(
-                name='nobody.jpg', content=img.read(), content_type='image/jpeg')
+                name='nobody.jpg', content=img.read(),
+                content_type='image/jpeg'
+            )
         self.profile.save()
         with open('assets/images/testing/new_nobody.jpg', 'rb') as img:
             response = self.client.post(
@@ -110,11 +114,15 @@ class ProfilePageTests(TestCase):
         # User with a profile image clicks on 'Delete Picture'
         with open('assets/images/testing/nobody.jpg', 'rb') as img:
             self.profile.profile_picture = SimpleUploadedFile(
-                name='nobody.jpg', content=img.read(), content_type='image/jpeg')
+                name='nobody.jpg', content=img.read(),
+                content_type='image/jpeg'
+            )
         self.profile.save()
         # Simulate clicking the delete picture button using a form post
-        response = self.client.post(reverse('delete_profile_picture'), {
-                                    'delete_profile_picture': 'true'})
+        response = self.client.post(
+            reverse('delete_profile_picture'),
+            ({'delete_profile_picture': 'true'})
+        )
         # Check that the response status code is 302 (redirect)
         self.assertEqual(response.status_code, 302)
         # Check that the profile picture was deleted
@@ -137,11 +145,12 @@ class ProfilePageTests(TestCase):
         self.assertEqual(response.context['user'].profile, self.profile)
 
     def test_profile_page_redirect_if_not_logged_in(self):
-        # Check that the profile page redirects to login if the user is not logged in
+        # Check that the profile page redirects to login
+        # if the user is not logged in
         self.client.logout()
         response = self.client.get(reverse('profile'))
-        self.assertRedirects(response, f"{reverse('account_login')}?next={
-                             reverse('profile')}")
+        self.assertRedirects(
+            response, f"{reverse('account_login')}?next={reverse('profile')}")
 
     def test_update_contact_information(self):
         # User updates contact information

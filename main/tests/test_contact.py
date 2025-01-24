@@ -8,8 +8,8 @@ class ContactPageTests(TestCase):
     """
     Test suite for the Contact Page.
 
-    This test suite includes tests for rendering the contact page, 
-    form submission success, form submission with missing fields, 
+    This test suite includes tests for rendering the contact page,
+    form submission success, form submission with missing fields,
     and form submission with an invalid email address.
     """
 
@@ -62,4 +62,5 @@ class ContactPageTests(TestCase):
         self.assertTrue(form.errors)
         self.assertIn('email', form.errors)
         self.assertEqual(form.errors['email'], [
-                         'Enter a valid email address.'])
+            'Enter a valid email address.'
+        ])

@@ -8,22 +8,22 @@ class MentorAddSkillTests(TestCase):
     """
     Test suite for the Mentor Add Skill functionality.
     This test suite includes the following tests:
-    - `test_page_visible_to_mentor`: Ensures that the add skill page is 
+    - `test_page_visible_to_mentor`: Ensures that the add skill page is
       only visible to mentor users.
 
-    - `test_page_not_visible_to_non_mentor`: Ensures that the add skill 
+    - `test_page_not_visible_to_non_mentor`: Ensures that the add skill
       page is not visible to non-mentor users.
 
-    - `test_add_skill`: Ensures that a mentor user can add a new skill 
+    - `test_add_skill`: Ensures that a mentor user can add a new skill
       with a name and description.
 
-    - `test_add_skill_name_required`: Ensures that the skill name is a 
+    - `test_add_skill_name_required`: Ensures that the skill name is a
       required field.
 
-    - `test_add_skill_description_required`: Ensures that the skill 
+    - `test_add_skill_description_required`: Ensures that the skill
       description is a required field.
 
-    - `test_add_skill_name_max_length`: Ensures that the skill name does 
+    - `test_add_skill_name_max_length`: Ensures that the skill name does
       not exceed 255 characters.
     """
 
@@ -92,7 +92,7 @@ class MentorAddSkillTests(TestCase):
         self.assertTrue(form.errors)
         self.assertIn('description', form.errors)
         self.assertEqual(form.errors['description'], [
-                         'This field is required.'])
+            'This field is required.'])
 
     def test_add_skill_name_max_length(self):
         self.client.login(username='mentoruser', password='TestPassword1word1')
@@ -106,4 +106,4 @@ class MentorAddSkillTests(TestCase):
         self.assertTrue(form.errors)
         self.assertIn('name', form.errors)
         self.assertEqual(form.errors['name'], [
-                         'Ensure this value has at most 255 characters (it has 256).'])
+            'Ensure this value has at most 255 characters (it has 256).'])
