@@ -572,7 +572,80 @@ By following these steps, you can effectively run and manage tests for your Skil
 ### HTML Validation
 - **Tool Used**: [W3C Markup Validation Service](https://validator.w3.org/)
 - **Process**: All HTML files were validated using the W3C Markup Validation Service to ensure there are no syntax errors and that the code adheres to web standards.
-- **Results**: Any errors or warnings identified were corrected to ensure compliance with HTML5 standards.
+
+#### Results
+
+<details>
+<summary>Home Page (click to view)</summary>
+<img src="assets/images/readme/home.webp" alt="Home Page">
+</details>
+
+<details>
+<summary>About Page (click to view)</summary>
+<img src="assets/images/readme/about.webp" alt="About Page">
+</details>
+
+<details>
+<summary>Contact Page (click to view)</summary>
+<img src="assets/images/readme/contact.webp" alt="Contact Page">
+</details>
+
+<details>
+<summary>Terms Page (click to view)</summary>
+<img src="assets/images/readme/terms.webp" alt="Terms Page">
+</details>
+
+<details>
+<summary>Login Page (click to view)</summary>
+<img src="assets/images/readme/login.webp" alt="Login Page">
+</details>
+
+<details>
+<summary>Logout Page (click to view)</summary>
+<img src="assets/images/readme/logout.webp" alt="Logout Page">
+</details>
+
+<details>
+<summary>Add Event Page (click to view)</summary>
+<img src="assets/images/readme/add_event.webp" alt="Add Event Page">
+</details>
+
+<details>
+<summary>Dashboard Page (click to view)</summary>
+<img src="assets/images/readme/dashboard.webp" alt="Dashboard Page">
+</details>
+
+<details>
+<summary>Event Detail Page (click to view)</summary>
+<img src="assets/images/readme/event_detail.webp" alt="Event Detail Page">
+</details>
+
+<details>
+<summary>Events Page (click to view)</summary>
+<img src="assets/images/readme/events.webp" alt="Events Page">
+</details>
+
+<details>
+<summary>Mentor Skills Page (click to view)</summary>
+<img src="assets/images/readme/mentor_skills.webp" alt="Mentor Skills Page">
+</details>
+
+<details>
+<summary>Profile Page (click to view)</summary>
+<img src="assets/images/readme/profile.webp" alt="Profile Page">
+</details>
+
+<details>
+<summary>Settings Page (click to view)</summary>
+<img src="assets/images/readme/settings.webp" alt="Settings Page">
+</details>
+
+<details>
+<summary>Skill Detail Page (click to view)</summary>
+<img src="assets/images/readme/skill_detail.webp" alt="Skill Detail Page">
+</details>
+
+The only errors are from external scripts.
 
 ### CSS Validation
 - **Tool Used**: [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
