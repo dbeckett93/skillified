@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
+# Profile model represents the user's profile information.
+# It is linked to the User model via a one-to-one relationship.
+# This model includes fields for profile picture, about me section, social media links, skills, and mentor status.
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -15,6 +19,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+# Skill model represents the skills that users can add to their profiles.
+# It includes fields for the skill name, description, and timestamps for creation and updates.
+# This model is related to the Profile model via a many-to-many relationship.
+
 
 class Skill(models.Model):
     name = models.CharField(max_length=255)
@@ -24,6 +32,10 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+# Event model represents the events that users can create and participate in.
+# It includes fields for the event title, overview, date and time, and relationships to the Skill and User models.
+# This model is related to the Skill model via a foreign key and to the User model via a many-to-many relationship for participants and a foreign key for the owner.
 
 
 class Event(models.Model):
@@ -37,6 +49,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+# NotificationSetting model represents the notification preferences for users.
+# It includes fields for new message notifications, new event notifications, and new skill notifications.
+# This model is related to the User model via a foreign key.
 
 
 class NotificationSetting(models.Model):
