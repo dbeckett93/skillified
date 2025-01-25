@@ -1,4 +1,5 @@
 # Skillified
+![Home Intro Image](assets/images/readme/home-intro-image.webp)
 
 ## Overview
 
@@ -189,14 +190,160 @@ Each feature and section of the application underwent rigorous testing to ensure
 5. **Responsive Design**: 
 - The layout adapts to different screen sizes using CSS media queries, Flexbox, and Grid. While Bootstrap handles most of the responsiveness, custom media queries have been used where needed to ensure that the platform is usable on a variety of devices, including desktops, tablets, and mobile phones.
     - Example:
-      ```css
+        ```css
         /* Media query to hide the login button on small screens */
         @media (max-width: 576px) {
             .navbar-nav .nav-item .nav-link.login-btn {
                 display: none;
             }
         }
-      ```
+        ```
+
+        ### Responsive Page Screenshots
+
+        <details>
+        <summary>About Page (click to view)</summary>
+        <p>About Page displayed on an iPad, showcasing the responsive design.</p>
+        <img src="assets/images/readme/about-ipad-1737767903046-679440c61c0e5.webp" alt="About Page on iPad">
+        <br>
+        <p>About Page displayed on an iPhone 12 Pro, demonstrating mobile responsiveness.</p>
+        <img src="assets/images/readme/about-iphone-12-pro-1737767903092-679440c36b224.webp" alt="About Page on iPhone 12 Pro">
+        <br>
+        <p>About Page displayed on a MacBook Pro, highlighting the desktop layout.</p>
+        <img src="assets/images/readme/about-macbook-pro-1737767903091-679440c3ec400.webp" alt="About Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Contact Page (click to view)</summary>
+        <p>Contact Page displayed on an iPad, showing the responsive design for tablets.</p>
+        <img src="assets/images/readme/contact-ipad-1737767943261-679440c22d807.webp" alt="Contact Page on iPad">
+        <br>
+        <p>Contact Page displayed on an iPhone 12 Pro, illustrating mobile responsiveness.</p>
+        <img src="assets/images/readme/contact-iphone-12-pro-1737767943268-679440c1e85e6.webp" alt="Contact Page on iPhone 12 Pro">
+        <br>
+        <p>Contact Page displayed on a MacBook Pro, emphasizing the desktop layout.</p>
+        <img src="assets/images/readme/contact-macbook-pro-1737767943246-679440c2b8065.webp" alt="Contact Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Dashboard Page (click to view)</summary>
+        <p>Dashboard Page displayed on an iPad, showcasing the responsive design for tablets.</p>
+        <img src="assets/images/readme/dashboard-ipad-1737768060221-679440be005cd.webp" alt="Dashboard Page on iPad">
+        <br>
+        <p>Dashboard Page displayed on an iPhone 12 Pro, demonstrating mobile responsiveness.</p>
+        <img src="assets/images/readme/dashboard-iphone-12-pro-1737768060261-679440bc1d4b5.webp" alt="Dashboard Page on iPhone 12 Pro">
+        <br>
+        <p>Dashboard Page displayed on a MacBook Pro, highlighting the desktop layout.</p>
+        <img src="assets/images/readme/dashboard-macbook-pro-1737768060261-679440bbe3b89.webp" alt="Dashboard Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Events Page (click to view)</summary>
+        <p>Events Page displayed on an iPad, showing the responsive design for tablets.</p>
+        <img src="assets/images/readme/events-ipad-1737768288181-679440d42c973.webp" alt="Events Page on iPad">
+        <br>
+        <p>Events Page displayed on an iPhone 12 Pro, illustrating mobile responsiveness.</p>
+        <img src="assets/images/readme/events-iphone-12-pro-1737768287998-679440d76c949.webp" alt="Events Page on iPhone 12 Pro">
+        <br>
+        <p>Events Page displayed on a MacBook Pro, emphasizing the desktop layout.</p>
+        <img src="assets/images/readme/events-macbook-pro-1737768288070-679440d46ff86.webp" alt="Events Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Home Page (click to view)</summary>
+        <p>Home Page displayed on an iPad, showcasing the responsive design for tablets.</p>
+        <img src="assets/images/readme/home-ipad-1737767855004-679440cade36d.webp" alt="Home Page on iPad">
+        <br>
+        <p>Home Page displayed on an iPhone 12 Pro, demonstrating mobile responsiveness.</p>
+        <img src="assets/images/readme/home-iphone-12-pro-1737767854987-679440cc138ec.webp" alt="Home Page on iPhone 12 Pro">
+        <br>
+        <p>Home Page displayed on a MacBook Pro, highlighting the desktop layout.</p>
+        <img src="assets/images/readme/home-macbook-pro-1737767854987-679440cc7dc97.webp" alt="Home Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Login Page (click to view)</summary>
+        <p>Login Page displayed on an iPad, showing the responsive design for tablets.</p>
+        <img src="assets/images/readme/login-ipad-1737768002213-679440bfcb64e.webp" alt="Login Page on iPad">
+        <br>
+        <p>Login Page displayed on an iPhone 12 Pro, illustrating mobile responsiveness.</p>
+        <img src="assets/images/readme/login-iphone-12-pro-1737768002241-679440be111ba.webp" alt="Login Page on iPhone 12 Pro">
+        <br>
+        <p>Login Page displayed on a MacBook Pro, emphasizing the desktop layout.</p>
+        <img src="assets/images/readme/login-macbook-pro-1737768002231-679440beecb25.webp" alt="Login Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Mentor Skills Page (click to view)</summary>
+        <p>Mentor Skills Page displayed on an iPad, showcasing the responsive design for tablets.</p>
+        <img src="assets/images/readme/mentor-skills-ipad-1737768090170-679440ba1ebbd.webp" alt="Mentor Skills Page on iPad">
+        <br>
+        <p>Mentor Skills Page displayed on an iPhone 12 Pro, demonstrating mobile responsiveness.</p>
+        <img src="assets/images/readme/mentor-skills-iphone-12-pro-1737768090200-679440daa2bb7.webp" alt="Mentor Skills Page on iPhone 12 Pro">
+        <br>
+        <p>Mentor Skills Page displayed on a MacBook Pro, highlighting the desktop layout.</p>
+        <img src="assets/images/readme/mentor-skills-macbook-pro-1737768090200-679440ba1dd3a.webp" alt="Mentor Skills Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Profile Page (click to view)</summary>
+        <p>Profile Page displayed on an iPad, showing the responsive design for tablets.</p>
+        <img src="assets/images/readme/profile-ipad-1737769005065-679440cf3ddf8.webp" alt="Profile Page on iPad">
+        <br>
+        <p>Profile Page displayed on an iPhone 12 Pro, illustrating mobile responsiveness.</p>
+        <img src="assets/images/readme/profile-iphone-12-pro-1737769005038-679440d0b6217.webp" alt="Profile Page on iPhone 12 Pro">
+        <br>
+        <p>Profile Page displayed on a MacBook Pro, emphasizing the desktop layout.</p>
+        <img src="assets/images/readme/profile-macbook-pro-1737769005052-679440d086b01.webp" alt="Profile Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Settings Page (click to view)</summary>
+        <p>Settings Page displayed on an iPad, showcasing the responsive design for tablets.</p>
+        <img src="assets/images/readme/settings-ipad-1737769038056-679440ce02093.webp" alt="Settings Page on iPad">
+        <br>
+        <p>Settings Page displayed on an iPhone 12 Pro, demonstrating mobile responsiveness.</p>
+        <img src="assets/images/readme/settings-iphone-12-pro-1737769038063-679440cd0dfe2.webp" alt="Settings Page on iPhone 12 Pro">
+        <br>
+        <p>Settings Page displayed on a MacBook Pro, highlighting the desktop layout.</p>
+        <img src="assets/images/readme/settings-macbook-pro-1737769038041-679440ce90c56.webp" alt="Settings Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Skill Detail Page (click to view)</summary>
+        <p>Skill Detail Page displayed on an iPad, showing the responsive design for tablets.</p>
+        <img src="assets/images/readme/skill-detail-ipad-1737768161557-679440d852d45.webp" alt="Skill Detail Page on iPad">
+        <br>
+        <p>Skill Detail Page displayed on an iPhone 12 Pro, illustrating mobile responsiveness.</p>
+        <img src="assets/images/readme/skill-detail-iphone-12-pro-1737768161557-679440d93d5de.webp" alt="Skill Detail Page on iPhone 12 Pro">
+        <br>
+        <p>Skill Detail Page displayed on a MacBook Pro, emphasizing the desktop layout.</p>
+        <img src="assets/images/readme/skill-detail-macbook-pro-1737768161538-679440d9dc449.webp" alt="Skill Detail Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>Terms Page (click to view)</summary>
+        <p>Terms Page displayed on an iPad, showcasing the responsive design for tablets.</p>
+        <img src="assets/images/readme/terms-ipad-1737767974212-679440c159aba.webp" alt="Terms Page on iPad">
+        <br>
+        <p>Terms Page displayed on an iPhone 12 Pro, demonstrating mobile responsiveness.</p>
+        <img src="assets/images/readme/terms-iphone-12-pro-1737767974245-679440c086bea.webp" alt="Terms Page on iPhone 12 Pro">
+        <br>
+        <p>Terms Page displayed on a MacBook Pro, highlighting the desktop layout.</p>
+        <img src="assets/images/readme/terms-macbook-pro-1737767974230-679440c0f1e9c.webp" alt="Terms Page on MacBook Pro">
+        </details>
+
+        <details>
+        <summary>View Event Page (click to view)</summary>
+        <p>View Event Page displayed on an iPad, showing the responsive design for tablets.</p>
+        <img src="assets/images/readme/view-event-ipad-1737768311083-679440d1d3d09.webp" alt="View Event Page on iPad">
+        <br>
+        <p>View Event Page displayed on an iPhone 12 Pro, illustrating mobile responsiveness.</p>
+        <img src="assets/images/readme/view-event-iphone-12-pro-1737768311055-679440d3096ba.webp" alt="View Event Page on iPhone 12 Pro">
+        <br>
+        <p>View Event Page displayed on a MacBook Pro, emphasizing the desktop layout.</p>
+        <img src="assets/images/readme/view-event-macbook-pro-1737768311072-679440d273d56.webp" alt="View Event Page on MacBook Pro">
+        </details>
 
 6. **Form Validation and Error Messages**: 
 - Forms include validation and clear error messages to guide users in correcting their input. This helps users with cognitive impairments to understand what is required. Additionally, crispy forms have been used for clear styling and easy-to-use form controls.
