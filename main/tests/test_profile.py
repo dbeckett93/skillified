@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from main.models import Profile, Skill
 from django.core.files.uploadedfile import SimpleUploadedFile
-from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
+from allauth.socialaccount.models import SocialApp
 import os
 import json
 

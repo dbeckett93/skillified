@@ -237,31 +237,36 @@ Each feature and section of the application underwent rigorous testing to ensure
 #### Requirements
 
 To run this project, you need to have the following dependencies installed:
-
-- asgiref==3.8.1
-- cloudinary==1.42.1
-- crispy-bootstrap5==2024.10
-- cryptography==41.0.3
-- dj-database-url==2.3.0
-- Django==5.1.4
-- django-allauth==65.3.1
-- django-cloudinary-storage==0.3.0
-- django-crispy-forms==2.3
-- django-extensions==3.2.3
-- django-heroku==0.3.1
-- gunicorn==23.0.0
-- iniconfig==2.0.0
-- pillow==11.1.0
-- pluggy==1.5.0
-- psycopg2==2.9.10
-- psycopg2-binary==2.9.10
-- PyJWT==2.10.1
-- pytest==8.3.4
-- pytest-django==4.9.0
-- python-dotenv==1.0.0
-- requests==2.31.0
-- sqlparse==0.5.3
-- whitenoise==6.8.2
+```markdown
+- `asgiref==3.8.1`
+- `black==24.10.0` (optional, used for code formatting)
+- `click==8.1.8`
+- `cloudinary==1.42.1`
+- `crispy-bootstrap5==2024.10`
+- `cryptography==41.0.3`
+- `dj-database-url==2.3.0`
+- `Django==5.1.4`
+- `django-allauth==65.3.1`
+- `django-cloudinary-storage==0.3.0`
+- `django-crispy-forms==2.3`
+- `django-extensions==3.2.3`
+- `django-heroku==0.3.1`
+- `gunicorn==23.0.0`
+- `iniconfig==2.0.0`
+- `pathspec==0.12.1`
+- `pillow==11.1.0`
+- `pluggy==1.5.0`
+- `psycopg2==2.9.10`
+- `psycopg2-binary==2.9.10`
+- `PyJWT==2.10.1`
+- `pytest==8.3.4`
+- `pytest-django==4.9.0`
+- `python-dotenv==1.0.0`
+- `requests==2.31.0`
+- `ruff==0.9.3` (optional, used for linting)
+- `sqlparse==0.5.3`
+- `whitenoise==6.8.2`
+```
 
 ### Installation Instructions
 
@@ -674,13 +679,9 @@ The only errors are from external scripts.
 </details>
 
 ### Python Validation
-- **Tool Used**: [Pylint](https://www.pylint.org/)
-- **Process**: All Python files were validated using Pylint to ensure there are no syntax errors and that the code adheres to PEP 8 standards.
+- **Tools Used**: [Pycodestyle](https://pycodestyle.pycqa.org/), [Black](https://black.readthedocs.io/en/stable/), and [Ruff](https://beta.ruff.rs/docs/).
+- **Process**: All Python files were validated using Pycodestyle, Black, and Ruff to ensure there are no syntax errors and that the code adheres to PEP 8 standards.
 - **Results**: Any errors or warnings identified were corrected to ensure clean and efficient Python code.
-
-By following these validation steps, we ensure that the codebase is clean, efficient, and adheres to industry standards.
-
-
 
 ## Future Enhancements
 
@@ -734,6 +735,7 @@ These enhancements aim to improve user engagement and provide additional value t
 - [Django-Allauth Documentation](https://django-allauth.readthedocs.io/en/latest/)
 - [Crispy Forms Documentation](https://django-crispy-forms.readthedocs.io/en/latest/)
 - [Heroku Documentation](https://devcenter.heroku.com/categories/reference)
+- [PEP 8 - Python Style Guide](https://realpython.com/python-pep8/)
 
 ### Special Thanks
 - To the helpful code Institute team that I've worked with during the Bootcamp.

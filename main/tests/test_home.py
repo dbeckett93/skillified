@@ -77,7 +77,7 @@ class HomePageTests(TestCase):
         self.assertContains(response, f'href="{self.login_url}"')
 
     def test_authenticated_user_navigation_links(self):
-        user = User.objects.create_user(
+        User.objects.create_user(
             username='testuser', password='testpassword')
         self.client.login(username='testuser', password='testpassword')
         response = self.client.get(self.home_url)

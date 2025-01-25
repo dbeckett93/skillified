@@ -55,7 +55,7 @@ class SettingsViewTests(TestCase):
 
     # Test updating the username and email
     def test_update_username_and_email(self):
-        response = self.client.post(reverse('settings'), {
+        self.client.post(reverse('settings'), {
             'username': 'newusername',
             'email': 'newemail@example.com',
             'current_password': '',
@@ -72,7 +72,7 @@ class SettingsViewTests(TestCase):
 
     # Test updating notification settings
     def test_update_notification_settings(self):
-        response = self.client.post(reverse('settings'), {
+        self.client.post(reverse('settings'), {
             'username': 'testuser',
             'email': 'testuser@example.com',
             'current_password': '',
@@ -91,7 +91,7 @@ class SettingsViewTests(TestCase):
 
     # Test updating the password
     def test_update_password(self):
-        response = self.client.post(reverse('settings'), {
+        self.client.post(reverse('settings'), {
             'username': 'testuser',
             'email': 'testuser@example.com',
             'current_password': 'TestPassword1',

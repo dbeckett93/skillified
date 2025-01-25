@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
-from main.models import Event, Skill, Profile
+from main.models import Event, Skill
 from django.utils import timezone
 from datetime import datetime
 

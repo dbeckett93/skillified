@@ -49,7 +49,7 @@ class SkillDetailTests(TestCase):
         self.assertEqual(self.skill.description, 'Updated Skill Description')
 
     def test_delete_skill(self):
-        response = self.client.post(
+        self.client.post(
             reverse('delete_skill', args=[self.skill.id]), follow=True)
         skill_exists = Skill.objects.filter(id=self.skill.id).exists()
         self.assertFalse(skill_exists)

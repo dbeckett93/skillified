@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
-from main.models import Skill, Profile
+from main.models import Profile
 import os
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'skillified.settings'
