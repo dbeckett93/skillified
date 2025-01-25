@@ -865,15 +865,61 @@ The only errors are from external scripts.
 
 These enhancements aim to improve user engagement and provide additional value to the Skillified platform.
 
-## Credits
+## Credits & Technology Used
 
-### External Resources Used
+### Frontend
+- **HTML5**: For structuring the content on the web pages.
+- **CSS3**: For styling the web pages and making them visually appealing.
+- **JavaScript**: For adding interactivity to the web pages.
+- **Bootstrap 5**: For responsive design and pre-built components.
+- **Font Awesome**: For using scalable vector icons.
+
+### Backend
+- **Python 3.12.2**: The programming language used for server-side development.
+- **Django 5.1.4**: The web framework used for building the backend of the application.
+- **Django-Allauth**: For handling user authentication, including social media logins.
+- **Django-Crispy-Forms**: For enhancing the forms with Bootstrap styling.
+- **Django-Cloudinary-Storage**: For managing media files with Cloudinary.
+
+### Database
+- **SQLite**: The database used for development and testing.
+- **PostgreSQL**: The database used for production on Heroku.
+
+### Deployment
+- **Heroku**: The platform used for deploying the application.
+- **Gunicorn**: The WSGI HTTP server used for serving the application on Heroku.
+- **Whitenoise**: For serving static files in production.
+
+### Version Control
+- **Git**: For version control and tracking changes in the codebase.
+- **GitHub**: For hosting the repository and managing the project.
+
+### Testing
+- **Pytest**: For running automated tests.
+- **Pytest-Django**: For integrating Django with Pytest.
+- **Pylint**: For checking the code against coding standards.
+- **Black**: For code formatting.
+- **Ruff**: For linting and code analysis.
+
+### Other Tools
+- **Cloudinary**: For storing and managing media files.
+- **VS Code**: The code editor used for development.
+- **Gitpod**: The online IDE used for development.
+- **Responsively App**: For testing responsive web designs.
+- **iLoveIMG**: For resizing images.
+- **FreeConvert**: For converting images to WebP format.
+- **TinyPNG**: For compressing images.
+- **Unsplash**: For sourcing free high-resolution images.
+- **GitHub Copilot**: For providing code suggestions and assistance throughout the development process.
+
+### External Resource Links
 
 - [iLoveIMG](https://www.iloveimg.com/resize-image#resize-options,percentage) - A tool for resizing images.
 - [FreeConvert](https://www.freeconvert.com/webp-converter) - A tool for converting images to WebP format.
 - [TinyPNG](https://tinypng.com/) - A tool for compressing images.
 - [Unsplash](https://unsplash.com/) - A source for free high-resolution images.
 - [Bootsnipp Buttons by user silentcoding](https://bootsnipp.com/snippets/bxK9b) - Used for styling social media buttons.
+- [Responsively App](https://responsively.app/) - A tool for testing responsive web designs.
 
 ### Resource Documentation
 - [Bootstrap Documentation](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
@@ -885,8 +931,7 @@ These enhancements aim to improve user engagement and provide additional value t
 - [PEP 8 - Python Style Guide](https://realpython.com/python-pep8/)
 
 ### Special Thanks
-- To the helpful code Institute team that I've worked with during the Bootcamp.
-    - Dillon McCaffrey - Facilitator, for advice and Heroku torubleshooting help during the intial deployment.
-    - Mark Briscoe - SME, for sharing his vast wealth of knowledge to prepare students for a career in development.
-    - Ruairidh MacArthur (Roo) - Software Coach, for great troubleshooting advice, particularly helping me untangle the mess of allauth templates to fit into my non-standard project directory structure.
-    - Ashley Beckett -  My Wife, for supporting my decision to dedicate time to the coding Bootcamp and for being a regular tester for all of my projects.
+To the helpful code Institute team that I've worked with during the Bootcamp.
+- Dillon McCaffrey - Facilitator, for advice and Heroku torubleshooting help during the intial deployment.
+- Mark Briscoe - SME, for sharing his vast wealth of knowledge to prepare students for a career in development.
+- Ruairidh MacArthur (Roo) - Software Coach, for great troubleshooting advice, particularly helping me untangle the mess of allauth templates to fit into my non-standard project directory structure.
