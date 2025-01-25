@@ -9,11 +9,13 @@ class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
-    reason = forms.ChoiceField(choices=[
-        ('general', 'General Inquiry'),
-        ('support', 'Support Request'),
-        ('feedback', 'Feedback'),
-    ])
+    reason = forms.ChoiceField(
+        choices=[
+            ('general', 'General Inquiry'),
+            ('support', 'Support Request'),
+            ('feedback', 'Feedback'),
+        ]
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,7 +34,10 @@ class CustomSignupForm(SignupForm):
         ],
         widget=forms.RadioSelect,
         label='Do you want to be a mentor and share skills with others?',
-        help_text='Mentors can list skills for other users to see and can arrange skill sharing events for the community.'
+        help_text=(
+            'Mentors can list skills for other users to see and can arrange '
+            'skill sharing events for the community.'
+        )
     )
 
     def __init__(self, *args, **kwargs):
@@ -75,7 +80,9 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'overview', 'date_time']
         widgets = {
-            'date_time': forms.DateTimeInput(attrs={'class': 'datetimepicker'}),
+            'date_time': forms.DateTimeInput(
+                attrs={'class': 'datetimepicker'}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -90,5 +97,7 @@ class EditEventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'overview', 'date_time']
         widgets = {
-            'date_time': forms.DateTimeInput(attrs={'class': 'datetimepicker'}),
+            'date_time': forms.DateTimeInput(
+                attrs={'class': 'datetimepicker'}
+            ),
         }
