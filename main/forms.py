@@ -4,6 +4,8 @@ from crispy_forms.layout import Submit
 from allauth.account.forms import SignupForm
 from .models import Profile, Skill, Event
 
+# ContactForm is used for the contact page to allow users to send messages to the site administrators.
+
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -22,6 +24,9 @@ class ContactForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Send'))
+
+# CustomSignupForm extends the default SignupForm from Django-Allauth to include additional fields.
+# It allows users to provide their first name, last name, and mentor status during registration.
 
 
 class CustomSignupForm(SignupForm):
@@ -62,6 +67,8 @@ class CustomSignupForm(SignupForm):
 
         return user
 
+# SkillForm is used for creating and editing skills. It is used in the mentor skills section.
+
 
 class SkillForm(forms.ModelForm):
     class Meta:
@@ -73,6 +80,8 @@ class SkillForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Add Skill'))
+
+# EventForm is used for creating and editing events. It is used in the skill detail and event management sections.
 
 
 class EventForm(forms.ModelForm):
@@ -90,6 +99,8 @@ class EventForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Create Event'))
+
+# EditEventForm is used for editing existing events. It is similar to EventForm but specifically for editing.
 
 
 class EditEventForm(forms.ModelForm):
