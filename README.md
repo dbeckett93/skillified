@@ -541,20 +541,13 @@ To integrate Cloudinary with your Skillified project, follow these steps:
 5. **Update Django Settings**:
     - Configure Cloudinary in your `settings.py` file:
       ```python
-      import cloudinary
-      import cloudinary.uploader
-      import cloudinary.api
-      from cloudinary_storage.storage import MediaCloudinaryStorage
-      from cloudinary_storage.storage import StaticHashedCloudinaryStorage
-
-      CLOUDINARY_STORAGE = {
-          'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-          'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-          'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-      }
+        CLOUDINARY_STORAGE = {
+            'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+            'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+            'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+        }
 
       DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-      STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
       ```
 
 By following these steps, you will successfully integrate Cloudinary into your Skillified project for media storage and management.
