@@ -1,6 +1,62 @@
 # Skillified
 ![Home Intro Image](assets/images/readme/home-intro-image.webp)
 
+## Index
+
+1. [Overview](#overview)
+2. [UX Design Process](#ux-design-process)
+    - [User Stories](#user-stories)
+    - [Wireframes](#wireframes)
+3. [ERD](#erd)
+    - [User](#user)
+    - [Profile](#profile)
+    - [Skill](#skill)
+    - [Event](#event)
+    - [NotificationSetting](#notificationsetting)
+    - [Relationships Summary](#relationships-summary)
+4. [Agile Development Process](#agile-development-process)
+    - [GitHub Projects](#github-projects)
+    - [Iterative Design](#iterative-design)
+    - [Simultaneous Development and Testing](#simultaneous-development-and-testing)
+    - [Thorough Testing](#thorough-testing)
+    - [Design Rationale](#design-rationale)
+    - [Inclusivity Notes](#inclusivity-notes)
+    - [Specific Examples of Accessibility Improvements](#specific-examples-of-accessibility-improvements)
+    - [Reasoning For Any Final Changes](#reasoning-for-any-final-changes)
+5. [Key Features](#key-features)
+6. [Deployment](#deployment)
+    - [Requirements](#requirements)
+    - [Installation Instructions](#installation-instructions)
+    - [Third-Party Account and Configuration](#third-party-account-and-configuration)
+    - [High-Level Deployment Steps for Heroku](#high-level-deployment-steps-for-heroku)
+7. [Verification and Validation](#verification-and-validation)
+    - [Security Measures](#security-measures)
+8. [AI Implementation and Orchestration](#ai-implementation-and-orchestration)
+    - [Use Cases and Reflections](#use-cases-and-reflections)
+    - [Overall Impact](#overall-impact)
+9. [Testing Summary](#testing-summary)
+    - [Manual Testing](#manual-testing)
+    - [Automated Testing](#automated-testing)
+    - [Testing Examples](#testing-examples)
+    - [Running Tests](#running-tests)
+10. [Code Validation](#code-validation)
+     - [HTML Validation](#html-validation)
+     - [CSS Validation](#css-validation)
+     - [JavaScript Validation](#javascript-validation)
+     - [Python Validation](#python-validation)
+11. [Future Enhancements](#future-enhancements)
+12. [Credits & Technology Used](#credits--technology-used)
+     - [Frontend](#frontend)
+     - [Backend](#backend)
+     - [Database](#database)
+     - [Deployment](#deployment)
+     - [Version Control](#version-control)
+     - [Testing](#testing)
+     - [Other Tools](#other-tools)
+     - [External Resource Links](#external-resource-links)
+     - [Resource Documentation](#resource-documentation)
+     - [Special Thanks](#special-thanks)
+
 ## Overview
 
 Skillified is a community skill-sharing platform designed to connect individuals eager to learn and share skills. Whether it's professional expertise, personal hobbies, or unique talents, Skillified provides a collaborative environment to foster growth and exchange knowledge. The platform addresses the need for accessible, inclusive, and user-friendly learning opportunities while showcasing the potential of modern full-stack web development.
@@ -574,7 +630,7 @@ By following these steps, you will successfully integrate Cloudinary into your S
 ## Testing Summary
 
 #### Manual Testing
-- **Devices and Browsers Tested**: The application was tested on various devices and browsers, including assistive technologies such as screen readers and keyboard-only navigation.
+- **Devices and Browsers Tested**: The application was tested on various devices and browsers, including keyboard-only navigation.
 - **Features Tested**: CRUD operations, navigation, profile management, skill and event management, and notification settings.
 - **Results**: All critical features worked as expected, including accessibility checks.
 
@@ -583,96 +639,116 @@ By following these steps, you will successfully integrate Cloudinary into your S
 - **Features Covered**: User authentication, profile management, skill and event management, and notification settings.
 - **Adjustments Made**: Manual corrections were made to AI-generated test cases to ensure comprehensive coverage and alignment with functionality, particularly for accessibility.
 
-### Comprehensive Testing in Place
+### Testing Examples
 
 The project includes a comprehensive suite of automated tests to ensure the functionality and reliability of the application. These tests cover various aspects of the application, including user authentication, profile management, skill and event management, and notification settings. Below are some specific examples of tests in place:
 
+<details>
+<summary>User Authentication (click to view)</summary>
+
 #### User Authentication
 - **Test Case**: `test_login`
-  - **Description**: Verifies that a user can log in with valid credentials.
-  - **Example**:
-    ```python
-    def test_login(self):
-        response = self.client.post(reverse('account_login'), {
-            'login': 'testuser',
-            'password': 'TestPassword1word1'
-        })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful login
-    ```
+    - **Description**: Verifies that a user can log in with valid credentials.
+    - **Example**:
+        ```python
+        def test_login(self):
+                response = self.client.post(reverse('account_login'), {
+                        'login': 'testuser',
+                        'password': 'TestPassword1word1'
+                })
+                self.assertEqual(response.status_code, 302)  # Redirect after successful login
+        ```
+</details>
+
+<details>
+<summary>Profile Management (click to view)</summary>
 
 #### Profile Management
 - **Test Case**: `test_update_contact_information`
-  - **Description**: Verifies that a user can update their contact information.
-  - **Example**:
-    ```python
-    def test_update_contact_information(self):
-        response = self.client.post(reverse('profile'), {
-            'facebook_link': 'https://facebook.com/testuser',
-            'linkedin_link': 'https://linkedin.com/in/testuser',
-            'email': 'testuser@example.com'
-        })
-        self.assertEqual(response.status_code, 302)
-        self.profile.refresh_from_db()
-        self.assertEqual(self.profile.facebook_link, 'https://facebook.com/testuser')
-        self.assertEqual(self.profile.linkedin_link, 'https://linkedin.com/in/testuser')
-        self.assertEqual(self.user.email, 'testuser@example.com')
-    ```
+    - **Description**: Verifies that a user can update their contact information.
+    - **Example**:
+        ```python
+        def test_update_contact_information(self):
+                response = self.client.post(reverse('profile'), {
+                        'facebook_link': 'https://facebook.com/testuser',
+                        'linkedin_link': 'https://linkedin.com/in/testuser',
+                        'email': 'testuser@example.com'
+                })
+                self.assertEqual(response.status_code, 302)
+                self.profile.refresh_from_db()
+                self.assertEqual(self.profile.facebook_link, 'https://facebook.com/testuser')
+                self.assertEqual(self.profile.linkedin_link, 'https://linkedin.com/in/testuser')
+                self.assertEqual(self.user.email, 'testuser@example.com')
+        ```
+</details>
+
+<details>
+<summary>Skill Management (click to view)</summary>
 
 #### Skill Management
 - **Test Case**: `test_add_skill`
-  - **Description**: Verifies that a mentor user can add a new skill.
-  - **Example**:
-    ```python
-    def test_add_skill(self):
-        self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('mentor_add_skill'), {
-            'name': 'Test Skill',
-            'description': 'Test Skill Description'
-        })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful form submission
-        skill_exists = Skill.objects.filter(name='Test Skill', description='Test Skill Description').exists()
-        self.assertTrue(skill_exists)
-    ```
+    - **Description**: Verifies that a mentor user can add a new skill.
+    - **Example**:
+        ```python
+        def test_add_skill(self):
+                self.client.login(username='mentoruser', password='TestPassword1word1')
+                response = self.client.post(reverse('mentor_add_skill'), {
+                        'name': 'Test Skill',
+                        'description': 'Test Skill Description'
+                })
+                self.assertEqual(response.status_code, 302)  # Redirect after successful form submission
+                skill_exists = Skill.objects.filter(name='Test Skill', description='Test Skill Description').exists()
+                self.assertTrue(skill_exists)
+        ```
+</details>
+
+<details>
+<summary>Event Management (click to view)</summary>
 
 #### Event Management
 - **Test Case**: `test_add_event`
-  - **Description**: Verifies that a mentor user can add a new event.
-  - **Example**:
-    ```python
-    def test_add_event(self):
-        self.client.login(username='mentoruser', password='TestPassword1word1')
-        response = self.client.post(reverse('add_event', args=[self.skill.id]), {
-            'title': 'Test Event',
-            'overview': 'Test Event Overview',
-            'date_time': '2025-01-21 10:00'
-        })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful form submission
-        event_exists = Event.objects.filter(title='Test Event', overview='Test Event Overview').exists()
-        self.assertTrue(event_exists)
-    ```
+    - **Description**: Verifies that a mentor user can add a new event.
+    - **Example**:
+        ```python
+        def test_add_event(self):
+                self.client.login(username='mentoruser', password='TestPassword1word1')
+                response = self.client.post(reverse('add_event', args=[self.skill.id]), {
+                        'title': 'Test Event',
+                        'overview': 'Test Event Overview',
+                        'date_time': '2025-01-21 10:00'
+                })
+                self.assertEqual(response.status_code, 302)  # Redirect after successful form submission
+                event_exists = Event.objects.filter(title='Test Event', overview='Test Event Overview').exists()
+                self.assertTrue(event_exists)
+        ```
+</details>
+
+<details>
+<summary>Notification Settings (click to view)</summary>
 
 #### Notification Settings
 - **Test Case**: `test_update_notification_settings`
-  - **Description**: Verifies that a user can update their notification settings.
-  - **Example**:
-    ```python
-    def test_update_notification_settings(self):
-        response = self.client.post(reverse('settings'), {
-            'username': 'testuser',
-            'email': 'testuser@example.com',
-            'current_password': '',
-            'new_password': '',
-            'confirm_password': '',
-            'notify_messages': 'on',
-            'notify_events': '',
-            'notify_skills': 'on',
-            'mentor_status': 'on',
-        })
-        notification_settings = NotificationSetting.objects.get(user=self.user)
-        self.assertTrue(notification_settings.new_message)
-        self.assertFalse(notification_settings.new_event)
-        self.assertTrue(notification_settings.new_skill)
-    ```
+    - **Description**: Verifies that a user can update their notification settings.
+    - **Example**:
+        ```python
+        def test_update_notification_settings(self):
+                response = self.client.post(reverse('settings'), {
+                        'username': 'testuser',
+                        'email': 'testuser@example.com',
+                        'current_password': '',
+                        'new_password': '',
+                        'confirm_password': '',
+                        'notify_messages': 'on',
+                        'notify_events': '',
+                        'notify_skills': 'on',
+                        'mentor_status': 'on',
+                })
+                notification_settings = NotificationSetting.objects.get(user=self.user)
+                self.assertTrue(notification_settings.new_message)
+                self.assertFalse(notification_settings.new_event)
+                self.assertTrue(notification_settings.new_skill)
+        ```
+</details>
 
 #### Contact Page
 - **Test Case**: `test_contact_form_submission_success`
